@@ -7,6 +7,8 @@
 body{
     min-height: 100vh;
     font-family: "Lato", sans-serif;
+    background: rgb(199,199,199);
+    background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(168,168,167,1) 37%, rgba(120,120,120,1) 100%); 
 }
 
 header {
@@ -14,21 +16,24 @@ header {
     justify-content: flex-start;
     align-items: start;
     background-color: gray;
-    height: 5vh;
+    height: 7vh;
     
 }
 
-.title{
+.title{ 
     text-align: center;
+    text-indent: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 main{
     height: 90vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .sidebar{
     width: 15vw;
-    height: 90vh;
+    height: 100vh;
     position: fixed;
     background-color: #b8cad4;
     display: flex;
@@ -38,16 +43,37 @@ main{
     align-items: center;
 }
 
-.side-button{
+.side-button {
     margin: 3px;
+    row-gap: 2px;
+    text-decoration: none;
     width: 13vw;
     height: 5vh;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+	background-color:#44abc7;
+	border-radius:20px;
+	border:2px solid #18a1ab;
+	display:inline-block;
+	cursor:pointer;
+	color: #383838;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:bold;
+	text-decoration:none;
+    text-align: center;
+	text-shadow:0px 6px 17px #276665;
+}
+.side-button:hover {
+	background-color:#2abf9f;
+}
+.side-button:active {
+	position:relative;
+	top:1px;
 }
 
+
 footer{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
