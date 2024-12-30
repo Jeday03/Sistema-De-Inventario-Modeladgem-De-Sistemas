@@ -1,24 +1,36 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Isso aqui ta mais pra teste mesmo não sei se vai acabr ficando isso mesmo
-    function abrirRecurso(url) {
-        window.location.href = url;
+    // Função para mostrar o conteúdo exclusivo
+    function mostrarConteudo(id) {
+        // Esconde todos os conteúdos
+        var conteudos = document.querySelectorAll('.conteudo');
+        conteudos.forEach(conteudo => {
+            conteudo.classList.remove('mostrar');
+        });
+        
+        // Mostra o conteúdo específico
+        var conteudoExclusivo = document.getElementById(id);
+        conteudoExclusivo.classList.add('mostrar');
     }
 
-    //Funções pra poder acessar outras janelas no Sistema
-
+    // Eventos para os botões
     document.getElementById('Estoque').addEventListener('click', () => {
-        abrirRecurso('Estoque.html');
+        mostrarConteudo('conteudoEstoque');
     });
 
     document.getElementById('Vendas').addEventListener('click', () => {
-        abrirRecurso('Vendas.html');
+        mostrarConteudo('conteudoVendas');
     });
 
     document.getElementById('Cadastro').addEventListener('click', () => {
-        abrirRecurso('Cadastro.html');
+        mostrarConteudo('conteudoCadastro');
     });
 
     document.getElementById('Pedidos').addEventListener('click', () => {
-        abrirRecurso('Pedidos.html');
+        mostrarConteudo('conteudoPedidos');
+    });
+
+    // Evento para o botão Logout
+    document.getElementById('Logout').addEventListener('click', () => {
+        window.location.href = 'login.html';
     });
 });

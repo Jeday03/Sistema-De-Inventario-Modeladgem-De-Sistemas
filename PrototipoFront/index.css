@@ -1,10 +1,33 @@
-*  {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+div p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px; 
+    text-align: center;
+    color: blue; 
+    margin: 10px 0; 
+    padding: 5px; 
+    background-color: #f0f0f0;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+
+.conteudo {
+    visibility: hidden; 
+    height: 0; 
+    overflow: hidden; 
+}
+
+.conteudo.mostrar { 
+    visibility: visible; 
+    height: auto;
+}
+
+body {
     min-height: 100vh;
     font-family: "Lato", sans-serif;
     background: rgb(199,199,199);
@@ -17,21 +40,20 @@ header {
     align-items: start;
     background-color: gray;
     height: 7vh;
-    
 }
 
-.title{ 
+.title { 
     text-align: center;
     text-indent: 5px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-main{
+main {
     height: 90vh;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
-.sidebar{
+.sidebar {
     width: 15vw;
     height: 100vh;
     position: fixed;
@@ -39,7 +61,6 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -49,29 +70,37 @@ main{
     text-decoration: none;
     width: 13vw;
     height: 5vh;
-	background-color:#44abc7;
-	border-radius:20px;
-	border:2px solid #18a1ab;
-	display:inline-block;
-	cursor:pointer;
-	color: #383838;
-	font-family:Arial;
-	font-size:25px;
-	font-weight:bold;
-	text-decoration:none;
+    background-color: #44abc7;
+    border-radius: 20px;
+    border: 2px solid #18a1ab;
+    display: inline-block;
+    cursor: pointer;
+    color: #383838;
+    font-family: Arial;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
     text-align: center;
-	text-shadow:0px 6px 17px #276665;
+    text-shadow: 0px 6px 17px #276665;
 }
+
 .side-button:hover {
-	background-color:#2abf9f;
+    background-color: #2abf9f;
 }
+
 .side-button:active {
-	position:relative;
-	top:1px;
+    position: relative;
+    top: 1px;
 }
 
-
-footer{
+#Logout {
+    background-color: red;
+    text-shadow: 0px 6px 17px #663527;
+    color: #383838;
+    margin: 370px;
+}
+  
+footer {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
     display: flex;
@@ -79,4 +108,7 @@ footer{
     align-items: center;
     background-color: gray;
     height: 5vh;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
