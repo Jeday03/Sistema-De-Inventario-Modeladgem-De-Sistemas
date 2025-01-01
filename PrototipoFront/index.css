@@ -46,6 +46,9 @@ header {
     text-align: center;
     text-indent: 5px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 1vh;
+    left: 1vw;
 }
 
 main {
