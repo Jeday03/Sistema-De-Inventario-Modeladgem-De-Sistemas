@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Estoque</title>
+    <link rel="stylesheet" href="Cadastro.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="title"> Gerenciador de Estoque</h1>
+    </header>
+    <main>
+      <div class="sidebar">
+        <div class="main-options">
+          <button class="side-button" href="#" id="Estoque"><strong>Estoque</strong></button>
+          <button class="side-button" href="#" id="Vendas"><strong>Vendas</strong></button>
+          <button class="side-button" href="#" id="Cadastro"><strong>Cadastro</strong></button>
+          <button class="side-button" href="#" id="Pedidos"><strong>Pedidos</strong></button>
+        </div>
+          <button class=" side-button" href="#" id="Logout"><strong>Sair</strong></button>
+      </div>
+      <div id="conteudoEstoque" class="conteudo"> 
+         <div class="painelCadastro">
+          <form method="post" class="formCadastro">
+            <h1>Cadastro de funcionário</h1>
+            <p>Digite os dados do funcionário a ser cadastrado:</p>
+            <!-- Campos para cadastro de funcionário:
+             Nome
+             cpf
+             celular
+             email
+             função
+             senha-->
+            <label for="nome">Nome:</label>
+            <input type="nome" placeholder="Digite o nome">
+            <label for="cpf">CPF:</label>
+            <input type="cpf" placeholder="Digite o CPF">
+            <!-- Trocar função para uma comboBox por motivos de evitar confusão na digitação dos cargos -->
+            <label for="funcao">Funcão:</label>
+            <input type="funcao" placeholder="Digite a função">
+            <label for="celular">Contato:</label>
+            <input type="celular">
+            <label for="email">E-mail</label>
+            <input type="email" placeholder="Digite o e-mail">
+          </form>
+         </div> 
+      </div>
+      <!-- É interressante pra quem for mexer no front apartir daqui ir dividindo os
+       arquivos, tem grandes chances de  ficar muito bagunçado com um só-->
+    </main>
+    <footer><span>Deformadores de sistemas</span></footer>
+  </body>
+  <!-- criar outro js -->
+  <script src=""></script>
+</html>
