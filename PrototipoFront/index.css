@@ -135,3 +135,95 @@ div p {
     border: 1px solid #ccc; 
     border-radius: 5px;
 }
+.estoqueP{
+    padding: 10px 20px;
+    text-align: center;
+    border: 2px;
+    margin: 3px;
+    margin-top: 20px;
+    text-align: center;
+    text-indent: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 1vh;
+    left: 1vw;
+}
+
+.inputEstoque {
+    margin: 20px 15px 20px 15px; 
+    text-align: center; 
+}
+
+.inputEstoque label {
+    font-family: Arial, sans-serif;
+    font-size: 14px; 
+    margin-right: 10px;
+    margin-top: 20px; 
+    display: inline-block;
+}
+
+.inputEstoque input[type="text"],
+.inputEstoque input[type="number"] {
+    font-family: Arial, sans-serif;
+    font-size: 14px; 
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.botoesEstoque {
+    margin: 40px 0; 
+    text-align: center; 
+}
+
+.estoqueButton {
+    margin: 3px;
+    padding: 10px 20px;
+    background-color: #44abc7;
+    border-radius: 20px;
+    border: 2px solid #18a1ab;
+    cursor: pointer;
+    color: #383838;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0px 6px 17px #276665;
+}
+
+.estoqueButton:hover {
+    background-color: #2abf9f;
+}
+
+.estoqueButton:active {
+    position: relative;
+    top: 1px;
+}
+
+#listaEstoque {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    justify-items: center;
+}    
+
+#listaEstoque li {
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #1688aaee;
+    border: 1px solid #02459cef;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing:border-box ;
+}
+.selecionado {
+    background-color: #0d2fc5cb;
+    border: 2px solid #0603a5;
+    text-shadow: 0px 6px 17px #000000;
+}

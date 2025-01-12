@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <header>
-      <h1 class="title"> Gerenciador de Estoque</h1>
-    </header>
-    <main>
-      <div class="sidebar">
-          <button class=" side-button" href="#" id="Estoque" title="Clique aqui para adicionar ao estoque"><strong>Estoque</strong></button>
-          <button class=" side-button" href="#" id="Vendas" title="Clique aqui para adicionar as vendas"><strong>Vendas</strong></button>
-          <button class=" side-button" href="#" id="Cadastro" title="Clique aqui para cadastrar funcionário"><strong>Cadastro</strong></button>
-          <button class=" side-button" href="#" id="Pedidos" title="Clique aqui para fazer pedidos"><strong>Pedidos</strong></button>
-          <button class=" side-button" href="#" id="Logout" title="Clique aqui para sair" ><strong>Sair</strong></button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <header>
+    <h1 class="title"> Gerenciador de Estoque</h1>
+  </header>
+  <main>
+    <div class="sidebar">
+      <button class=" side-button" href="#" id="Estoque"><strong>Estoque</strong></button>
+      <button class=" side-button" href="#" id="Vendas"><strong>Vendas</strong></button>
+      <button class=" side-button" href="#" id="Cadastro"><strong>Cadastro</strong></button>
+      <button class=" side-button" href="#" id="Pedidos"><strong>Pedidos</strong></button>
+      <button class=" side-button" href="#" id="Logout"><strong>Sair</strong></button>
+    </div>
+    <div id="conteudoEstoque" class="conteudo">
+      <h1 class="estoqueP">Produtos no Estoque</h1>
+      <div class="inputEstoque">
+        <ul id="listaEstoque"></ul>
+        <label for="nomeProduto">Nome do Produto:</label>
+        <input type="text" id="nomeProduto" name="nomeProduto">
+        <label for="quantidadeProduto">Quantidade:</label>
+        <input type="number" id="quantidadeProduto" name="quantidadeProduto">
       </div>
-      <div id="conteudoEstoque" class="conteudo"> 
-        <div>
-          <form method="post" class="formEstoque">
-              <h1>Produtos no Estoque</h1>
-              <div class="botoesEstoque">
-                <button class="estoqueButton" id="adicionar">Adicionar</button> 
-                <button class="estoqueButton" id="remover">Remover</button>
-              </div>
-          </form>
+      <div class="botoesEstoque">
+        <button class="estoqueButton" id="adicionar">Adicionar</button>
+        <button class="estoqueButton" id="remover">Remover</button>
       </div>
-      </div> 
-      <div id="conteudoVendas" class="conteudo">
-        <p>Conteúdo da página de Vendas</p> 
-      </div>
-       <div id="conteudoCadastro" class="conteudo">
-         <p>Conteúdo da página de Cadastro</p> 
-      </div> 
-      <div id="conteudoPedidos" class="conteudo">
-         <p>Conteúdo da página de Pedidos</p> 
-      </div>
-      <!-- É interressante pra quem for mexer no front apartir daqui ir dividindo os
-       arquivos, tem grandes chances de  ficar muito bagunçado com um só-->
-    </main>
-    <footer><span>Deformadores de sistemas</span><strong class="simbolo">™</strong></footer>
-  </body>
+    </div>
+    <div id="conteudoVendas" class="conteudo">
+      <p>Conteúdo da página de Vendas</p>
+    </div>
+    <div id="conteudoCadastro" class="conteudo">
+      <p>Conteúdo da página de Cadastro</p>
+    </div>
+    <div id="conteudoPedidos" class="conteudo">
+      <p>Conteúdo da página de Pedidos</p>
+    </div>
+  </main>
+  <footer>
+    <span>Deformadores de sistemas</span>
+  </footer>
   <script src="index.js"></script>
+</body>
 </html>
