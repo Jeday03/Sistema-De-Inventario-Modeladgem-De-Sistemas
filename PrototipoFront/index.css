@@ -149,12 +149,13 @@ div p {
     left: 1vw;
 }
 
-.inputEstoque {
+.inputEstoque, .listas {
     margin: 20px 15px 20px 15px; 
     text-align: center; 
 }
 
-.inputEstoque label {
+
+.inputEstoque label,.listas label {
     font-family: Arial, sans-serif;
     font-size: 14px; 
     margin-right: 10px;
@@ -163,7 +164,9 @@ div p {
 }
 
 .inputEstoque input[type="text"],
-.inputEstoque input[type="number"] {
+.inputEstoque input[type="number"]
+,.listas input[type="text"],
+.listas input[type="number"] {
     font-family: Arial, sans-serif;
     font-size: 14px; 
     padding: 5px;
