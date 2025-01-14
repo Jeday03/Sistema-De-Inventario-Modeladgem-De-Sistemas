@@ -4,18 +4,6 @@
     box-sizing: border-box;
 }
 
-div p {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 18px; 
-    text-align: center;
-    color: blue; 
-    margin: 10px 0; 
-    padding: 5px; 
-    background-color: #f0f0f0;
-    border: 1px solid #ccc; 
-    border-radius: 5px;
-}
-
 
 
 body {
@@ -43,8 +31,13 @@ header {
 }
 
 main {
-    height: 90vh;
-    font-family: Georgia, 'Times New Roman', Times, serif; 
+    height: 88vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .sidebar {
@@ -93,6 +86,20 @@ main {
 .side-button:active {
     position: relative;
     top: 1px;
+}
+
+#conteudo-estoque{
+    display: flex;
+}
+
+#painel-funcionarios{
+    width: 40vw;
+    height: 88vh;
+}
+
+#painel-cadastro{
+    width: 45vw;
+    height: 88vh;
 }
 
 #Logout {
