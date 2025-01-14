@@ -40,7 +40,7 @@ main {
     flex-wrap: wrap;
 }
 
-.sidebar {
+#sidebar {
     width: 15vw;
     height: 88vh;
     position: fixed;
@@ -90,6 +90,8 @@ main {
 
 #conteudo-estoque{
     display: flex;
+    position: fixed;
+    left: 15vw;
 }
 
 #painel-funcionarios{
@@ -97,9 +99,11 @@ main {
     height: 88vh;
 }
 
-#painel-cadastro{
+.form-cadastro{
     width: 45vw;
     height: 88vh;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #Logout {
