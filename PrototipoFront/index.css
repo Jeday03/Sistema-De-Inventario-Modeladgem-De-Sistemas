@@ -30,7 +30,8 @@
     height: auto;
 }
 
-body {
+body, html {
+    overflow: hidden;
     min-height: 100vh;
     font-family: "Lato", sans-serif;
     background: rgb(199,199,199);
@@ -39,7 +40,7 @@ body {
 
 header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: first baseline;
     align-items: start;
     background-color: gray;
     height: 7vh;
@@ -52,6 +53,7 @@ header {
     position: relative;
     top: 1vh;
     left: 1vw;
+    margin: 0;
 }
 
 main {
@@ -136,11 +138,9 @@ div p {
     border-radius: 5px;
 }
 .estoqueP{
-    padding: 10px 20px;
-    text-align: center;
+    padding: 10px 10px;
     border: 2px;
     margin: 3px;
-    margin-top: 20px;
     text-align: center;
     text-indent: 5px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -177,6 +177,8 @@ div p {
 
 .botoesEstoque {
     margin: 40px 0; 
+    position:relative;
+    left: 1vw;
     text-align: center; 
 }
 
@@ -256,10 +258,6 @@ div p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.header h1 {
-    margin: 0;
 }
 
 .header #boxIcon {
