@@ -4,30 +4,34 @@
     box-sizing: border-box;
 }
 
-div p {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 18px; 
-    text-align: center;
-    color: blue; 
-    margin: 10px 0; 
-    padding: 5px; 
-    background-color: #f0f0f0;
-    border: 1px solid #ccc; 
-    border-radius: 5px;
+#Logout {
+    position: relative;
+    top: 58vh;
+    background-color: red;
+    text-shadow: 0px 6px 17px #663527;
+    color: #000000;
 }
 
 .conteudo {
     visibility: hidden; 
-    height: 0; 
+    height: 10; 
     overflow: hidden; 
+    position: absolute;
+    left: 21vw;
+    top: 11vh;
+    width: calc(100% - 25vw);
+    padding-left: 17px;
+    transition: all 0.2s ease;
 }
 
-.conteudo.mostrar { 
+.conteudo.mostrar {
+    transform: scale(1.2) translate(12px, -8px);
     visibility: visible; 
     height: auto;
 }
 
-body {
+body, html {
+    overflow: hidden;
     min-height: 100vh;
     font-family: "Lato", sans-serif;
     background: rgb(199,199,199);
@@ -36,7 +40,7 @@ body {
 
 header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: first baseline;
     align-items: start;
     background-color: gray;
     height: 7vh;
@@ -49,6 +53,7 @@ header {
     position: relative;
     top: 1vh;
     left: 1vw;
+    margin: 0;
 }
 
 main {
@@ -67,7 +72,7 @@ main {
     align-items: center;
 }
 
-.main-options{
+#main-options {
     position: relative;
     top: 1vh;
     align-items: center;
@@ -104,23 +109,158 @@ main {
     top: 1px;
 }
 
-#Logout {
-    position: relative;
-    top: 59vh;
-    background-color: red;
-    text-shadow: 0px 6px 17px #663527;
-    color: #000000;
-}
-  
 footer {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     background-color: gray;
-    height: 5vh;
+    height: 4vh;
     position: fixed;
     width: 100%;
     bottom: 0;
 }
+
+.simbolo {
+    font-size: 10px;
+}
+
+div p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px; 
+    text-align: center;
+    color: blue; 
+    margin: 10px 0; 
+    padding: 5px; 
+    background-color: #f0f0f0;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+.estoqueP{
+    padding: 10px 10px;
+    border: 2px;
+    margin: 3px;
+    text-align: center;
+    text-indent: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 1vh;
+    left: 1vw;
+}
+
+.inputEstoque, .listas {
+    margin: 20px 15px 20px 15px; 
+    text-align: center; 
+}
+
+
+.inputEstoque label,.listas label {
+    font-family: Arial, sans-serif;
+    font-size: 14px; 
+    margin-right: 10px;
+    margin-top: 20px; 
+    display: inline-block;
+}
+
+.inputEstoque input[type="text"],
+.inputEstoque input[type="number"]
+,.listas input[type="text"],
+.listas input[type="number"] {
+    font-family: Arial, sans-serif;
+    font-size: 14px; 
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.botoesEstoque {
+    margin: 40px 0; 
+    position:relative;
+    left: 1vw;
+    text-align: center; 
+}
+
+.estoqueButton {
+    margin: 3px;
+    padding: 10px 20px;
+    background-color: #44abc7;
+    border-radius: 20px;
+    border: 2px solid #18a1ab;
+    cursor: pointer;
+    color: #383838;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0px 6px 17px #276665;
+}
+
+.estoqueButton:hover {
+    background-color: #2abf9f;
+}
+
+.estoqueButton:active {
+    position: relative;
+    top: 1px;
+}
+
+#listaEstoque {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    justify-items: center;
+}    
+
+#listaEstoque li {
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #1688aaee;
+    border: 1px solid #02459cef;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing:border-box ;
+}
+.selecionado {
+    background-color: #0d2fc5cb;
+    border: 2px solid #0603a5;
+    text-shadow: 0px 6px 17px #000000;
+}
+
+#listaEstoque li:hover {
+    background-color: #0d2fc5cb;
+    border: 2px solid #0603a5;
+    text-shadow: 0px 6px 17px #000000;
+}
+
+#listaEstoque li:active {
+    position: relative;
+    top: 1px;
+}
+
+#boxIcon {
+    size: 20px;
+    margin: 20px 0;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header #boxIcon {
+    margin-left: 10px;
+}
+
