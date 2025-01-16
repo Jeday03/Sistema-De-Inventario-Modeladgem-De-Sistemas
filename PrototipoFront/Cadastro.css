@@ -11,7 +11,7 @@ body {
     background: rgb(199,199,199);
     background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(168,168,167,1) 37%, rgba(120,120,120,1) 100%); 
     display: grid;
-    grid-template-rows: 8fr 88fr 4fr;
+    grid-template-rows: 7fr 89fr 4fr;
 }
 
 header{
@@ -90,27 +90,34 @@ main {
     top: 1px;
 }
 
-.conteudo{
+
+#conteudo-estoque{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-#conteudo-estoque{
-    display: flex;
-    position: fixed;
-    left: 15vw;
-}
-
 #painel-funcionarios{
-    width: 40vw;
-    height: 88vh;
 }
 
 .form-cadastro{
-    width: 45vw;
-    height: 88vh;
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 3;
+}
+
+.cabecalho{
+    grid-row:1;
+    grid-column: span 2;
+}
+
+.labels{
+    grid-column: 1;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.inputs{
+    grid-column: 2;
 }
 
 #Logout {
