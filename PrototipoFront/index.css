@@ -4,12 +4,47 @@
     box-sizing: border-box;
 }
 
-#Logout {
-    position: relative;
-    top: 58vh;
-    background-color: red;
-    text-shadow: 0px 6px 17px #663527;
-    color: #000000;
+body{
+    overflow: hidden;
+    min-height: 100vh;
+    font-family: "Lato", sans-serif;
+    background: rgb(199,199,199);
+    background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(168,168,167,1) 37%, rgba(120,120,120,1) 100%); 
+    grid-template-rows: 7fr 89fr 4fr;
+}
+
+header{
+    grid-row: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    background-color: gray;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#boxIcon {
+    margin-left: 10px;
+}
+
+.title { 
+    text-align: center;
+    text-indent: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    top: 1vh;
+    left: 1vw;
+    margin: 0;
+}
+
+main {
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    display: grid;
+    grid-row: 2;
+    justify-content: stretch;
 }
 
 .conteudo {
@@ -28,37 +63,6 @@
     transform: scale(1.2) translate(12px, -8px);
     visibility: visible; 
     height: auto;
-}
-
-body, html {
-    overflow: hidden;
-    min-height: 100vh;
-    font-family: "Lato", sans-serif;
-    background: rgb(199,199,199);
-    background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(168,168,167,1) 37%, rgba(120,120,120,1) 100%); 
-}
-
-header {
-    display: flex;
-    justify-content: first baseline;
-    align-items: start;
-    background-color: gray;
-    height: 7vh;
-}
-
-.title { 
-    text-align: center;
-    text-indent: 5px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    position: relative;
-    top: 1vh;
-    left: 1vw;
-    margin: 0;
-}
-
-main {
-    height: 90vh;
-    font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
 .sidebar {
@@ -254,13 +258,12 @@ div p {
     margin: 20px 0;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.header #boxIcon {
-    margin-left: 10px;
+#Logout {
+    position: relative;
+    top: 58vh;
+    background-color: red;
+    text-shadow: 0px 6px 17px #663527;
+    color: #000000;
 }
 
