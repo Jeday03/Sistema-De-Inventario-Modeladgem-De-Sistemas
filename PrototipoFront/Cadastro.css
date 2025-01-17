@@ -82,7 +82,7 @@ main {
 
 
 
-#conteudo-estoque{
+#conteudo-cadastro{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -256,14 +256,7 @@ header {
     flex-wrap: wrap;
 }
 
-#Logout {
-    position: relative;
-    top: 59vh;
-    background-color: red;
-    text-shadow: 0px 6px 17px #663527;
-    color: #000000;
-}
-  
+
 footer {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
@@ -275,5 +268,12 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
-}
+    }
+    #Logout {
+        position: relative;
+        top: 59vh;
+        background-color: red;
+        text-shadow: 0px 6px 17px #663527;
+        color: #000000;
+    }
 */
