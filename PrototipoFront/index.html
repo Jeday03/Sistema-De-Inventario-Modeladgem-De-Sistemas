@@ -1,114 +1,132 @@
 <!DOCTYPE html>
 <html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://kit.fontawesome.com/861ddcb9bc.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
-  <link rel="stylesheet" href="index.css" />
-  <script src="https://kit.fontawesome.com/861ddcb9bc.js" crossorigin="anonymous"></script>
-
-</head>
-
-<body>
-  <header>
-    <i class="fa-solid fa-boxes-stacked fa-2xl" id="boxIcon"></i>
-    <h1 class="title"> Gerenciador de Estoque</h1>
-  </header>
-  <main>
-    <div class="container">
-      <div class="sidebar">
-        <div class="main-options">
-          <button class=" side-button" href="#" id="Estoque"><strong>Estoque</strong></button>
-          <button class=" side-button" href="#" id="Vendas"><strong>Vendas</strong></button>
-          <button class=" side-button" href="#" id="Cadastro"><strong>Cadastro</strong></button>
-          <button class=" side-button" href="#" id="Pedidos"><strong>Pedidos</strong></button>
-        </div>
-          <button class=" side-button" href="#" id="Logout"><strong>Sair</strong></button>
-    </div>
-    <div id="conteudoEstoque" class="conteudo">
-      <h1 class="estoqueP">Produtos no Estoque</h1>
-      <div class="inputEstoque">
-        <ul id="listaEstoque"></ul>
-        <label for="nomeProduto">Nome do Produto:</label>
-        <input type="text" id="nomeProduto" name="nomeProduto">
-        <label for="quantidadeProduto">Quantidade:</label>
-        <input type="number" id="quantidadeProduto" name="quantidadeProduto">
-      </div>
-      <div class="botoesEstoque">
-        <button class="estoqueButton" id="adicionar">Adicionar</button>
-        <button class="estoqueButton" id="remover">Remover</button>
-      </div>
-    </div>
-    <div id="conteudoVendas" class="conteudo">
-      <p>Conteúdo da página de Vendas</p>
-    </div>
-    <div id="conteudoCadastro" class="conteudo">
-      <div id="painel-funcionarios">Lista de funcionarios
-        <!--Uma tabela de funcoionários talvez?-->
-      </div>
-      <div id="painel-cadastro">
-        <form method="post" class="form-cadastro">
-          <div class="cabecalho">
-            <h1>Cadastro de funcionário</h1>
-            <p>Digite os dados do funcionário a ser cadastrado:</p>
+  <body>
+    <header>
+      <i class="fa-solid fa-boxes-stacked fa-2xl" id="boxIcon"></i>
+      <h1 class="title">Gerenciador de Estoque</h1>
+    </header>
+    <main>
+      <div class="container">
+        <div class="sidebar">
+          <div class="main-options">
+            <button class="side-button" href="#" id="Estoque">
+              <strong>Estoque</strong>
+            </button>
+            <button class="side-button" href="#" id="Vendas">
+              <strong>Vendas</strong>
+            </button>
+            <button class="side-button" href="#" id="Cadastro">
+              <strong>Cadastro</strong>
+            </button>
+            <button class="side-button" href="#" id="Pedidos">
+              <strong>Pedidos</strong>
+            </button>
           </div>
-          <!-- Campos para cadastro de funcionário:
+          <button class="side-button" href="#" id="Logout">
+            <strong>Sair</strong>
+          </button>
+        </div>
+        <div id="conteudoEstoque" class="conteudo">
+          <h1 class="estoqueP">Produtos no Estoque</h1>
+          <div class="inputEstoque">
+            <ul id="listaEstoque"></ul>
+            <label for="nomeProduto">Nome do Produto:</label>
+            <label for="quantidadeProduto">Quantidade:</label>
+            <input
+              type="number"
+              id="quantidadeProduto"
+              name="quantidadeProduto"
+            />
+          </div>
+          <div class="botoesEstoque">
+            <button class="estoqueButton" id="adicionar">Adicionar</button>
+            <button class="estoqueButton" id="remover">Remover</button>
+          </div>
+        </div>
+        <div id="conteudoVendas" class="conteudo">
+          <p>Conteúdo da página de Vendas</p>
+        </div>
+        <div id="conteudoCadastro" class="conteudo">
+          <div id="painel-funcionarios">
+            Lista de funcionarios
+            <!--Uma tabela de funcoionários talvez?-->
+          </div>
+          <div id="painel-cadastro">
+            <form method="post" class="form-cadastro">
+              <div class="cabecalho">
+                <h1>Cadastro de funcionário</h1>
+                <p>Digite os dados do funcionário a ser cadastrado:</p>
+              </div>
+              <!-- Campos para cadastro de funcionário:
         Nome
         cpf
         celular
         email
         função
         senha-->
-        <div class="labels">
-          <label for="nome">Nome:</label>
-          <label for="cpf">CPF:</label>
-          <label for="funcao">Funcão:</label>
-          <label for="celular">Contato:</label>
-          <label for="email">E-mail:</label>
-          <label for="senha">Senha:</label>
+              <div class="labels">
+                <label for="nome">Nome:</label>
+                <label for="cpf">CPF:</label>
+                <label for="funcao">Funcão:</label>
+                <label for="celular">Contato:</label>
+                <label for="email">E-mail:</label>
+                <label for="senha">Senha:</label>
+              </div>
+              <div class="inputs">
+                <input type="nome" placeholder="Digite o nome" />
+                <input type="cpf" placeholder="Digite o CPF" />
+                <select>
+                  <option value="">Selecione uma opção</option>
+                  <option value="adm">Administrador</option>
+                  <option value="ger">Gerente</option>
+                  <option value="cai">Caixa/Repositor</option>
+                </select>
+                <input type="celular" placeholder="Digite Nº de contato" />
+                <input type="email" placeholder="Digite o e-mail" />
+                <input type="senha" placeholder="Digite a senha" />
+                <button class="botoes">Confirmar</button>
+                <button class="botoes">Excluir</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="inputs">
-          <input type="nome" placeholder="Digite o nome" />
-          <input type="cpf" placeholder="Digite o CPF" />
-          <select>
-            <option value="">Selecione uma opção</option>
-            <option value="adm">Administrador</option>
-            <option value="ger">Gerente</option>
-            <option value="cai">Caixa/Repositor</option>
-          </select>
-          <input type="celular" placeholder="Digite Nº de contato"/>
-          <input type="email" placeholder="Digite o e-mail" />
-          <input type="senha" placeholder="Digite a senha" />
-          <button class="botoes">Confirmar</button>
-          <button class="botoes">Excluir</button>
-        </div>
-          <!--(DONE) Trocar função para uma comboBox por motivos de evitar confusão na digitação dos cargos -->
-        </form>
-      </div>
-    </div>
-    <div id="conteudoPedidos" class="conteudo">
-      <h1 class="estoqueP">Seção de Pedidos</h1>
-      <div class="listas">
-        <!-- (Talvez não) Minha ideia é duas listas com o email dos fornecedores e os produtos que produzem
+        <div id="conteudoPedidos" class="conteudo">
+          <h1 class="estoqueP">Seção de Pedidos</h1>
+          <div class="listas">
+            <!-- (Talvez não) Minha ideia é duas listas com o email dos fornecedores e os produtos que produzem
         talvez uma tabela seja a melhor alternativa-->
-        <ul class="lista2"></ul>
-        <ul class="lista2"></ul>
-        <label for="nomeProduto">Nome do Produto:</label>
-        <input type="text" id="nomeProduto2" name="nomeProduto">
-        <label for="quantidadeProduto">Quantidade:</label>
-        <input type="number" id="quantidadeProduto2" name="quantidadeProduto">
+            <ul class="lista2"></ul>
+            <ul class="lista2"></ul>
+            <label for="nomeProduto">Nome do Produto:</label>
+            <input type="text" id="nomeProduto2" name="nomeProduto" />
+            <label for="quantidadeProduto">Quantidade:</label>
+            <input
+              type="number"
+              id="quantidadeProduto2"
+              name="quantidadeProduto"
+            />
+          </div>
+          <div class="botoesEstoque">
+            <button class="estoqueButton" id="adicionar2">Fazer Pedido</button>
+            <button class="estoqueButton" id="remover2">Cancelar</button>
+          </div>
+        </div>
       </div>
-      <div class="botoesEstoque">
-        <button class="estoqueButton" id="adicionar2">Fazer Pedido</button>
-        <button class="estoqueButton" id="remover2">Cancelar</button>
-      </div>
-    </div>
-  </div>
-  </main>
-  <footer>
-    <span>Deformadores de sistemas<strong>™</strong></span>
-  </footer>
-  <script src="index.js"></script>
-</body>
+    </main>
+    <footer>
+      <span>Deformadores de sistemas<strong>™</strong></span>
+    </footer>
+    <script src="index.js"></script>
+  </body>
 </html>
