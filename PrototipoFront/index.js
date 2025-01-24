@@ -83,3 +83,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   document.getElementById('remover').addEventListener('click', removerItem);
 });
+
+document.querySelector('.form-cadastro').addEventListener('submit', logar);
+
+function logar(event) {
+    event.preventDefault(); //ignora envio, remover qnd for possivel validar
+}
