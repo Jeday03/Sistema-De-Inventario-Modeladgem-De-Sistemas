@@ -7,7 +7,7 @@ function logar(event) {
 
     if (login && senha) {
         alert("sucesso");
-        location.href = "index.html";
+        location.href = "gerenciamento.html";
     } else {
         alert("Por favor, preencha todos os campos!");
     }

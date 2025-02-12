@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
   document.getElementById('Logout').addEventListener('click', () => {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
   });
 
   document.getElementById('adicionar').addEventListener('click', adicionarItem);

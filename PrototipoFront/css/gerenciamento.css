@@ -8,7 +8,7 @@ body {
   overflow: hidden;
   min-height: 100vh;
   font-family: 'Lato', sans-serif;
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%); /* Novo background moderno */
+  background: linear-gradient(135deg, rgb(30, 60, 114) 0%, #2a5298 50%, #1e3c72 100%);
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -32,8 +32,6 @@ header {
   text-align: center;
   text-indent: 5px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  top: 1vh;
-  left: 1vw;
   margin: 0;
 }
 
@@ -46,8 +44,6 @@ main {
 
 .conteudo {
   visibility: hidden;
-  height: 10;
-  overflow: hidden;
   position: absolute;
   left: 21vw;
   top: 11vh;
@@ -59,7 +55,6 @@ main {
 .conteudo.mostrar {
   transform: scale(1.2) translate(12px, -8px);
   visibility: visible;
-  height: auto;
 }
 
 .sidebar {
@@ -73,35 +68,28 @@ main {
 }
 
 .main-options {
-  position: relative;
-  top: 1vh;
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
 .container {
-  flex: 1;
   display: grid;
   grid-template-columns: 15fr 85fr;
 }
 
 .side-button {
   margin: 3px;
-  row-gap: 2px;
-  text-decoration: none;
   width: 13vw;
   height: 5vh;
   background-color: #3498db;
   border-radius: 20px;
   border: 2px solid #2980b9;
-  display: inline-block;
   cursor: pointer;
   color: #000000;
   font-family: Arial;
   font-size: 25px;
   font-weight: bold;
-  text-decoration: none;
   text-align: center;
   text-shadow: 0px 6px 17px #276665;
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -112,11 +100,6 @@ main {
   transform: scale(1.05);
 }
 
-side-button:active {
-  position: relative;
-  top: 1px;
-}
-
 footer {
   grid-row: 3;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -125,39 +108,22 @@ footer {
   justify-content: flex-end;
   align-items: center;
   background-color: #333;
-  color: #000000; 
+  color: #000000;
   padding: 10px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.simbolo {
-  font-size: 10px;
-}
-
-div p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  unicode-bidi: isolate;
-}
-
 .estoqueP {
-  padding: 10px 10px;
-  border: 2px solid #ccc;
+  padding: 10px;
   margin: 3px;
   text-align: center;
   text-indent: 5px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  position: relative;
-  top: 1vh;
-  left: 1vw;
 }
 
 .inputEstoque,
 .listas {
-  margin: 20px 15px 20px 15px;
+  margin: 20px 15px;
   text-align: center;
 }
 
@@ -184,8 +150,6 @@ div p {
 
 .botoesEstoque {
   margin: 40px 0;
-  position: relative;
-  left: 1vw;
   text-align: center;
 }
 
@@ -208,11 +172,6 @@ div p {
 .estoqueButton:hover {
   background-color: #2980b9;
   transform: scale(1.05);
-}
-
-.estoqueButton:active {
-  position: relative;
-  top: 1px;
 }
 
 #listaEstoque {
@@ -245,19 +204,11 @@ div p {
   transform: scale(1.05);
 }
 
-#listaEstoque li:active {
-  position: relative;
-  top: 1px;
-}
-
 #boxIcon {
-  size: 20px;
   margin: 20px 0;
-  padding: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
 }
 
 #conteudoCadastro {
@@ -280,13 +231,11 @@ div p {
   background-color: #3498db;
   border-radius: 20px;
   border: 2px solid #2980b9;
-  display: inline-block;
   cursor: pointer;
-  color: #000000; 
+  color: #000000;
   font-family: Arial;
   font-size: 14px;
   font-weight: bold;
-  text-decoration: none;
   text-align: center;
   text-shadow: 0px 6px 17px #276665;
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -327,7 +276,7 @@ select {
   border-radius: 20px;
   border: 2px solid #660000;
   cursor: pointer;
-  color: #000000; 
+  color: #000000;
   transition: background-color 0.2s ease, transform 0.2s ease;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
