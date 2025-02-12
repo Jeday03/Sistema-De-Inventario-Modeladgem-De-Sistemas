@@ -8,7 +8,7 @@ Atualmente, o repositório se encontra com a branch "Prototipos" atualizada. Est
 - Segundo, fiz algumas mudanças nos estilos de algumas coisas e mudei bastante a página de login. Ainda vou ter que mexer um pouco nas coisas na página de gerenciamento (antigo index), mas é pouca coisa.
 - Sobre o JavaScript, definitivamente não vou mexer mais nisso, então caso já queira começar a mexer, pode (EU ACHO).
 - Além disso, como dá para ver, coloquei em pastas separadas os arquivos CSS e JS. Futuramente, penso em um jeito de separar ainda mais.
-- Refatorei os CSSs, agora deu uma diminuída no número de linhas do pior deles (de 341 linhas para 290, tá aí Mateus).
+- Não sei se melhora ou atrapalha, mas eu adcionei uma pasta e separei esse arquivo gerenciamento em varios arquivos css menores caso não fique daora deixei o arquivo ai pra poder colocar de volta caso precise.
 
 ## Explicação do Gerenciamento.html
 

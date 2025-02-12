@@ -1,0 +1,134 @@
+#boxIcon {
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.title {
+  text-align: center;
+  text-indent: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 0;
+}
+
+.conteudo {
+  visibility: hidden;
+  position: absolute;
+  left: 21vw;
+  top: 11vh;
+  width: calc(100% - 25vw);
+  padding-left: 17px;
+  transition: all 0.2s ease-in-out;
+}
+
+.conteudo.mostrar {
+  transform: scale(1.2) translate(12px, -8px);
+  visibility: visible;
+}
+
+.main-options {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.estoqueP {
+  padding: 10px;
+  margin: 3px;
+  text-align: center;
+  text-indent: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.inputEstoque,
+.listas {
+  margin: 20px 15px;
+  text-align: center;
+}
+
+.inputEstoque label,
+.listas label {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.inputEstoque input[type='text'],
+.inputEstoque input[type='number'],
+.listas input[type='text'],
+.listas input[type='number'] {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#listaEstoque {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  justify-items: center;
+}
+
+#listaEstoque li {
+  font-size: 18px;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #1688aaee;
+  border: 1px solid #02459cef;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#listaEstoque li:hover {
+  background-color: #0d2fc5cb;
+  border: 2px solid #0603a5;
+  text-shadow: 0px 6px 17px #000000;
+  transform: scale(1.05);
+}
+
+#conteudoCadastro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-cadastro {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 3;
+}
+
+.cabecalho {
+  grid-row: 1;
+  grid-column: span 2;
+}
+
+.labels {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+.inputs {
+  grid-column: 2;
+  display: inline-grid;
+  justify-content: start;
+}
+
+.inputs input,
+select {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
