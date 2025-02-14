@@ -13,12 +13,12 @@ def get_random_number():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data['username']
-    password = data['password']
+    username = data['usuario']
+    password = data['senha']
     if username == 'admin' and password == 'admin':
-        return jsonify({'message': 'Login efetuado'}), 200
+        return jsonify({'message': 'Login efetuado'})
     else:
-        return jsonify({'message': 'Informações inválidas'}), 200
+        return jsonify({'message': 'Informações inválidas'})
 
 if __name__ == '__main__':
     app.run(debug=True)
