@@ -49,3 +49,6 @@ theme_override_font_sizes/font_size = 35
 text = "Login"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer"]
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Button" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="request_completed" from="CanvasLayer/HTTPRequest" to="CanvasLayer" method="_on_http_request_request_completed"]
