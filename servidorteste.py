@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import random
 import os
@@ -24,7 +24,9 @@ def login():
 @app.route('/get_image', methods=['POST'])
 def get_image():
     image_path = "placeholder/evolucao.png"
-    if os.path.exists(image_path) and image_path.endswith('.png'):
+    absolute_path = os.path.abspath(image_path)
+    if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
+        print("Encontrei a imagem")
         return send_file(image_path, mimetype='image/png')
     else:
         print("Imagem não encontrada")
