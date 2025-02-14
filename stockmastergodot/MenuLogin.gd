@@ -7,7 +7,7 @@ extends CanvasLayer
 @onready var texture_rect: TextureRect = $TextureRect
 
 func _on_button_pressed() -> void:
-	var erro = http_request.request("http://127.0.0.1:5000/get_image", [], HTTPClient.METHOD_POST)
+	var erro = http_request.request("http://127.0.0.1:5000/get_image", [], HTTPClient.METHOD_GET)
 	if erro == OK:
 		print("Deu certo, enviou a request")
 	'''
