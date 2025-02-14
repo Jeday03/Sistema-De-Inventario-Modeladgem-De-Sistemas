@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var usuario: LineEdit = $VBoxContainer/LineEdit
 @onready var senha: LineEdit = $VBoxContainer/LineEdit2
 
+@onready var texture_rect: TextureRect = $TextureRect
 
 func _on_button_pressed() -> void:
 	var body = JSON.new().stringify({"usuario": usuario.text, "senha": senha.text})
@@ -13,7 +14,6 @@ func _on_button_pressed() -> void:
 	if error != OK:
 		printerr("Algo deu errado. Tente novamente")
 		return
-	
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	var json = body.get_string_from_utf8()
