@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnydgc3m51djg"]
+
+[ext_resource type="Script" uid="uid://cnfmjxdxwwubq" path="res://MenuLogin.gd" id="1_eu5th"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_eu5th")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -278.0
+offset_right = 279.0
+offset_bottom = -2.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 76
+text = "StockMaster
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Usuário"
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Senha"
+
+[node name="LineEdit2" type="LineEdit" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+secret = true
+
+[node name="Label4" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Login"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer"]
