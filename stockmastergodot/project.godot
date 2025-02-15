@@ -11,23 +11,13 @@ config_version=5
 [application]
 
 config/name="StockMasterGodot"
-run/main_scene="res://Scenes/TelaInicial.tscn"
-config/features=PackedStringArray("4.4", "Mobile")
+run/main_scene="res://PainelDeItem.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
-[display]
+[gui]
 
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-
-[dotnet]
-
-project/assembly_name="StockMasterGodot"
-
-[physics]
-
-2d/physics_engine="Dummy"
-3d/physics_engine="Dummy"
+theme/custom_font="res://Themes/BasicThemes.tres"
 
 [rendering]
 
