@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnydgc3m51djg"]
 
-[ext_resource type="Script" uid="uid://cnfmjxdxwwubq" path="res://MenuLogin.gd" id="1_eu5th"]
+[ext_resource type="Script" uid="uid://cnfmjxdxwwubq" path="res://Scripts/MenuLogin.gd" id="1_mhdbr"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_eu5th")
+script = ExtResource("1_mhdbr")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 offset_right = 340.0

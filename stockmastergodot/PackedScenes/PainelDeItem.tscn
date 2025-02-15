@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://db0bixhh74jjv"]
+
+[ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_axohy"]
+[ext_resource type="Texture2D" uid="uid://djcxtqpxskgpm" path="res://icon.svg" id="1_ci2ft"]
+
+[node name="ColorRect" type="ColorRect"]
+offset_right = 446.0
+offset_bottom = 150.0
+color = Color(0.38, 0.38, 0.38, 1)
+script = ExtResource("1_axohy")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FotoProduto" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ci2ft")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="LabelNome" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nome do item"
+
+[node name="LabelQtd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Qtd: 200"
