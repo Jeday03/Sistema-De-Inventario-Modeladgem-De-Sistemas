@@ -24,6 +24,7 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	print("Response code: ", response_code)
 	if response_code == 200:
 		var image = Image.new()
+		print(typeof(body))
 		var error = image.load_png_from_buffer(body)
 		if error == OK:
 			var texture = ImageTexture.create_from_image(image)

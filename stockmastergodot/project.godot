@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="StockMasterGodot"
-run/main_scene="uid://cnydgc3m51djg"
+run/main_scene="res://Scenes/TelaInicial.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
@@ -20,9 +20,12 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[dotnet]
+
+project/assembly_name="StockMasterGodot"
+
 [physics]
 
-common/physics_ticks_per_second=1
 2d/physics_engine="Dummy"
 3d/physics_engine="Dummy"
 
