@@ -14,19 +14,18 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	if response_code == 200:
 		var response_text = body.get_string_from_utf8()
 		var response_json = JSON.parse_string(response_text)
-		print(typeof(response_json))
 		for item in response_json:
-			var image = Image.new()
-			print(typeof(item['imagem']))
-			#TEM ALGO ERRADO COM ESSA CONVERSÃO DE BASE64 PRA UTF8 E DPS PRA IMAGEM
-			var error = image.load_png_from_buffer(Marshalls.base64_to_utf8(item['imagem']).to_utf8_buffer())
-			if error == OK:
-				var texture = ImageTexture.create_from_image(image)
-				instanciar(texture, item['nome'], item['quantidade'])
-			else:
-				printerr("DEU RUIM")
+			var image : Image = Image.new()
+			var bytes : PackedByteArray = Marshalls.base64_to_raw(item['imagem'])
+			var erro = image.load_png_from_buffer(bytes)
+			if erro != OK:
+				printerr("DEU MERDA")
+				continue
+			var texture : ImageTexture = ImageTexture.create_from_image(image)
+			instanciar(texture, item['nome'], item['quantidade'])
 
-func instanciar(textura : ImageTexture, nome : StringName, qtd : int):
+func instanciar(textura : ImageTexture, nome : StringName, qtd : float):
+	var qtdCerta = round(qtd)
 	var instancia : PainelItem = PAINEL_DE_ITEM.instantiate()
-	instancia.setup(textura, nome, qtd)
 	add_child(instancia)
+	instancia.setup(textura, nome, qtdCerta)

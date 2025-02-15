@@ -56,13 +56,13 @@ def get_image():
 itens = [
     {
         'id': 1,
-        'imagem': 'placeholder/evolucao.png',
+        'imagem': 'placeholder/salim.png',
         'nome': 'Arroz',
         'quantidade': 5
     },
     {
         'id': 2,
-        'imagem': 'placeholder/evolucao.png',
+        'imagem': 'placeholder/salim.png',
         'nome': 'Feijão',
         'quantidade': 3
     },
@@ -78,7 +78,6 @@ itens = [
 def get_itens():
     for item in itens:
         absolute_path = os.path.abspath(item['imagem'])
-        print(absolute_path)
         if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
             with open(item['imagem'], 'rb') as f:
                 item['imagem'] = base64.b64encode(f.read()).decode('utf-8')
