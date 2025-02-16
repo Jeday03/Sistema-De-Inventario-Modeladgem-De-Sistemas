@@ -1,11 +1,14 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 import random
 import os
 import base64
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 CORS(app)
+db = SQLAlchemy(app)
 
 #region Teste de GET
 '''
@@ -89,9 +92,62 @@ itens = [
         'imagem': 'placeholder/salim.png',
         'nome': 'Tomate',
         'quantidade': 4
+    },
+    {
+        'id': 7,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Cebola',
+        'quantidade': 6
+    },
+    {
+        'id': 8,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Alho',
+        'quantidade': 8
+    },
+    {
+        'id': 9,
+        'imagem': 'placeholder/evolucao.png',
+        'nome': 'Pão',
+        'quantidade': 10
+    },
+    {
+        'id': 10,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Leite',
+        'quantidade': 7
+    },
+    {
+        'id': 11,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Ovos',
+        'quantidade': 12
+    },
+    {
+        'id': 12,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Queijo',
+        'quantidade': 2
+    },
+    {
+        'id': 13,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Presunto',
+        'quantidade': 3
+    },
+    {
+        'id': 14,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Manteiga',
+        'quantidade': 1
+    },
+    {
+        'id': 15,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Café',
+        'quantidade': 5
     }
 ]
-
 @app.route('/itens', methods=['GET'])
 def get_itens():
     for item in itens:
@@ -105,6 +161,14 @@ def get_itens():
 
 #endregion
 
+#region Teste de envio de itens, via SQL
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    imagem = db.Column(db.String(200), nullable=False)
+    nome = db.Column(db.String(100), nullable=False)
+    quantidade = db.Column(db.Integer)
+
+#endregion
 
 if __name__ == '__main__':
     app.run(debug=True)
