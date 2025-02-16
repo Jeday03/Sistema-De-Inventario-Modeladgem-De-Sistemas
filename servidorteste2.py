@@ -13,14 +13,21 @@ db = SQLAlchemy(app)
 
 #region de Get e Post
 
+#Get lista de itens prefixados
 
-#Get item por id
-@app.route('/itens/<int:item_id>', methods=['GET'])
-def get_item(item_id):
-    item = next((i for i in itens if i['id'] == item_id), None)
-    if item:
-        return jsonify(item)
-    return jsonify({'message': 'Item não encontrado'}), 404
+@app.route('/itens_limitados', methods=['POST'])
+def get_limited_itens():
+    data = request.get_json() or {}  # Garante que data seja um dicionário, mesmo se for None
+    prefixo = data.get('prefixo', '').lower()  # Obtém o prefixo (se houver) e converte para minúsculas
+
+    # Filtra os itens com base no prefixo, se houver
+    if prefixo:
+        itens_filtrados = [item for item in itens if item['nome'].lower().startswith(prefixo)]
+    else:
+        itens_filtrados = itens
+
+    # Retorna no máximo 10 itens
+    return jsonify(itens_filtrados[:10])
 
 
 #Get lista de itens do banco
