@@ -71,6 +71,24 @@ itens = [
         'imagem': 'placeholder/evolucao.png',
         'nome': 'Macarrão',
         'quantidade': 2
+    },
+    {
+        'id': 4,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Carne',
+        'quantidade': 1
+    },
+    {
+        'id': 5,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Batata',
+        'quantidade': 3
+    },
+    {
+        'id': 6,
+        'imagem': 'placeholder/salim.png',
+        'nome': 'Tomate',
+        'quantidade': 4
     }
 ]
 
