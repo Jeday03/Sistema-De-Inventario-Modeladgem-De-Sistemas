@@ -165,9 +165,10 @@ itens = [
 ]
 @app.route('/itens', methods=['GET'])
 def get_itens():
-    for item in itens:
+    itensCopy = itens.copy()
+    for item in itensCopy:
         absolute_path = os.path.abspath(item['imagem'])
-        if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
+        if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
             with open(item['imagem'], 'rb') as f:
                 item['imagem'] = base64.b64encode(f.read()).decode('utf-8')
         else:
@@ -188,7 +189,7 @@ def add_item():
         'id': itens[-1]['id'] + 1,
         'imagem': data['imagem'],
         'nome': data['nome'],
-        'quantidade': data['quantidade']
+        'quantidade': data['quantidade'],
         'extensao': data['extensao']
     }
     itens.append(new_item)

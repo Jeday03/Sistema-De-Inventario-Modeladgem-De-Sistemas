@@ -9,7 +9,6 @@ func _ready() -> void:
 	if erro != OK:
 		printerr("Não foi possível fazer httprequest")
 
-
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code == 200:
 		var response_text = body.get_string_from_utf8()
@@ -18,11 +17,10 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 			var image : Image = Image.new()
 			var bytes : PackedByteArray = Marshalls.base64_to_raw(item['imagem'])
 			var erro : Error = FAILED
-			
 			match item['extensao']:
-				"png":
+				".png":
 					erro = image.load_png_from_buffer(bytes)
-				"jpg":
+				".jpg":
 					erro = image.load_jpg_from_buffer(bytes)
 			
 			if erro != OK:

@@ -22,14 +22,14 @@ func _on_file_dialog_file_selected(path: String) -> void:
 		return
 	var texture = ImageTexture.create_from_image(image)
 	texture_rect.texture = texture
-	imageType = path.get_extension()
+	imageType = "." + path.get_extension()
 
 func _on_button_2_pressed() -> void:
 	var imagemComprimida : PackedByteArray
 	match imageType:
-		"png":
+		".png":
 			imagemComprimida = image.save_png_to_buffer()
-		"jpg":
+		".jpg":
 			imagemComprimida = image.save_jpg_to_buffer()
 		"null":
 			printerr("Imagem inválida. Recarregue novamente")
