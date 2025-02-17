@@ -159,6 +159,26 @@ def get_itens():
             print("Imagem não encontrada do ", item['nome'])
     return jsonify(itens)
 
+@app.route('/add_item', methods=['POST'])
+def add_item():
+    data = request.get_json()
+    
+    image_data = base64.b64decode(data['imagem'])
+    image_path = f"placeholder/{data['nome']}.png"
+    with open(image_path, 'wb') as f:
+        f.write(image_data)
+    data['imagem'] = image_path
+
+    new_item = {
+        'id': itens[-1]['id'] + 1,
+        'imagem': data['imagem'],
+        'nome': data['nome'],
+        'quantidade': data['quantidade']
+    }
+    itens.append(new_item)
+    print("Item adicionado com sucesso!")
+    return jsonify({'message': 'Item adicionado com sucesso!'}), 201
+
 #endregion
 
 #region Teste de envio de itens, via SQL
