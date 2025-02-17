@@ -152,11 +152,11 @@ itens = [
 def get_itens():
     for item in itens:
         absolute_path = os.path.abspath(item['imagem'])
-        if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
+        if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
             with open(item['imagem'], 'rb') as f:
                 item['imagem'] = base64.b64encode(f.read()).decode('utf-8')
         else:
-            print("Imagem não encontrada do ", item['nome'])
+            print("Imagem não encontrada do", item['nome'])
     return jsonify(itens)
 
 @app.route('/add_item', methods=['POST'])
@@ -164,7 +164,7 @@ def add_item():
     data = request.get_json()
     
     image_data = base64.b64decode(data['imagem'])
-    image_path = f"placeholder/{data['nome']}.png"
+    image_path = f"placeholder/{data['nome']}" + data['extensao']
     with open(image_path, 'wb') as f:
         f.write(image_data)
     data['imagem'] = image_path
