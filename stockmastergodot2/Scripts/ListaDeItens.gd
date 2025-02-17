@@ -17,7 +17,14 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		for item in response_json:
 			var image : Image = Image.new()
 			var bytes : PackedByteArray = Marshalls.base64_to_raw(item['imagem'])
-			var erro = image.load_png_from_buffer(bytes)
+			var erro : Error = FAILED
+			
+			match item['extensao']:
+				"png":
+					erro = image.load_png_from_buffer(bytes)
+				"jpg":
+					erro = image.load_jpg_from_buffer(bytes)
+			
 			if erro != OK:
 				printerr("DEU MERDA")
 				continue
