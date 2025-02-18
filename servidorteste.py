@@ -169,7 +169,7 @@ def get_itens():
     itensCopy = copy.deepcopy(itens) # Para não alterar a lista original
     for item in itensCopy:
         absolute_path = os.path.abspath(item['imagem'])
-        if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
+        if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolut_path.endswith('.jpg')):
             with open(item['imagem'], 'rb') as f:
                 item['imagem'] = base64.b64encode(f.read()).decode('utf-8')
         else:
