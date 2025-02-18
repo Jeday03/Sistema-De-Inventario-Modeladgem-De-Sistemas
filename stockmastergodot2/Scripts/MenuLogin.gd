@@ -12,7 +12,6 @@ func _on_button_pressed() -> void:
 		print("Deu certo, enviou a request")
 	'''
 	var body = JSON.stringify({"usuario": usuario.text, "senha": senha.text})
-	print(typeof(body))
 	var headers = ["Content-Type: application/json"]
 	var error = http_request.request("http://127.0.0.1:5000/login", headers, HTTPClient.METHOD_POST, body)
 	if error != OK:

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cpp10fh3liriv"]
+[gd_scene load_steps=2 format=3 uid="uid://kmqmxm1dioua"]
+
+[ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_oxy3b")
 
 [node name="Header" type="ColorRect" parent="."]
 z_index = 1
@@ -33,16 +36,21 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "StockMaster"
 
-[node name="Sidebar" type="ColorRect" parent="."]
-z_index = -1
+[node name="MainFrame" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 300.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Sidebar" type="ColorRect" parent="MainFrame"]
+z_index = -1
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
 color = Color(0.721569, 0.792157, 0.831373, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Sidebar"]
+[node name="MarginContainer" type="MarginContainer" parent="MainFrame/Sidebar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,31 +62,31 @@ theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 60
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainFrame/Sidebar/MarginContainer"]
 z_index = 1
 layout_mode = 2
 
-[node name="EstoqueButton" type="Button" parent="Sidebar/MarginContainer/VBoxContainer"]
+[node name="EstoqueButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Estoque
 "
 
-[node name="VendasButton" type="Button" parent="Sidebar/MarginContainer/VBoxContainer"]
+[node name="VendasButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Vendas"
 
-[node name="CadastroButton" type="Button" parent="Sidebar/MarginContainer/VBoxContainer"]
+[node name="CadastroButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Cadastro
 "
 
-[node name="PedidosButton" type="Button" parent="Sidebar/MarginContainer/VBoxContainer"]
+[node name="PedidosButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Pedidos
 "
 
-[node name="LogoutButton" type="Button" parent="Sidebar/MarginContainer/VBoxContainer"]
+[node name="LogoutButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 text = "Sair
@@ -106,3 +114,6 @@ offset_bottom = 30.0
 [node name="Label" type="Label" parent="Footer/HBoxContainer"]
 layout_mode = 2
 text = "Deformadores de sistemas™"
+
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/EstoqueButton" to="." method="_on_estoque_button_pressed"]
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/LogoutButton" to="." method="_on_logout_button_pressed"]

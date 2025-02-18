@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import os
 import base64
+import copy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -61,103 +62,141 @@ itens = [
         'id': 1,
         'imagem': 'placeholder/salim.png',
         'nome': 'Arroz',
-        'quantidade': 5
+        'quantidade': 5,
+        'extensao': '.png'
     },
     {
         'id': 2,
         'imagem': 'placeholder/salim.png',
         'nome': 'Feijão',
-        'quantidade': 3
+        'quantidade': 3,
+        'extensao': '.png'
     },
     {
         'id': 3,
         'imagem': 'placeholder/evolucao.png',
         'nome': 'Macarrão',
-        'quantidade': 2
+        'quantidade': 2,
+        'extensao': '.png'
     },
     {
         'id': 4,
         'imagem': 'placeholder/salim.png',
         'nome': 'Carne',
-        'quantidade': 1
+        'quantidade': 1,
+        'extensao': '.png'
     },
     {
         'id': 5,
         'imagem': 'placeholder/salim.png',
         'nome': 'Batata',
-        'quantidade': 3
+        'quantidade': 3,
+        'extensao': '.png'
     },
     {
         'id': 6,
         'imagem': 'placeholder/salim.png',
         'nome': 'Tomate',
-        'quantidade': 4
+        'quantidade': 4,
+        'extensao': '.png'
     },
     {
         'id': 7,
         'imagem': 'placeholder/salim.png',
         'nome': 'Cebola',
-        'quantidade': 6
+        'quantidade': 6,
+        'extensao': '.png'
     },
     {
         'id': 8,
         'imagem': 'placeholder/salim.png',
         'nome': 'Alho',
-        'quantidade': 8
+        'quantidade': 8,
+        'extensao': '.png'
     },
     {
         'id': 9,
         'imagem': 'placeholder/evolucao.png',
         'nome': 'Pão',
-        'quantidade': 10
+        'quantidade': 10,
+        'extensao': '.png'
     },
     {
         'id': 10,
         'imagem': 'placeholder/salim.png',
         'nome': 'Leite',
-        'quantidade': 7
+        'quantidade': 7,
+        'extensao': '.png'
     },
     {
         'id': 11,
         'imagem': 'placeholder/salim.png',
         'nome': 'Ovos',
-        'quantidade': 12
+        'quantidade': 12,
+        'extensao': '.png'
     },
     {
         'id': 12,
         'imagem': 'placeholder/salim.png',
         'nome': 'Queijo',
-        'quantidade': 2
+        'quantidade': 2,
+        'extensao': '.png'
     },
     {
         'id': 13,
         'imagem': 'placeholder/salim.png',
         'nome': 'Presunto',
-        'quantidade': 3
+        'quantidade': 3,
+        'extensao': '.png'
     },
     {
         'id': 14,
         'imagem': 'placeholder/salim.png',
         'nome': 'Manteiga',
-        'quantidade': 1
+        'quantidade': 1,
+        'extensao': '.png'
     },
     {
         'id': 15,
         'imagem': 'placeholder/salim.png',
         'nome': 'Café',
-        'quantidade': 5
+        'quantidade': 5,
+        'extensao': '.png'
     }
 ]
 @app.route('/itens', methods=['GET'])
 def get_itens():
-    for item in itens:
+    itensCopy = copy.deepcopy(itens) # Para não alterar a lista original
+    for item in itensCopy:
         absolute_path = os.path.abspath(item['imagem'])
         if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
             with open(item['imagem'], 'rb') as f:
                 item['imagem'] = base64.b64encode(f.read()).decode('utf-8')
         else:
-            print("Imagem não encontrada do ", item['nome'])
-    return jsonify(itens)
+            print(item['imagem'])
+            print("Imagem não encontrada do", item['nome'])
+    return jsonify(itensCopy)
+
+@app.route('/add_item', methods=['POST'])
+def add_item():
+    data = request.get_json()
+    
+    image_data = base64.b64decode(data['imagem'])
+    image_path = f"placeholder/{data['nome']}" + data['extensao']
+    with open(image_path, 'wb') as f:
+        f.write(image_data)
+    data['imagem'] = image_path
+
+    new_item = {
+        'id': itens[-1]['id'] + 1,
+        'imagem': data['imagem'],
+        'nome': data['nome'],
+        'quantidade': data['quantidade'],
+        'extensao': data['extensao']
+    }
+    itens.append(new_item)
+    print("Item adicionado com sucesso!")
+    return jsonify({'message': 'Item adicionado com sucesso!'}), 201
 
 #endregion
 
