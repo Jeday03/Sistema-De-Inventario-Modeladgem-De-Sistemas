@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://kmqmxm1dioua"]
+[gd_scene load_steps=3 format=3 uid="uid://kmqmxm1dioua"]
 
 [ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
+[ext_resource type="PackedScene" uid="uid://flpa1v0if7uv" path="res://Scenes/CadastroFuncionario.tscn" id="2_4tmdg"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -43,6 +44,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 5
 
 [node name="Sidebar" type="ColorRect" parent="MainFrame"]
 z_index = -1
@@ -91,6 +93,15 @@ layout_mode = 2
 size_flags_vertical = 10
 text = "Sair
 "
+
+[node name="MarginContainer" type="MarginContainer" parent="MainFrame"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Control" parent="MainFrame/MarginContainer" instance=ExtResource("2_4tmdg")]
+layout_mode = 2
 
 [node name="Footer" type="ColorRect" parent="."]
 z_index = 1
