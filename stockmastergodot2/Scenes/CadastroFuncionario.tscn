@@ -62,8 +62,6 @@ text = "CPF:"
 
 [node name="CampoCPF" type="LineEdit" parent="CanvasLayer/HBoxContainer/Formulario"]
 layout_mode = 2
-text = "000.000.000-00"
-placeholder_text = "000.000.000-0"
 
 [node name="LabelCel" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
 layout_mode = 2
