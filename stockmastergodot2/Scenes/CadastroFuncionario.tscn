@@ -25,3 +25,98 @@ anchor_bottom = 1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Lista de funcionários" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Formulario" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Cadastro e edição de funcionários"
+
+[node name="Description" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Digite os dados a serem cadastrados e/ou editados:"
+
+[node name="LabelNome" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Nome:"
+
+[node name="CampoNome" type="LineEdit" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+
+[node name="LabelCPF" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "CPF:"
+
+[node name="CampoCPF" type="LineEdit" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+text = "000.000.000-00"
+placeholder_text = "000.000.000-0"
+
+[node name="LabelCel" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Celular:"
+
+[node name="CampoCel" type="LineEdit" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+
+[node name="LabelEmail" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "E-mail:"
+
+[node name="CampoEmail" type="LineEdit" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+
+[node name="LabelFunction" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Função:"
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Admnistrador"
+popup/item_0/id = 0
+popup/item_1/text = "Gerente"
+popup/item_1/id = 1
+popup/item_2/text = "Caixa/Repositor"
+popup/item_2/id = 2
+
+[node name="LabelSenha" type="Label" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Senha: "
+
+[node name="CampoSenha" type="LineEdit" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/Formulario"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Cadastrar" type="Button" parent="CanvasLayer/HBoxContainer/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Cadastrar"
+
+[node name="Editar" type="Button" parent="CanvasLayer/HBoxContainer/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Editar"
+
+[node name="Remover" type="Button" parent="CanvasLayer/HBoxContainer/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Excluir"
