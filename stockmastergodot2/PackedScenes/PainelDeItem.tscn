@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://db0bixhh74jjv"]
 
-[ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_axohy"]
+[ext_resource type="Script" path="res://Scripts/PainelItem.gd" id="1_axohy"]
 [ext_resource type="Texture2D" uid="uid://jk0exjrfod4x" path="res://salim.png" id="2_axohy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axohy"]
