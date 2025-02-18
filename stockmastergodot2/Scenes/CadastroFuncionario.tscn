@@ -125,6 +125,7 @@ text = "Função:"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer/MarginContainer2/Formulario"]
 layout_mode = 2
+selected = 2
 item_count = 3
 popup/item_0/text = "Admnistrador"
 popup/item_0/id = 0
@@ -160,4 +161,18 @@ text = "Excluir"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "Usuário criado"
+initial_position = 1
+size = Vector2i(207, 100)
+dialog_text = "O usuário foi cadastrado"
+
+[node name="Erro" type="AcceptDialog" parent="."]
+title = "ERRO!"
+initial_position = 1
+size = Vector2i(202, 159)
+ok_button_text = "Tentar novamente"
+dialog_text = "O usuário não foi criado"
+
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

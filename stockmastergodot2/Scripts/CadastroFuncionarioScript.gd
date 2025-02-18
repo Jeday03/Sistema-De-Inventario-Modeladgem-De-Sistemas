@@ -8,6 +8,9 @@ extends Control
 @onready var campo_senha: LineEdit = $HBoxContainer/MarginContainer2/Formulario/CampoSenha
 @onready var http_request: HTTPRequest = $HTTPRequest
 
+@onready var accept_dialog: AcceptDialog = $AcceptDialog
+@onready var erro: AcceptDialog = $Erro
+
 func _on_cadastrar_pressed() -> void:
 	var json = {
 		"nome": campo_nome.text,
@@ -17,4 +20,18 @@ func _on_cadastrar_pressed() -> void:
 		"funcao": option_button.get_item_text(option_button.selected),
 		"senha": campo_senha.text
 	}
-	http_request.request("url", [], HTTPClient.METHOD_POST, json)
+	var body = JSON.stringify(json)
+	var error = http_request.request("http://127.0.0.1:5000/cadastro_funcionario", [], HTTPClient.METHOD_POST, body)
+	if error != OK:
+		erro.visible = true
+
+func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	if response_code == 200:
+		accept_dialog.visible = true
+		campo_nome.text = ""
+		campo_cel.text = ""
+		campo_email.text = ""
+		campo_senha.text = ""
+		campo_cpf.text = ""
+	else:
+		erro.visible = true
