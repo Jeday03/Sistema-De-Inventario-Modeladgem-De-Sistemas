@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://flpa1v0if7uv"]
+[gd_scene load_steps=2 format=3 uid="uid://flpa1v0if7uv"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" uid="uid://dfes7eftqca3a" path="res://Scripts/CadastroFuncionarioScript.gd" id="1_qssss"]
+
+[node name="CadastroFuncionario" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -9,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_qssss")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -154,3 +157,7 @@ text = "Editar"
 [node name="Remover" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
 layout_mode = 2
 text = "Excluir"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
