@@ -3,7 +3,6 @@ extends Control
 @onready var http_request_2: HTTPRequest = $HTTPRequest2
 @onready var lista_de_funcionários: VBoxContainer = $"HBoxContainer/MarginContainer/ScrollContainer/Lista de funcionários"
 
-
 func _ready() -> void:
 	http_request_2.request("url", [], HTTPClient.METHOD_GET)
 
