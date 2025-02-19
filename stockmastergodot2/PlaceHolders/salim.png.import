@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jk0exjrfod4x"
-path="res://.godot/imported/salim.png-a4d86dc6254d88af59f6e1499ed3173b.ctex"
+path="res://.godot/imported/salim.png-828c47769ee4b6f982e5b41b5e94844e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://salim.png"
-dest_files=["res://.godot/imported/salim.png-a4d86dc6254d88af59f6e1499ed3173b.ctex"]
+source_file="res://PlaceHolders/salim.png"
+dest_files=["res://.godot/imported/salim.png-828c47769ee4b6f982e5b41b5e94844e.ctex"]
 
 [params]
 
