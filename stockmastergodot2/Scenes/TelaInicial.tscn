@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnydgc3m51djg"]
 
-[ext_resource type="Script" uid="uid://cnfmjxdxwwubq" path="res://Scripts/MenuLogin.gd" id="1_mhdbr"]
+[ext_resource type="Script" path="res://Scripts/MenuLogin.gd" id="1_mhdbr"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_6mis4"]
 
 [node name="Node2D" type="Node2D"]

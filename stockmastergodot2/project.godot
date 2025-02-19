@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="StockMasterGodot2"
-run/main_scene="uid://cnydgc3m51djg"
-config/features=PackedStringArray("4.4", "Mobile")
+run/main_scene="res://Scenes/TelaInicial.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [physics]
