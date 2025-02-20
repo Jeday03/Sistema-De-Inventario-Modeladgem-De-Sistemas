@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://kmqmxm1dioua"]
+[gd_scene load_steps=2 format=3 uid="uid://kmqmxm1dioua"]
 
 [ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
-[ext_resource type="PackedScene" uid="uid://flpa1v0if7uv" path="res://Scenes/CadastroFuncionario.tscn" id="2_4tmdg"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -83,10 +82,9 @@ layout_mode = 2
 text = "Cadastro
 "
 
-[node name="PedidosButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
+[node name="NotificacoesButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Pedidos
-"
+text = "Notificações"
 
 [node name="LogoutButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -99,9 +97,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 44
 theme_override_constants/margin_bottom = 25
-
-[node name="Control" parent="MainFrame/MarginContainer" instance=ExtResource("2_4tmdg")]
-layout_mode = 2
 
 [node name="Footer" type="ColorRect" parent="."]
 z_index = 1
