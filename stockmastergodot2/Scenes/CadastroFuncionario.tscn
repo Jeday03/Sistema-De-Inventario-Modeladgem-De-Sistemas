@@ -43,24 +43,9 @@ theme_override_constants/margin_bottom = 20
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Lista de funcionários" type="VBoxContainer" parent="HBoxContainer/MarginContainer/ScrollContainer"]
+[node name="ListaFuncionario" type="VBoxContainer" parent="HBoxContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Panel" type="Panel" parent="HBoxContainer/MarginContainer/ScrollContainer/Lista de funcionários"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/ScrollContainer/Lista de funcionários/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "fdsafdsafjkdlsajfkdlsajfkdlas"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -128,6 +113,7 @@ layout_mode = 2
 selected = 2
 item_count = 3
 popup/item_0/text = "Admnistrador"
+popup/item_0/id = 0
 popup/item_1/text = "Gerente"
 popup/item_1/id = 1
 popup/item_2/text = "Caixa/Repositor"
@@ -176,5 +162,7 @@ dialog_text = "O usuário não foi criado"
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Editar" to="." method="_on_editar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Remover" to="." method="_on_remover_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="request_completed" from="HTTPRequest2" to="." method="_on_http_request_2_request_completed"]

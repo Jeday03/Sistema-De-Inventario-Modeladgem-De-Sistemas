@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kmqmxm1dioua"]
 
-[ext_resource type="Script" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
+[ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
 [ext_resource type="PackedScene" uid="uid://flpa1v0if7uv" path="res://Scenes/CadastroFuncionario.tscn" id="2_4tmdg"]
 
 [node name="DefaultPage" type="Control"]
