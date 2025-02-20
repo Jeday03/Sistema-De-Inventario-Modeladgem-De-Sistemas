@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://kmqmxm1dioua"]
+[gd_scene load_steps=3 format=3 uid="uid://kmqmxm1dioua"]
 
-[ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
+[ext_resource type="Script" path="res://Scripts/DefaultPage.gd" id="1_oxy3b"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_4q1ni"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -30,6 +31,7 @@ offset_top = -17.5
 offset_right = 249.0
 offset_bottom = 17.5
 grow_vertical = 2
+theme = ExtResource("2_4q1ni")
 
 [node name="Label" type="Label" parent="Header/HBoxContainer"]
 layout_mode = 2
@@ -58,6 +60,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_4q1ni")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 20
@@ -108,6 +111,7 @@ anchor_bottom = 1.0
 offset_top = -30.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("2_4q1ni")
 color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Footer"]

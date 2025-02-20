@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cpp10fh3liriv"]
+[gd_scene load_steps=2 format=3 uid="uid://cpp10fh3liriv"]
+
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7tra1"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -27,11 +29,21 @@ offset_top = -17.5
 offset_right = 249.0
 offset_bottom = 17.5
 grow_vertical = 2
+theme = ExtResource("1_7tra1")
 
 [node name="Label" type="Label" parent="Header/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "StockMaster"
+
+[node name="Background" type="ColorRect" parent="."]
+clip_contents = true
+layout_mode = 2
+offset_left = 300.0
+offset_top = 45.0
+offset_right = 1152.0
+offset_bottom = 639.0
+color = Color(0.241373, 0.436284, 0.560191, 1)
 
 [node name="Sidebar" type="ColorRect" parent="."]
 z_index = -1
@@ -40,7 +52,8 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 300.0
 grow_vertical = 2
-color = Color(0.721569, 0.792157, 0.831373, 1)
+theme = ExtResource("1_7tra1")
+color = Color(0.58943, 0.826612, 0.86543, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Sidebar"]
 layout_mode = 1
@@ -94,6 +107,7 @@ anchor_bottom = 1.0
 offset_top = -30.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("1_7tra1")
 color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Footer"]

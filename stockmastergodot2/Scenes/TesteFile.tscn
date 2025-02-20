@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://beohxmqhnpjfg"]
+[gd_scene load_steps=4 format=3 uid="uid://beohxmqhnpjfg"]
 
-[ext_resource type="Script" uid="uid://qqlkroorvehi" path="res://Scripts/CadastroItem.gd" id="1_flhr8"]
+[ext_resource type="Script" path="res://Scripts/CadastroItem.gd" id="1_flhr8"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_k2qlc"]
 [ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="2_uexps"]
 
 [node name="Control" type="Control"]
@@ -33,6 +34,7 @@ offset_top = 95.0
 offset_right = 455.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_k2qlc")
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
