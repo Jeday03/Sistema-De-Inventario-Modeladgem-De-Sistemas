@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bqh2iuipvdjx"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bqh2iuipvdjx"]
 
 [ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="1_qrn1d"]
 [ext_resource type="FontFile" uid="uid://hpetxanxfrcx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="2_qg5t3"]
@@ -29,6 +29,12 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54afu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sfgg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4iaxc"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waxua"]
 bg_color = Color(0.260727, 0.306174, 0.378109, 1)
 corner_radius_top_left = 5
@@ -46,6 +52,10 @@ Button/fonts/font = ExtResource("1_qrn1d")
 Button/styles/hover = SubResource("StyleBoxFlat_6bnt2")
 Button/styles/normal = SubResource("StyleBoxFlat_j8br0")
 Button/styles/pressed = SubResource("StyleBoxFlat_oyh1g")
+ItemList/colors/font_color = Color(0, 0, 0, 1)
+ItemList/styles/focus = SubResource("StyleBoxFlat_54afu")
+ItemList/styles/panel = SubResource("StyleBoxFlat_5sfgg")
+ItemList/styles/selected = SubResource("StyleBoxFlat_4iaxc")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/fonts/font = ExtResource("2_qg5t3")
 LineEdit/colors/font_placeholder_color = Color(0.86037, 0.860369, 0.860369, 0.329412)
