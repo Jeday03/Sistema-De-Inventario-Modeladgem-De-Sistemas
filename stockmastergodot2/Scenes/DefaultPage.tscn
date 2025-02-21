@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpp10fh3liriv"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7tra1"]
-[ext_resource type="Texture2D" uid="uid://jk0exjrfod4x" path="res://PlaceHolders/salim.png" id="2_bkq7m"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="2_hxsfm"]
+[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="2_mcygh"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -26,16 +26,15 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 25.0
-offset_top = -17.5
-offset_right = 240.0
-offset_bottom = 17.5
+offset_top = -15.5
+offset_right = 215.0
+offset_bottom = 15.5
 grow_vertical = 2
 theme = ExtResource("1_7tra1")
 
 [node name="TextureRect" type="TextureRect" parent="Header/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_bkq7m")
+texture = ExtResource("2_mcygh")
 expand_mode = 2
 
 [node name="Label" type="Label" parent="Header/HBoxContainer"]
