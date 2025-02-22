@@ -164,7 +164,17 @@ itens = [
         'extensao': '.png'
     }
 ]
-@app.route('/itens', methods=['GET'])
+
+
+@app.route('/item', methods=['GET', 'POST'])
+def item():
+    if request.method == 'GET':
+        return get_itens()
+    elif request.method == 'POST':
+        return add_item(request)
+
+
+#@app.route('/itens', methods=['GET'])
 def get_itens():
     itensCopy = copy.deepcopy(itens) # Para não alterar a lista original
     for item in itensCopy:
@@ -177,8 +187,8 @@ def get_itens():
             print("Imagem não encontrada do", item['nome'])
     return jsonify(itensCopy)
 
-@app.route('/add_item', methods=['POST'])
-def add_item():
+#@app.route('/add_item', methods=['POST'])
+def add_item(request):
     data = request.get_json()
     
     image_data = base64.b64decode(data['imagem'])
