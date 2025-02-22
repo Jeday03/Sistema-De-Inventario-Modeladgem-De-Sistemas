@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpp10fh3liriv"]
+[gd_scene load_steps=5 format=3 uid="uid://cpp10fh3liriv"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7tra1"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="2_hxsfm"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="2_mcygh"]
+[ext_resource type="Texture2D" uid="uid://bdn8fu61vygqn" path="res://PlaceHolders/sair.png" id="4_776vx"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -106,6 +107,9 @@ size_flags_vertical = 10
 theme = ExtResource("2_hxsfm")
 text = "Sair
 "
+icon = ExtResource("4_776vx")
+icon_alignment = 2
+expand_icon = true
 
 [node name="Footer" type="ColorRect" parent="."]
 z_index = 1

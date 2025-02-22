@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://flpa1v0if7uv"]
+[gd_scene load_steps=6 format=3 uid="uid://flpa1v0if7uv"]
 
 [ext_resource type="Script" path="res://Scripts/CadastroFuncionarioScript.gd" id="1_qssss"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_al0f7"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="3_4jtm2"]
 [ext_resource type="Theme" uid="uid://be60t68qx8sof" path="res://Themes/Visibility.tres" id="3_15m6i"]
+[ext_resource type="Texture2D" uid="uid://drsape8br8e5w" path="res://PlaceHolders/trash.png" id="5_v2ivm"]
 
 [node name="CadastroFuncionario" type="Control"]
 layout_mode = 3
@@ -166,6 +167,8 @@ text = "Editar"
 layout_mode = 2
 theme = ExtResource("3_4jtm2")
 text = "Excluir"
+icon = ExtResource("5_v2ivm")
+icon_alignment = 2
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 

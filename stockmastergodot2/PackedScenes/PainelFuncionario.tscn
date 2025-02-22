@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0lu6xuvw4n0n"]
+[gd_scene load_steps=6 format=3 uid="uid://c0lu6xuvw4n0n"]
 
-[ext_resource type="Script" uid="uid://bcgm78kevdjx3" path="res://Scripts/PainelFuncionario.gd" id="1_ffxwa"]
+[ext_resource type="Script" path="res://Scripts/PainelFuncionario.gd" id="1_ffxwa"]
 [ext_resource type="Texture2D" uid="uid://jk0exjrfod4x" path="res://PlaceHolders/salim.png" id="2_nfeuk"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_qyo72"]
+[ext_resource type="FontFile" uid="uid://8l1ywgx6ncsi" path="res://GodotFont/fonts/montreal/Montreal-Bold.ttf" id="3_jniag"]
+
+[sub_resource type="Theme" id="Theme_e63hu"]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("3_jniag")
 
 [node name="ColorRect" type="Button"]
 custom_minimum_size = Vector2(0, 100)
@@ -16,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_qyo72")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -23,6 +31,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme = SubResource("Theme_e63hu")
 theme_override_constants/separation = 20
 
 [node name="FotoFuncionario" type="TextureRect" parent="MarginContainer/HBoxContainer"]
