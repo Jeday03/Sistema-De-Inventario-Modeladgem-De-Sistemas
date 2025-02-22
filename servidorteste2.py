@@ -13,6 +13,28 @@ db = SQLAlchemy(app)
 
 #region de Get e Post
 
+
+# Rota única para lidar com todos os métodos HTTP
+@app.route('/item', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def item_handler():
+    if request.method == 'GET':
+        return get_itens_db()
+    elif request.method == 'POST':
+        return add_item()
+    elif request.method == 'PUT':
+        item_id = request.args.get('id')
+        if not item_id:
+            return jsonify({'message': 'ID do item é necessário para atualização'}), 400
+        return update_item(item_id)
+    elif request.method == 'DELETE':
+        item_id = request.args.get('id')
+        if not item_id:
+            return jsonify({'message': 'ID do item é necessário para exclusão'}), 400
+        return delete_item(item_id)
+    else:
+        return jsonify({'message': 'Método não suportado'}), 405
+
+
 #Get lista de itens prefixados
 
 @app.route('/itens_limitados', methods=['POST'])
