@@ -1,3 +1,103 @@
-[gd_resource type="Theme" format=3 uid="uid://bqh2iuipvdjx"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://bqh2iuipvdjx"]
+
+[ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="1_qrn1d"]
+[ext_resource type="FontFile" uid="uid://hpetxanxfrcx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="2_qg5t3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bnt2"]
+bg_color = Color(0.133677, 0.412666, 0.596144, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8br0"]
+bg_color = Color(0.142328, 0.574475, 0.755387, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0.0938485, 0.145101, 0.226284, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oyh1g"]
+bg_color = Color(0.0998322, 0.474286, 0.69902, 1)
+border_color = Color(0.719457, 0.830608, 0.786678, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54afu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sfgg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4iaxc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waxua"]
+bg_color = Color(0.260727, 0.306174, 0.378109, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.627451)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtxnt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5pd4"]
+bg_color = Color(0.117459, 0.518971, 0.688899, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8mqm"]
+bg_color = Color(0.183619, 0.637798, 0.836611, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0a0p"]
+bg_color = Color(0.141176, 0.572549, 0.756863, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x28w5"]
+bg_color = Color(0.126012, 0.540012, 0.715744, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
 
 [resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1_qrn1d")
+Button/styles/hover = SubResource("StyleBoxFlat_6bnt2")
+Button/styles/normal = SubResource("StyleBoxFlat_j8br0")
+Button/styles/pressed = SubResource("StyleBoxFlat_oyh1g")
+ItemList/colors/font_color = Color(0, 0, 0, 1)
+ItemList/styles/focus = SubResource("StyleBoxFlat_54afu")
+ItemList/styles/panel = SubResource("StyleBoxFlat_5sfgg")
+ItemList/styles/selected = SubResource("StyleBoxFlat_4iaxc")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("2_qg5t3")
+LineEdit/colors/font_placeholder_color = Color(0.86037, 0.860369, 0.860369, 0.329412)
+LineEdit/styles/normal = SubResource("StyleBoxFlat_waxua")
+OptionButton/styles/disabled = SubResource("StyleBoxFlat_wtxnt")
+OptionButton/styles/focus = SubResource("StyleBoxFlat_d5pd4")
+OptionButton/styles/hover = SubResource("StyleBoxFlat_i8mqm")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_r0a0p")
+OptionButton/styles/pressed = SubResource("StyleBoxFlat_x28w5")

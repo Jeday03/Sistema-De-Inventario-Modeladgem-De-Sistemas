@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jk0exjrfod4x"
-path="res://.godot/imported/salim.png-a4d86dc6254d88af59f6e1499ed3173b.ctex"
+uid="uid://cwhepiuq3gclv"
+path="res://.godot/imported/sair.png-3acfc287cad2e646c015cf31494c2e80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://salim.png"
-dest_files=["res://.godot/imported/salim.png-a4d86dc6254d88af59f6e1499ed3173b.ctex"]
+source_file="res://PlaceHolders/sair.png"
+dest_files=["res://.godot/imported/sair.png-3acfc287cad2e646c015cf31494c2e80.ctex"]
 
 [params]
 

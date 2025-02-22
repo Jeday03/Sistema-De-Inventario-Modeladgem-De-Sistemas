@@ -1,0 +1,197 @@
+[gd_scene load_steps=5 format=3 uid="uid://flpa1v0if7uv"]
+
+[ext_resource type="Script" uid="uid://dfes7eftqca3a" path="res://Scripts/CadastroFuncionarioScript.gd" id="1_qssss"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_al0f7"]
+[ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="3_4jtm2"]
+[ext_resource type="Theme" uid="uid://be60t68qx8sof" path="res://Themes/Visibility.tres" id="3_15m6i"]
+
+[node name="CadastroFuncionario" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qssss")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.780392, 0.780392, 0.780392, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("2_al0f7")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ListaFuncionario" type="VBoxContainer" parent="HBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Formulario" type="VBoxContainer" parent="HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_al0f7")
+
+[node name="Title" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Cadastro e edição de funcionários"
+
+[node name="Description" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Digite os dados a serem cadastrados e/ou editados:"
+
+[node name="LabelNome" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Nome:"
+
+[node name="CampoNome" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+placeholder_text = "Digite seu nome"
+alignment = 1
+
+[node name="LabelCPF" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "CPF:"
+
+[node name="CampoCPF" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+placeholder_text = "Digite seu CPF"
+alignment = 1
+
+[node name="LabelCel" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Celular:"
+
+[node name="CampoCel" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+placeholder_text = "(99)9999-9999"
+alignment = 1
+
+[node name="LabelEmail" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "E-mail:"
+
+[node name="CampoEmail" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+placeholder_text = "Digite seu email aqui"
+alignment = 1
+
+[node name="LabelFunction" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Função:"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "Admnistrador"
+popup/item_0/id = 0
+popup/item_1/text = "Gerente"
+popup/item_1/id = 1
+popup/item_2/text = "Caixa/Repositor"
+popup/item_2/id = 2
+
+[node name="LabelSenha" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Senha: "
+
+[node name="CampoSenha" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+placeholder_text = "Senha"
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/CampoSenha"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_vertical = 2
+theme = ExtResource("3_15m6i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/Formulario"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Cadastrar" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Cadastrar"
+
+[node name="Editar" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Editar"
+
+[node name="Remover" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_4jtm2")
+text = "Excluir"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "Usuário criado"
+initial_position = 1
+size = Vector2i(207, 100)
+dialog_text = "O usuário foi cadastrado"
+
+[node name="Erro" type="AcceptDialog" parent="."]
+title = "ERRO!"
+initial_position = 1
+size = Vector2i(202, 159)
+ok_button_text = "Tentar novamente"
+dialog_text = "O usuário não foi criado"
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Editar" to="." method="_on_editar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/Formulario/HBoxContainer/Remover" to="." method="_on_remover_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="request_completed" from="HTTPRequest2" to="." method="_on_http_request_2_request_completed"]
