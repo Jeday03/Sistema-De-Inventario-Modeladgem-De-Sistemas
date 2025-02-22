@@ -10,251 +10,119 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 CORS(app)
 db = SQLAlchemy(app)
 
-
-#region de Get e Post
-
-
-# Rota única para lidar com todos os métodos HTTP
-@app.route('/item', methods=['GET', 'POST', 'PUT', 'DELETE'])
-def item_handler():
-    if request.method == 'GET':
-        return get_itens_db()
-    elif request.method == 'POST':
-        return add_item()
-    elif request.method == 'PUT':
-        item_id = request.args.get('id')
-        if not item_id:
-            return jsonify({'message': 'ID do item é necessário para atualização'}), 400
-        return update_item(item_id)
-    elif request.method == 'DELETE':
-        item_id = request.args.get('id')
-        if not item_id:
-            return jsonify({'message': 'ID do item é necessário para exclusão'}), 400
-        return delete_item(item_id)
-    else:
-        return jsonify({'message': 'Método não suportado'}), 405
-
-
-#Get lista de itens prefixados
-
-@app.route('/itens_limitados', methods=['POST'])
-def get_limited_itens():
-    data = request.get_json() or {}  # Garante que data seja um dicionário, mesmo se for None
-    prefixo = data.get('prefixo', '').lower()  # Obtém o prefixo (se houver) e converte para minúsculas
-
-    # Filtra os itens com base no prefixo, se houver
-    if prefixo:
-        itens_filtrados = [item for item in itens if item['nome'].lower().startswith(prefixo)]
-    else:
-        itens_filtrados = itens
-
-    # Retorna no máximo 10 itens
-    return jsonify(itens_filtrados[:10])
-
-
-#Get lista de itens do banco
-@app.route('/itens_db', methods=['GET'])
-def get_itens_db():
-    itens = Item.query.all()
-    itens_json = [{'id': i.id, 'imagem': i.imagem, 'nome': i.nome, 'quantidade': i.quantidade} for i in itens]
-    return jsonify(itens_json)
-
-
-#Post add item ao banco
-@app.route('/add_item', methods=['POST'])
-def add_item():
-    data = request.get_json()
-    new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
-    db.session.add(new_item)
-    db.session.commit()
-    return jsonify({'message': 'Item adicionado com sucesso!'}), 201
-
-
-#Post atualizar quantidade de item
-@app.route('/update_item/<int:item_id>', methods=['POST'])
-def update_item(item_id):
-    item = Item.query.get(item_id)
-    if not item:
-        return jsonify({'message': 'Item não encontrado'}), 404
-    
-    data = request.get_json()
-    item.quantidade = data.get('quantidade', item.quantidade)
-    db.session.commit()
-    return jsonify({'message': 'Item atualizado com sucesso!'})
-
-
-#Post deletar item
-@app.route('/delete_item/<int:item_id>', methods=['POST'])
-def delete_item(item_id):
-    item = Item.query.get(item_id)
-    if not item:
-        return jsonify({'message': 'Item não encontrado'}), 404
-    
-    db.session.delete(item)
-    db.session.commit()
-    return jsonify({'message': 'Item deletado com sucesso!'})
-#endregion
-
-
-#region Teste de GET
-'''
-Função teste de GET
-'''
-@app.route('/random', methods=['GET'])
-def get_random_number():
-    random_number = random.randint(1, 10)
-    return jsonify({'random_number': random_number})
-#endregion
-
-#region Teste de login
-'''
-O método POST é usado para enviar dados para o servidor.
-Daí, conseguimos pegar o usuário e senha, da mesma forma que fizemos no app cliente.
-RETIRAR O ADMIN, ISSO FOI SÓ PRA TESTE
-'''
-@app.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    username = data['usuario']
-    password = data['senha']
-    if username == 'admin' and password == 'admin':
-        return jsonify({'message': 'Login efetuado'})
-    else:
-        return jsonify({'message': 'Informações inválidas'})
-#endregion
-
-#region Teste de imagem
-'''
-Muito importante usar o absolute_path, se não dá erro 500.
-O send_file é outro módulo do Flask, não esquecer de importar.
-Verifiquem a existência do arquivo e se ele é do tipo esperado, daí mandem o print. Alterem o valor da response também.
-'''
-@app.route('/get_image', methods=['GET'])
-def get_image():
-    image_path = "placeholder/evolucao.png"
-    absolute_path = os.path.abspath(image_path)
-    if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
-        print("Encontrei a imagem")
-        return send_file(image_path, mimetype='image/png'), 200
-    else:
-        print("Imagem não encontrada")
-        return jsonify({'message': 'Imagem não encontrada'}), 404
-#endregion
-
-#region Teste de envio de itens, via lista Python
-itens = [
-    {
-        'id': 1,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Arroz',
-        'quantidade': 5
-    },
-    {
-        'id': 2,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Feijão',
-        'quantidade': 3
-    },
-    {
-        'id': 3,
-        'imagem': 'placeholder/evolucao.png',
-        'nome': 'Macarrão',
-        'quantidade': 2
-    },
-    {
-        'id': 4,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Carne',
-        'quantidade': 1
-    },
-    {
-        'id': 5,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Batata',
-        'quantidade': 3
-    },
-    {
-        'id': 6,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Tomate',
-        'quantidade': 4
-    },
-    {
-        'id': 7,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Cebola',
-        'quantidade': 6
-    },
-    {
-        'id': 8,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Alho',
-        'quantidade': 8
-    },
-    {
-        'id': 9,
-        'imagem': 'placeholder/evolucao.png',
-        'nome': 'Pão',
-        'quantidade': 10
-    },
-    {
-        'id': 10,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Leite',
-        'quantidade': 7
-    },
-    {
-        'id': 11,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Ovos',
-        'quantidade': 12
-    },
-    {
-        'id': 12,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Queijo',
-        'quantidade': 2
-    },
-    {
-        'id': 13,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Presunto',
-        'quantidade': 3
-    },
-    {
-        'id': 14,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Manteiga',
-        'quantidade': 1
-    },
-    {
-        'id': 15,
-        'imagem': 'placeholder/salim.png',
-        'nome': 'Café',
-        'quantidade': 5
-    }
-]
-@app.route('/itens', methods=['GET'])
-def get_itens():
-    for item in itens:
-        absolute_path = os.path.abspath(item['imagem'])
-        if os.path.exists(absolute_path) and absolute_path.endswith('.png'):
-            with open(item['imagem'], 'rb') as f:
-                item['imagem'] = base64.b64encode(f.read()).decode('utf-8')
-        else:
-            print("Imagem não encontrada do ", item['nome'])
-    return jsonify(itens)
-
-#endregion
-
-#region Teste de envio de itens, via SQL
+# Modelos
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     imagem = db.Column(db.String(200), nullable=False)
     nome = db.Column(db.String(100), nullable=False)
     quantidade = db.Column(db.Integer)
 
-#endregion
+class Gerente(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+
+class Funcionario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    vendas = db.Column(db.Integer, default=0)
+
+class Venda(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    funcionario_id = db.Column(db.Integer, db.ForeignKey('funcionario.id'))
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
+    quantidade = db.Column(db.Integer)
+
+class Notificacao(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
+    mensagem = db.Column(db.String(200))
+
+# Gerenciamento de Itens
+@app.route('/item', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def item_handler():
+    if request.method == 'GET':
+        itens = Item.query.all()
+        return jsonify([{'id': i.id, 'imagem': i.imagem, 'nome': i.nome, 'quantidade': i.quantidade} for i in itens])
+    data = request.get_json()
+    if request.method == 'POST':
+        new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
+        db.session.add(new_item)
+    elif request.method == 'PUT':
+        item = Item.query.get(data['id'])
+        if item:
+            item.nome = data.get('nome', item.nome)
+            item.quantidade = data.get('quantidade', item.quantidade)
+    elif request.method == 'DELETE':
+        item = Item.query.get(data['id'])
+        if item:
+            db.session.delete(item)
+    db.session.commit()
+    return jsonify({'message': 'Operação realizada com sucesso!'})
+
+# Gerenciamento de Gerentes
+@app.route('/gerente', methods=['POST', 'DELETE'])
+def gerente_handler():
+    data = request.get_json()
+    if request.method == 'POST':
+        new_gerente = Gerente(nome=data['nome'], email=data['email'])
+        db.session.add(new_gerente)
+    elif request.method == 'DELETE':
+        gerente = Gerente.query.get(data['id'])
+        if gerente:
+            db.session.delete(gerente)
+    db.session.commit()
+    return jsonify({'message': 'Operação realizada com sucesso!'})
+
+# Gerenciamento de Funcionários
+@app.route('/funcionarios', methods=['GET', 'POST', 'DELETE'])
+def funcionarios_handler():
+    if request.method == 'GET':
+        page = request.args.get('page', 1, type=int)
+        funcionarios = Funcionario.query.paginate(page, 10, False).items
+        return jsonify([{'id': f.id, 'nome': f.nome, 'vendas': f.vendas} for f in funcionarios])
+    data = request.get_json()
+    if request.method == 'POST':
+        new_funcionario = Funcionario(nome=data['nome'])
+        db.session.add(new_funcionario)
+    elif request.method == 'DELETE':
+        funcionario = Funcionario.query.get(data['id'])
+        if funcionario:
+            db.session.delete(funcionario)
+    db.session.commit()
+    return jsonify({'message': 'Operação realizada com sucesso!'})
+
+# Criar e Registrar Vendas
+@app.route('/venda', methods=['POST'])
+def realizar_venda():
+    data = request.get_json()
+    print("Dados recebidos:", data)  # Debug: mostra os dados recebidos
+    item = Item.query.get(data.get('item_id'))
+    funcionario = Funcionario.query.get(data.get('funcionario_id'))
+    print("Item:", item)
+    print("Funcionário:", funcionario)
+    
+    # Se necessário, converta a quantidade para int
+    quantidade_venda = int(data.get('quantidade', 0))
+    print("Quantidade da venda:", quantidade_venda)
+    
+    if item and funcionario and item.quantidade >= quantidade_venda:
+        item.quantidade -= quantidade_venda
+        funcionario.vendas += 1
+        venda = Venda(funcionario_id=funcionario.id, item_id=item.id, quantidade=quantidade_venda)
+        db.session.add(venda)
+        db.session.commit()
+        return jsonify({'message': 'Venda realizada com sucesso!'})
+    return jsonify({'message': 'Erro ao processar venda'}), 400
+
+
+# Relatórios de vendas
+@app.route('/relatorio_vendas', methods=['GET'])
+def relatorio_vendas():
+    funcionarios = Funcionario.query.order_by(Funcionario.vendas.desc()).limit(5).all()
+    return jsonify([{'id': f.id, 'nome': f.nome, 'vendas': f.vendas} for f in funcionarios])
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # Cria todas as tabelas definidas pelos modelos
     app.run(debug=True)
