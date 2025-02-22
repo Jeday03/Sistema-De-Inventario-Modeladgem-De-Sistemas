@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://dox0yll6h35gt"
+=======
+uid="uid://cvt0jg74njrag"
+>>>>>>> origin/Godot-salim
 path="res://.godot/imported/divisa-para-baixo.png-87a65b92506ba02d8a677c169c4aee29.ctex"
 metadata={
 "vram_texture": false

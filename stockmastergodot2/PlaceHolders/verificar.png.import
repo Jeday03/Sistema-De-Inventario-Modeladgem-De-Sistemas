@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://4llxusentb3f"
+=======
+uid="uid://cus5jle8uo6o6"
+>>>>>>> origin/Godot-salim
 path="res://.godot/imported/verificar.png-ad8fa476cd58cb056ae7965c62d22615.ctex"
 metadata={
 "vram_texture": false

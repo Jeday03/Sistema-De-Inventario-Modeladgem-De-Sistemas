@@ -35,12 +35,12 @@ func instanciar(t : ImageTexture, funcionario : Dictionary):
 	novo.pai = self as CadastroFuncionario
 	novo.setup(t, funcionario)
 
-@onready var campo_nome: LineEdit = $HBoxContainer/MarginContainer2/Formulario/CampoNome
-@onready var campo_cpf: LineEdit = $HBoxContainer/MarginContainer2/Formulario/CampoCPF
-@onready var campo_cel: LineEdit = $HBoxContainer/MarginContainer2/Formulario/CampoCel
-@onready var campo_email: LineEdit = $HBoxContainer/MarginContainer2/Formulario/CampoEmail
-@onready var option_button: OptionButton = $HBoxContainer/MarginContainer2/Formulario/OptionButton
-@onready var campo_senha: LineEdit = $HBoxContainer/MarginContainer2/Formulario/CampoSenha
+@onready var campo_nome: LineEdit = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoNome
+@onready var campo_cpf: LineEdit = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoCPF
+@onready var campo_cel: LineEdit = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoCel
+@onready var campo_email: LineEdit = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoEmail
+@onready var option_button: OptionButton = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/OptionButton
+@onready var campo_senha: LineEdit = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoSenha
 @onready var http_request: HTTPRequest = $HTTPRequest
 
 @onready var accept_dialog: AcceptDialog = $AcceptDialog
