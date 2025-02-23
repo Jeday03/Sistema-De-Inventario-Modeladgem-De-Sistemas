@@ -53,6 +53,7 @@ var funcaoAtual : Callable
 
 func _on_cadastrar_pressed() -> void:
 	funcaoAtual = Callable(self, "cadastrar")
+	confirmation_dialog.dialog_text = "Deseja CADASTRAR o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
 
 func cadastrar():
@@ -94,6 +95,7 @@ func carregarFuncionario(textura : ImageTexture, funcionario : Dictionary):
 
 func _on_editar_pressed() -> void:
 	funcaoAtual = Callable(self, "editarFuncionario")
+	confirmation_dialog.dialog_text = "Deseja EDITAR o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
 
 func editarFuncionario():
@@ -113,6 +115,7 @@ func editarFuncionario():
 
 func _on_remover_pressed() -> void:
 	funcaoAtual = Callable(self, "remover")
+	confirmation_dialog.dialog_text = "Deseja REMOVER o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
 
 func remover():
