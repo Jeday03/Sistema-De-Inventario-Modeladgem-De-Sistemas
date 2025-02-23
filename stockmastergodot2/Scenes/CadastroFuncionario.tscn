@@ -203,8 +203,14 @@ dialog_text = "O usuário não foi criado"
 
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Confirmação"
+initial_position = 1
+dialog_text = "Deseja confirmar?"
+
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Editar" to="." method="_on_editar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Remover" to="." method="_on_remover_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="request_completed" from="HTTPRequest2" to="." method="_on_http_request_2_request_completed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

@@ -45,10 +45,17 @@ func instanciar(t : ImageTexture, funcionario : Dictionary):
 
 @onready var accept_dialog: AcceptDialog = $AcceptDialog
 @onready var erro: AcceptDialog = $Erro
+@onready var confirmation_dialog: ConfirmationDialog = $ConfirmationDialog
 
 var idFuncionario : int = -1
 
+var funcaoAtual : Callable
+
 func _on_cadastrar_pressed() -> void:
+	funcaoAtual = Callable(self, "cadastrar")
+	confirmation_dialog.visible = true
+
+func cadastrar():
 	var json = {
 		"nome": campo_nome.text,
 		"cpf": campo_cpf.text,
@@ -76,6 +83,7 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 
 var listaFuncao := ["Administrador", "Gerente", "Caixa/Repositor"]
 
+
 func carregarFuncionario(textura : ImageTexture, funcionario : Dictionary):
 	campo_nome.text = funcionario['nome']
 	campo_cel.text = funcionario['celular']
@@ -85,6 +93,10 @@ func carregarFuncionario(textura : ImageTexture, funcionario : Dictionary):
 	option_button.select(listaFuncao.find(funcionario['funcao']))
 
 func _on_editar_pressed() -> void:
+	funcaoAtual = Callable(self, "editarFuncionario")
+	confirmation_dialog.visible = true
+
+func editarFuncionario():
 	var json = {
 		"nome": campo_nome.text,
 		"cpf": campo_cpf.text,
@@ -100,10 +112,14 @@ func _on_editar_pressed() -> void:
 		erro.visible = true
 
 func _on_remover_pressed() -> void:
+	funcaoAtual = Callable(self, "remover")
+	confirmation_dialog.visible = true
+
+func remover():
 	var json = {
 		"nome": campo_nome.text,
-		"cpf": campo_cpf.text,
 		"celular": campo_cel.text,
+		"cpf": campo_cpf.text,
 		"email": campo_email.text,
 		"funcao": option_button.get_item_text(option_button.selected),
 		"senha": campo_senha.text,
@@ -111,3 +127,7 @@ func _on_remover_pressed() -> void:
 	}
 	var body = JSON.stringify(json)
 	http_request.request("http://127.0.0.1:5000/remover_funcionario", ["Content-Type: application/json"], HTTPClient.METHOD_DELETE, body)
+
+
+func _on_confirmation_dialog_confirmed() -> void:
+	funcaoAtual.call()
