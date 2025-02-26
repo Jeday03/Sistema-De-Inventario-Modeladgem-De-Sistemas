@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request, send_file
+from sqlalchemy import func
+from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import base64
 
@@ -16,13 +19,15 @@ class Item(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     quantidade = db.Column(db.Integer)
 
+
+
 class Funcionario(db.Model):
     __tablename__ = 'funcionario'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     funcao = db.Column(db.String(50), nullable=False)
-    senha = db.Column(db.String(100), nullable=False)
+    _senha = db.Column("senha", db.String(255), nullable=False)  # Armazena o hash da senha
     vendas = db.relationship('Venda', back_populates='funcionario')
     tipo = db.Column(db.String(20))  # Diferencia funcionário de gerente
 
@@ -30,6 +35,22 @@ class Funcionario(db.Model):
         'polymorphic_identity': 'funcionario',
         'polymorphic_on': tipo
     }
+
+    # Setter para armazenar a senha como hash
+    @property
+    def senha(self):
+        raise AttributeError("A senha não pode ser acessada diretamente.")
+
+    @senha.setter
+    def senha(self, senha_plain):
+        """Armazena a senha de forma segura como um hash"""
+        self._senha = generate_password_hash(senha_plain)
+
+    # Método para verificar a senha
+    def verificar_senha(self, senha_plain):
+        """Verifica se a senha fornecida confere com o hash armazenado"""
+        return check_password_hash(self._senha, senha_plain)
+
 
 class Gerente(Funcionario):
     id = db.Column(db.Integer, db.ForeignKey('funcionario.id'), primary_key=True)
@@ -134,7 +155,7 @@ def gerente_handler():
     db.session.commit()
     return jsonify({'message': 'Operação realizada com sucesso!'})
 
-# Gerenciamento de Funcionários com paginação (10 por página) e suporte a GET, POST, PUT e DELETE
+# Gerenciamento de Funcionários
 @app.route('/funcionarios', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def funcionarios_handler():
     if request.method == 'GET':
@@ -142,28 +163,76 @@ def funcionarios_handler():
         per_page = 10
         funcionarios_paginated = Funcionario.query.paginate(page=page, per_page=per_page, error_out=False)
         funcionarios = funcionarios_paginated.items
-        return jsonify([{'id': f.id, 'nome': f.nome, 'vendas': f.vendas} for f in funcionarios])
-    
+        
+        return jsonify([{
+        'id': f.id,
+        'nome': f.nome,
+        'email': f.email,
+        'funcao': f.funcao,
+        'tipo': f.tipo,
+        'vendas': [{'id': v.id, 'item_id': v.item_id, 'quantidade': v.quantidade} for v in f.vendas]  # ✅ Convertendo cada venda para dicionário
+    } for f in funcionarios])
+
+
     data = request.get_json()
+
     if request.method == 'POST':
+        # Verifica se o e-mail já existe
+        if Funcionario.query.filter_by(email=data['email']).first():
+            return jsonify({'erro': 'E-mail já cadastrado!'}), 400  # Retorna erro HTTP 400
+
         new_funcionario = Funcionario(
             nome=data['nome'],
             email=data['email'],
             funcao=data.get('funcao', 'Funcionário'),
-            senha=data.get('senha', 'default_senha')  # Recomenda-se usar hash
+            senha=data.get('senha', 'default_senha'),  # 🔥 Senha será automaticamente armazenada como hash
+            tipo=data.get('tipo', 'funcionario')
         )
-        db.session.add(new_funcionario)
+
+        try:
+            db.session.add(new_funcionario)
+            db.session.commit()
+            return jsonify({'mensagem': 'Funcionário cadastrado com sucesso!'}), 201  # Sucesso HTTP 201
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify({'erro': 'Erro ao inserir funcionário. Verifique os dados.'}), 400
 
     elif request.method == 'PUT':
-        funcionario = Funcionario.query.get(data['id'])
-        if funcionario:
-            funcionario.nome = data.get('nome', funcionario.nome)
+        funcionario = Funcionario.query.get(data.get('id'))
+        if not funcionario:
+            return jsonify({'erro': 'Funcionário não encontrado!'}), 404  # Retorna erro HTTP 404
+
+        funcionario.nome = data.get('nome', funcionario.nome)
+        funcionario.email = data.get('email', funcionario.email)
+        funcionario.funcao = data.get('funcao', funcionario.funcao)
+
+        # 🔥 Atualiza a senha, se fornecida, armazenando o hash
+        if 'senha' in data:
+            funcionario.senha = data['senha']
+
+        funcionario.tipo = data.get('tipo', funcionario.tipo)
+
+        try:
+            db.session.commit()
+            return jsonify({'mensagem': 'Funcionário atualizado com sucesso!'}), 200
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify({'erro': 'Erro ao atualizar funcionário.'}), 400
+
     elif request.method == 'DELETE':
-        funcionario = Funcionario.query.get(data['id'])
-        if funcionario:
+        funcionario = Funcionario.query.get(data.get('id'))
+        if not funcionario:
+            return jsonify({'erro': 'Funcionário não encontrado!'}), 404  # Retorna erro HTTP 404
+
+        try:
             db.session.delete(funcionario)
-    db.session.commit()
-    return jsonify({'message': 'Operação realizada com sucesso!'})
+            db.session.commit()
+            return jsonify({'mensagem': 'Funcionário removido com sucesso!'}), 200
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify({'erro': 'Erro ao remover funcionário.'}), 400
+
+    return jsonify({'erro': 'Método não permitido!'}), 405  # Retorna erro HTTP 405 para métodos inválidos
 
 # Endpoint para retornar as vendas de um funcionário específico
 @app.route('/vendas/<int:funcionario_id>', methods=['GET'])
@@ -190,7 +259,7 @@ def realizar_venda():
     
     if item and funcionario and item.quantidade >= quantidade_venda:
         item.quantidade -= quantidade_venda
-        funcionario.vendas += 1
+        numero_vendas = Venda.query.filter_by(funcionario_id=funcionario.id).count()
         venda = Venda(funcionario_id=funcionario.id, item_id=item.id, quantidade=quantidade_venda)
         db.session.add(venda)
         db.session.commit()
@@ -200,8 +269,22 @@ def realizar_venda():
 # Relatórios de vendas: retorna os 5 funcionários que mais venderam
 @app.route('/relatorio_vendas', methods=['GET'])
 def relatorio_vendas():
-    funcionarios = Funcionario.query.order_by(Funcionario.vendas.desc()).limit(5).all()
-    return jsonify([{'id': f.id, 'nome': f.nome, 'vendas': f.vendas} for f in funcionarios])
+    funcionarios = (
+        db.session.query(Funcionario, func.count(Venda.id).label("total_vendas"))
+        .outerjoin(Venda, Funcionario.id == Venda.funcionario_id)  # Une as tabelas
+        .group_by(Funcionario.id)
+        .order_by(func.count(Venda.id).desc())  # Ordena pelo número de vendas
+        .limit(5)
+        .all()
+    )
+
+    return jsonify([
+        {
+            'id': f.id,
+            'nome': f.nome,
+            'total_vendas': total_vendas  # Agora pegamos o total de vendas corretamente
+        } for f, total_vendas in funcionarios
+    ])
 
 # Gerenciamento de Notificações de estoque zerado com GET, POST e DELETE
 @app.route('/notificacao', methods=['GET', 'POST', 'DELETE'])
@@ -232,15 +315,14 @@ def notificacao_handler():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    usuario = data.get('usuario')
-    senha = data.get('senha')
+    funcionario = Funcionario.query.filter_by(email=data['email']).first()
 
-    funcionario = Funcionario.query.filter_by(email=usuario).first()
+    if not funcionario or not funcionario.verificar_senha(data['senha']):
+        return jsonify({'erro': 'Credenciais inválidas!'}), 401  # Retorna erro HTTP 401
 
-    if funcionario and funcionario.senha == senha:  # Recomenda-se usar hash
-        return jsonify({'message': 'Login efetuado', 'tipo': funcionario.tipo})
-    
-    return jsonify({'message': 'Informações inválidas'}), 401
+    return jsonify({'mensagem': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!'}), 200
+
+
 
 
 if __name__ == '__main__':
