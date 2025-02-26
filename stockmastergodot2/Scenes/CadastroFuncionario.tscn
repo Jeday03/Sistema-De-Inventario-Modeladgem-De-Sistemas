@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_al0f7"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="3_4jtm2"]
 [ext_resource type="Theme" uid="uid://be60t68qx8sof" path="res://Themes/Visibility.tres" id="3_15m6i"]
-[ext_resource type="Texture2D" uid="uid://dait2cspre45v" path="res://PlaceHolders/trash.png" id="5_v2ivm"]
+[ext_resource type="Texture2D" uid="uid://bl2sptu117lt3" path="res://PlaceHolders/trash.png" id="5_v2ivm"]
 
 [node name="CadastroFuncionario" type="Control"]
 layout_mode = 3
@@ -148,6 +148,7 @@ placeholder_text = "Senha"
 alignment = 1
 
 [node name="Button" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoSenha"]
+visible = false
 layout_direction = 3
 layout_mode = 1
 anchors_preset = 4
