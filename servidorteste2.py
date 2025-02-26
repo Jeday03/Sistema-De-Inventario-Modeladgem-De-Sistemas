@@ -16,21 +16,40 @@ class Item(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     quantidade = db.Column(db.Integer)
 
-class Gerente(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
-
 class Funcionario(db.Model):
+    __tablename__ = 'funcionario'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
-    vendas = db.Column(db.Integer, default=0)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    funcao = db.Column(db.String(50), nullable=False)
+    senha = db.Column(db.String(100), nullable=False)
+    vendas = db.relationship('Venda', back_populates='funcionario')
+    tipo = db.Column(db.String(20))  # Diferencia funcionário de gerente
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'funcionario',
+        'polymorphic_on': tipo
+    }
+
+class Gerente(Funcionario):
+    id = db.Column(db.Integer, db.ForeignKey('funcionario.id'), primary_key=True)
+    nivel_acesso = db.Column(db.String(20), nullable=False, default="Alto")
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'gerente'
+    }
+
+
 
 class Venda(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    funcionario_id = db.Column(db.Integer, db.ForeignKey('funcionario.id'))
-    item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
-    quantidade = db.Column(db.Integer)
+    funcionario_id = db.Column(db.Integer, db.ForeignKey('funcionario.id'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
+    quantidade = db.Column(db.Integer, nullable=False)
+
+    funcionario = db.relationship('Funcionario', back_populates='vendas')
+    item = db.relationship('Item', backref='vendas')
+
 
 class Notificacao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -85,17 +104,24 @@ def item_handler():
 def gerente_handler():
     if request.method == 'GET':
         gerentes = Gerente.query.all()
-        return jsonify([{'id': g.id, 'nome': g.nome, 'email': g.email} for g in gerentes])
+        return jsonify([{'id': g.id, 'nome': g.nome, 'email': g.email, 'nivel_acesso': g.nivel_acesso} for g in gerentes])
     
     data = request.get_json()
     if request.method == 'POST':
-        new_gerente = Gerente(nome=data['nome'], email=data['email'])
+        new_gerente = Gerente(
+            nome=data['nome'],
+            email=data['email'],
+            senha=data.get('senha', 'default_senha'),  # Recomenda-se usar hash
+            funcao='Gerente',
+            nivel_acesso=data.get('nivel_acesso', 'Alto')
+        )
         db.session.add(new_gerente)
     elif request.method == 'PUT':
         gerente = Gerente.query.get(data['id'])
         if gerente:
             gerente.nome = data.get('nome', gerente.nome)
             gerente.email = data.get('email', gerente.email)
+            gerente.nivel_acesso = data.get('nivel_acesso', gerente.nivel_acesso)
     elif request.method == 'DELETE':
         gerente = Gerente.query.get(data['id'])
         if gerente:
@@ -115,8 +141,14 @@ def funcionarios_handler():
     
     data = request.get_json()
     if request.method == 'POST':
-        new_funcionario = Funcionario(nome=data['nome'])
+        new_funcionario = Funcionario(
+            nome=data['nome'],
+            email=data['email'],
+            funcao=data.get('funcao', 'Funcionário'),
+            senha=data.get('senha', 'default_senha')  # Recomenda-se usar hash
+        )
         db.session.add(new_funcionario)
+
     elif request.method == 'PUT':
         funcionario = Funcionario.query.get(data['id'])
         if funcionario:
@@ -195,12 +227,16 @@ def notificacao_handler():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data['usuario']
-    password = data['senha']
-    if username == 'admin' and password == 'admin':
-        return jsonify({'message': 'Login efetuado'})
-    else:
-        return jsonify({'message': 'Informações inválidas'})
+    usuario = data.get('usuario')
+    senha = data.get('senha')
+
+    funcionario = Funcionario.query.filter_by(email=usuario).first()
+
+    if funcionario and funcionario.senha == senha:  # Recomenda-se usar hash
+        return jsonify({'message': 'Login efetuado', 'tipo': funcionario.tipo})
+    
+    return jsonify({'message': 'Informações inválidas'}), 401
+
 
 if __name__ == '__main__':
     with app.app_context():
