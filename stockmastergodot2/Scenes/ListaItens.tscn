@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqjc2q5secxgy"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_g0fg2"]
-[ext_resource type="Script" path="res://Scripts/ListaDeItens.gd" id="1_u7xwu"]
+[ext_resource type="Script" uid="uid://c5b27k2fmvkqh" path="res://Scripts/ListaDeItens.gd" id="1_u7xwu"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -29,7 +29,7 @@ theme = ExtResource("1_g0fg2")
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-placeholder_text = "Nome do produto"
+placeholder_text = " Nome do produto"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2

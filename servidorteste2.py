@@ -203,9 +203,9 @@ def login():
     username = data['usuario']
     password = data['senha']
     if username == 'admin' and password == 'admin':
-        return jsonify({'message': 'Login efetuado'})
+        return jsonify({'message': True})
     else:
-        return jsonify({'message': 'Informações inválidas'})
+        return jsonify({'message': False})
 
 if __name__ == '__main__':
     with app.app_context():

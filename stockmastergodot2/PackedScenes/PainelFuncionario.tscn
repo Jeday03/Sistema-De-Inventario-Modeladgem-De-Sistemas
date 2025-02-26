@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0lu6xuvw4n0n"]
 
-[ext_resource type="Script" path="res://Scripts/PainelFuncionario.gd" id="1_ffxwa"]
+[ext_resource type="Script" uid="uid://bcgm78kevdjx3" path="res://Scripts/PainelFuncionario.gd" id="1_ffxwa"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_qyo72"]
 [ext_resource type="FontFile" uid="uid://8l1ywgx6ncsi" path="res://GodotFont/fonts/montreal/Montreal-Bold.ttf" id="3_jniag"]
 [ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="4_wiyqd"]
-[ext_resource type="Texture2D" uid="uid://cn8anykr4nr81" path="res://PlaceHolders/do-utilizador.png" id="5_43oad"]
+[ext_resource type="Texture2D" uid="uid://tjit8378qeu8" path="res://PlaceHolders/do-utilizador.png" id="5_43oad"]
 
 [sub_resource type="Theme" id="Theme_e63hu"]
 Label/colors/font_color = Color(1, 1, 1, 1)

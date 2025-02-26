@@ -81,5 +81,10 @@ text = "Login"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer"]
 
+[node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer"]
+initial_position = 1
+size = Vector2i(143, 100)
+dialog_text = "Dados inválidos!"
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="request_completed" from="CanvasLayer/HTTPRequest" to="CanvasLayer" method="_on_http_request_request_completed"]

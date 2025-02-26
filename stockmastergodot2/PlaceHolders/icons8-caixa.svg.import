@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tjit8378qeu8"
-path="res://.godot/imported/do-utilizador.png-cff1f28e41941f0f370effc0196224f3.ctex"
+uid="uid://v156384kbse4"
+path="res://.godot/imported/icons8-caixa.svg-666ff71d9eac77f755147ea9ec3707f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlaceHolders/do-utilizador.png"
-dest_files=["res://.godot/imported/do-utilizador.png-cff1f28e41941f0f370effc0196224f3.ctex"]
+source_file="res://PlaceHolders/icons8-caixa.svg"
+dest_files=["res://.godot/imported/icons8-caixa.svg-666ff71d9eac77f755147ea9ec3707f2.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

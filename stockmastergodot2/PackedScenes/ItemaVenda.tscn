@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://db0bixhh74jjv"]
 
-[ext_resource type="Script" path="res://Scripts/PainelItem.gd" id="1_axohy"]
+[ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_axohy"]
 [ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_ph4kd"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_po218"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="4_7lq7c"]
