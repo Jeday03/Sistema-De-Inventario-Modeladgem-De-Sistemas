@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr3we5xo525uy"]
+[gd_scene load_steps=9 format=3 uid="uid://dr3we5xo525uy"]
 
 [ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_tk464"]
 [ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_3t13s"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_q5m15"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="4_1xk13"]
+[ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="5_3t13s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axohy"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
@@ -61,9 +62,10 @@ alignment = 1
 layout_mode = 2
 text = "Nome do item"
 
-[node name="LabelQtd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="LabelResto" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Qtd: 200"
+text = "Restante: 200"
+horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -72,9 +74,11 @@ size_flags_vertical = 4
 theme = ExtResource("4_1xk13")
 alignment = 1
 
-[node name="addItem" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Adicionar item"
+theme_override_fonts/font = ExtResource("5_3t13s")
+text = "01"
+alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -89,8 +93,3 @@ text = "-
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+"
-
-[node name="LabelResto" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Restante: 200"
-horizontal_alignment = 1
