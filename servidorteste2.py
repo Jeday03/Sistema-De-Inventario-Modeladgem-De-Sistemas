@@ -112,7 +112,8 @@ def item_handler():
                 'id': i.id,
                 'imagem': imagem_base64,
                 'nome': i.nome,
-                'quantidade': i.quantidade
+                'quantidade': i.quantidade,
+                'extensao': absolute_path[-4:]
             })
         return jsonify(itens_encoded)
 
@@ -159,7 +160,8 @@ def gerente_handler():
                 'nome': g.nome,
                 'email': g.email,
                 'nivel_acesso': g.nivel_acesso,
-                'imagem': imagem_base64  # Adicionando a imagem convertida
+                'imagem': imagem_base64,  # Adicionando a imagem convertida
+                'extensao': absolute_path[-4:]
             })
 
         return jsonify(gerentes_encoded)
@@ -264,7 +266,8 @@ def funcionarios_handler():
                 'funcao': f.funcao,
                 'tipo': f.tipo,
                 'imagem': imagem_base64,  # Adicionando a imagem convertida
-                'vendas': [{'id': v.id, 'item_id': v.item_id, 'quantidade': v.quantidade} for v in f.vendas]
+                'vendas': [{'id': v.id, 'item_id': v.item_id, 'quantidade': v.quantidade} for v in f.vendas],
+                'extensao': absolute_path[-4:]
             })
 
         return jsonify(funcionarios_encoded)

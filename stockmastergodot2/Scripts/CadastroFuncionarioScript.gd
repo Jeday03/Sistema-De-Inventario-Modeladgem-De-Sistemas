@@ -25,18 +25,21 @@ func _on_http_request_2_request_completed(result: int, response_code: int, heade
 		return
 	var response_text = body.get_string_from_utf8()
 	var response_json = JSON.parse_string(response_text)
+	for c in lista_de_funcionários.get_children():
+		c.queue_free()
 	for funcionario in response_json:
 		image = Image.new()
 		var bytes : PackedByteArray = Marshalls.base64_to_raw(funcionario['imagem'])
 		var error : Error = FAILED
+		print(funcionario['extensao'])
 		match funcionario['extensao']:
 			".png":
 				error = image.load_png_from_buffer(bytes)
 			".jpg":
 				error = image.load_jpg_from_buffer(bytes)
 		
-		if error != OK:
-			printerr("DEU MERDA")
+		if error != 0:
+			printerr("DEU MERDA2")
 			continue
 		var texture : ImageTexture = ImageTexture.create_from_image(image)
 		instanciar(texture, funcionario)
@@ -91,15 +94,18 @@ func cadastrar():
 		"email": campo_email.text,
 		"funcao": option_button.get_item_text(option_button.selected),
 		"senha": campo_senha.text,
-		"imagem": imagemBase64
+		"imagem": imagemBase64,
+		"extensao": imageType
 	}
 	var body = JSON.stringify(json)
-	var error = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
-	if error != OK:
+	var thisError = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
+	print(thisError, " Cadastro")
+	if thisError != 0:
+		print("Entrou aq")
 		erro.visible = true
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-	if response_code == 200:
+	if response_code == 200 or response_code == 201:
 		accept_dialog.visible = true
 		campo_nome.text = ""
 		campo_cel.text = ""
@@ -107,6 +113,7 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		campo_senha.text = ""
 		campo_cpf.text = ""
 		idFuncionario = -1
+		pagAtual = pagAtual
 	else:
 		erro.visible = true
 
@@ -147,8 +154,8 @@ func editarFuncionario():
 		"imagem": imagemBase64
 	}
 	var body = JSON.stringify(json)
-	var error = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_PUT, body)
-	if error != OK:
+	var thiserror = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_PUT, body)
+	if thiserror != 0:
 		erro.visible = true
 
 func _on_remover_pressed() -> void:
