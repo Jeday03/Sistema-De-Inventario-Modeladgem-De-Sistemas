@@ -6,6 +6,9 @@ class_name CadastroFuncionario
 const PAINEL_FUNCIONARIO = preload("res://PackedScenes/PainelFuncionario.tscn")
 @onready var pageText: LineEdit = $HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit
 
+@onready var file_dialog: FileDialog = $FileDialog
+
+
 var pagAtual : int = 1:
 	set(value):
 		if value > 0:
@@ -61,12 +64,27 @@ var idFuncionario : int = -1
 
 var funcaoAtual : Callable
 
+var image : Image
+@onready var fotoFuncionario: TextureRect = $HBoxContainer/MarginContainer2/ScrollContainer/Formulario/FotoFuncionario
+var imageType : String
+
+
 func _on_cadastrar_pressed() -> void:
 	funcaoAtual = Callable(self, "cadastrar")
 	confirmation_dialog.dialog_text = "Deseja CADASTRAR o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
 
 func cadastrar():
+	var imagemComprimida : PackedByteArray
+	match imageType:
+		".png":
+			imagemComprimida = image.save_png_to_buffer()
+		".jpg":
+			imagemComprimida = image.save_jpg_to_buffer()
+		"null":
+			printerr("Imagem inválida. Recarregue novamente")
+			return
+	var imagemBase64 = Marshalls.raw_to_base64(imagemComprimida)
 	var json = {
 		"nome": campo_nome.text,
 		"cpf": campo_cpf.text,
@@ -74,6 +92,7 @@ func cadastrar():
 		"email": campo_email.text,
 		"funcao": option_button.get_item_text(option_button.selected),
 		"senha": campo_senha.text,
+		"imagem": imagemBase64
 	}
 	var body = JSON.stringify(json)
 	var error = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
@@ -108,6 +127,16 @@ func _on_editar_pressed() -> void:
 	confirmation_dialog.visible = true
 
 func editarFuncionario():
+	var imagemComprimida : PackedByteArray
+	match imageType:
+		".png":
+			imagemComprimida = image.save_png_to_buffer()
+		".jpg":
+			imagemComprimida = image.save_jpg_to_buffer()
+		"null":
+			printerr("Imagem inválida. Recarregue novamente")
+			return
+	var imagemBase64 = Marshalls.raw_to_base64(imagemComprimida)
 	var json = {
 		"nome": campo_nome.text,
 		"cpf": campo_cpf.text,
@@ -115,7 +144,8 @@ func editarFuncionario():
 		"email": campo_email.text,
 		"funcao": option_button.get_item_text(option_button.selected),
 		"senha": campo_senha.text,
-		"id": idFuncionario
+		"id": idFuncionario,
+		"imagem": imagemBase64
 	}
 	var body = JSON.stringify(json)
 	var error = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_PUT, body)
@@ -129,17 +159,10 @@ func _on_remover_pressed() -> void:
 
 func remover():
 	var json = {
-		"nome": campo_nome.text,
-		"celular": campo_cel.text,
-		"cpf": campo_cpf.text,
-		"email": campo_email.text,
-		"funcao": option_button.get_item_text(option_button.selected),
-		"senha": campo_senha.text,
 		"id": idFuncionario
 	}
 	var body = JSON.stringify(json)
 	http_request.request("http://127.0.0.1:5000/remover_funcionario", ["Content-Type: application/json"], HTTPClient.METHOD_DELETE, body)
-
 
 func _on_confirmation_dialog_confirmed() -> void:
 	funcaoAtual.call()
@@ -155,3 +178,15 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 	if n <= 0:
 		n = 1
 	pagAtual = n
+
+func _on_button_imagem_pressed() -> void:
+	file_dialog.visible = true
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	image = Image.load_from_file(path)
+	if not image:
+		erro.visible = true
+		return
+	var texture = ImageTexture.create_from_image(image)
+	fotoFuncionario.texture = texture
+	imageType = "." + path.get_extension()

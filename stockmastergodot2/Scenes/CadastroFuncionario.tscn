@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://flpa1v0if7uv"]
+[gd_scene load_steps=8 format=3 uid="uid://flpa1v0if7uv"]
 
 [ext_resource type="Script" uid="uid://dfes7eftqca3a" path="res://Scripts/CadastroFuncionarioScript.gd" id="1_qssss"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_al0f7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://be60t68qx8sof" path="res://Themes/Visibility.tres" id="3_15m6i"]
 [ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="3_iy6x7"]
 [ext_resource type="Texture2D" uid="uid://dfqnprdr71tkn" path="res://PlaceHolders/trash.png" id="5_v2ivm"]
+[ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="7_jmddd"]
 
 [node name="CadastroFuncionario" type="Control"]
 layout_mode = 3
@@ -187,6 +188,20 @@ offset_bottom = 32.0
 grow_vertical = 2
 theme = ExtResource("3_15m6i")
 
+[node name="LabelImagem" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Imagem:"
+
+[node name="buttonImagem" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+text = "Selecionar Imagem"
+
+[node name="FotoFuncionario" type="TextureRect" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+texture = ExtResource("7_jmddd")
+stretch_mode = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -237,12 +252,23 @@ title = "Confirmação"
 initial_position = 1
 dialog_text = "Deseja confirmar?"
 
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 1
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg")
+
 [connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/PagAnterior" to="." method="_on_pag_anterior_pressed"]
 [connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/PagPosterior" to="." method="_on_pag_posterior_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/buttonImagem" to="." method="_on_button_imagem_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Editar" to="." method="_on_editar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Remover" to="." method="_on_remover_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="request_completed" from="HTTPRequest2" to="." method="_on_http_request_2_request_completed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
