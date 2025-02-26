@@ -8,7 +8,6 @@ const PAINEL_FUNCIONARIO = preload("res://PackedScenes/PainelFuncionario.tscn")
 
 @onready var file_dialog: FileDialog = $FileDialog
 
-
 var pagAtual : int = 1:
 	set(value):
 		if value > 0:
