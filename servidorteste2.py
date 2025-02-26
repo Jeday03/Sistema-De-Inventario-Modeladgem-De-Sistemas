@@ -84,6 +84,11 @@ def item_handler():
 
     data = request.get_json()
     if request.method == 'POST':
+        image_data = base64.b64decode(data['imagem'])
+        image_path = f"placeholder/{data['nome']}" + data['extensao']
+        with open(image_path, 'wb') as f:
+            f.write(image_data)
+        data['imagem'] = image_path
         new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
         db.session.add(new_item)
     elif request.method == 'PUT':

@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpp10fh3liriv"]
+[gd_scene load_steps=10 format=3 uid="uid://cpp10fh3liriv"]
 
 [ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_2xcu7"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7tra1"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="2_hxsfm"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="2_mcygh"]
+[ext_resource type="Texture2D" uid="uid://dgsxes1hhbnf7" path="res://PlaceHolders/big-gear.png" id="4_4suug"]
+[ext_resource type="Texture2D" uid="uid://cuachaauwkr3p" path="res://PlaceHolders/sair.png" id="4_776vx"]
+[ext_resource type="Texture2D" uid="uid://v156384kbse4" path="res://PlaceHolders/icons8-caixa.svg" id="4_xlgvs"]
+[ext_resource type="Texture2D" uid="uid://bcdh5pj6m8e4r" path="res://PlaceHolders/icons8-carrinho-de-compras-30.png" id="5_slrki"]
+[ext_resource type="Texture2D" uid="uid://denbt2ffxslgq" path="res://PlaceHolders/icons8-carta-50.png" id="7_r6l41"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3
@@ -93,25 +98,39 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/icon_max_width = 30
 text = "Estoque
 "
+icon = ExtResource("4_xlgvs")
+icon_alignment = 2
+expand_icon = true
 
 [node name="VendasButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Vendas"
+icon = ExtResource("5_slrki")
+icon_alignment = 2
 
 [node name="CadastroButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme_override_constants/icon_max_width = 28
 text = "Cadastro
 "
+icon = ExtResource("4_4suug")
+icon_alignment = 2
+expand_icon = true
 
 [node name="PedidosButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Pedidos
+theme_override_constants/icon_max_width = 25
+text = "Notificações
 "
+icon = ExtResource("7_r6l41")
+icon_alignment = 2
+expand_icon = true
 
 [node name="LogoutButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 30)
@@ -119,8 +138,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme = ExtResource("2_hxsfm")
+theme_override_constants/h_separation = -14
+theme_override_constants/icon_max_width = 24
 text = "Sair
 "
+icon = ExtResource("4_776vx")
+icon_alignment = 2
+expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MainFrame"]
 layout_mode = 2

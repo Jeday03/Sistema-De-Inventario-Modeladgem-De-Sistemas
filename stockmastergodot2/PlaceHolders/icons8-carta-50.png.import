@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvt0jg74njrag"
-path="res://.godot/imported/divisa-para-baixo.png-87a65b92506ba02d8a677c169c4aee29.ctex"
+uid="uid://denbt2ffxslgq"
+path="res://.godot/imported/icons8-carta-50.png-5c0cd28813a0539bfe163260bcf2e5e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlaceHolders/divisa-para-baixo.png"
-dest_files=["res://.godot/imported/divisa-para-baixo.png-87a65b92506ba02d8a677c169c4aee29.ctex"]
+source_file="res://PlaceHolders/icons8-carta-50.png"
+dest_files=["res://.godot/imported/icons8-carta-50.png-5c0cd28813a0539bfe163260bcf2e5e5.ctex"]
 
 [params]
 
