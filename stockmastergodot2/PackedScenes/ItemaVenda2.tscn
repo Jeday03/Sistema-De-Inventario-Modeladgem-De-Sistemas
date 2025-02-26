@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://dr3we5xo525uy"]
+
+[ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_tk464"]
+[ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_3t13s"]
+[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_q5m15"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="4_1xk13"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axohy"]
+bg_color = Color(0.45, 0.45, 0.45, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Theme" id="Theme_idymw"]
+Label/fonts/font = ExtResource("2_3t13s")
+
+[sub_resource type="Theme" id="Theme_lpe4d"]
+Label/fonts/font = ExtResource("2_3t13s")
+
+[node name="ColorRect" type="Panel"]
+custom_minimum_size = Vector2(0, 100)
+offset_right = 446.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_axohy")
+script = ExtResource("1_tk464")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_idymw")
+theme_override_constants/separation = 20
+
+[node name="FotoProduto" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = SubResource("Theme_lpe4d")
+texture = ExtResource("3_q5m15")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_1xk13")
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="LabelNome" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nome do item"
+
+[node name="LabelQtd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Qtd: 200"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("4_1xk13")
+alignment = 1
+
+[node name="addItem" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Adicionar item"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="decrease" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-
+"
+
+[node name="increase" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="LabelResto" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Restante: 200"
+horizontal_alignment = 1
