@@ -20,8 +20,8 @@ func apertou():
 		return
 	pai.carregarFuncionario(foto_funcionario.texture, funcionario)
 
-func setup(textura : ImageTexture, funcionario : Dictionary):
+func setup(textura : ImageTexture, funcio : Dictionary):
 	foto_funcionario.texture = textura
-	label_nome.text = funcionario['nome']
-	label_function.text = funcionario['funcao']
-	self.funcionario = funcionario
+	label_nome.text = funcio['nome']
+	label_function.text = funcio['funcao']
+	self.funcionario = funcio

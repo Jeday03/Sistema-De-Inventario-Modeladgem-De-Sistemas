@@ -2,7 +2,7 @@ extends Control
 class_name CadastroFuncionario
 
 @onready var http_request_2: HTTPRequest = $HTTPRequest2
-@onready var lista_de_funcionários: VBoxContainer = $HBoxContainer/MarginContainer/ScrollContainer/ListaFuncionario
+@onready var lista_de_funcionários: VBoxContainer = $HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/ListaFuncionario
 const PAINEL_FUNCIONARIO = preload("res://PackedScenes/PainelFuncionario.tscn")
 @onready var pageText: LineEdit = $HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit
 
@@ -152,6 +152,6 @@ func _on_pag_posterior_pressed() -> void:
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	var n : int = int(pageText.text)
-	if n == 0:
+	if n <= 0:
 		n = 1
 	pagAtual = n

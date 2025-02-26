@@ -114,7 +114,7 @@ text = "Nome:"
 
 [node name="CampoNome" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 layout_mode = 2
-placeholder_text = "Digite seu nome"
+placeholder_text = "Digite o nome"
 alignment = 1
 
 [node name="LabelCPF" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
@@ -124,7 +124,7 @@ text = "CPF:"
 
 [node name="CampoCPF" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 layout_mode = 2
-placeholder_text = "Digite seu CPF"
+placeholder_text = "Digite o CPF"
 alignment = 1
 
 [node name="LabelCel" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
@@ -144,7 +144,7 @@ text = "E-mail:"
 
 [node name="CampoEmail" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 layout_mode = 2
-placeholder_text = "Digite seu email aqui"
+placeholder_text = "Digite o email aqui"
 alignment = 1
 
 [node name="LabelFunction" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]

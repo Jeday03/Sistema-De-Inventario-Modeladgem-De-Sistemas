@@ -50,6 +50,8 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	timer.start()
 
 func _on_timer_timeout() -> void:
+	if not http_request:
+		return
 	http_request.cancel_request()
 	var json = {
 		"prefixo": line_edit.text
