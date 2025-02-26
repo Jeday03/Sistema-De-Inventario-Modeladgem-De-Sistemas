@@ -26,7 +26,7 @@ func _on_http_request_2_request_completed(result: int, response_code: int, heade
 	var response_text = body.get_string_from_utf8()
 	var response_json = JSON.parse_string(response_text)
 	for funcionario in response_json:
-		var image = Image.new()
+		image = Image.new()
 		var bytes : PackedByteArray = Marshalls.base64_to_raw(funcionario['imagem'])
 		var error : Error = FAILED
 		match funcionario['extensao']:
