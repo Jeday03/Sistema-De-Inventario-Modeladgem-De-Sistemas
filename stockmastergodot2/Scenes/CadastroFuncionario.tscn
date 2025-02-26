@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://flpa1v0if7uv"]
+[gd_scene load_steps=7 format=3 uid="uid://flpa1v0if7uv"]
 
 [ext_resource type="Script" uid="uid://dfes7eftqca3a" path="res://Scripts/CadastroFuncionarioScript.gd" id="1_qssss"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_al0f7"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="3_4jtm2"]
 [ext_resource type="Theme" uid="uid://be60t68qx8sof" path="res://Themes/Visibility.tres" id="3_15m6i"]
+[ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="3_iy6x7"]
 [ext_resource type="Texture2D" uid="uid://dfqnprdr71tkn" path="res://PlaceHolders/trash.png" id="5_v2ivm"]
 
 [node name="CadastroFuncionario" type="Control"]
@@ -45,12 +46,37 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ListaFuncionario" type="VBoxContainer" parent="HBoxContainer/MarginContainer/ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListaFuncionario" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PagAnterior" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "<<"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_iy6x7")
+text = "01"
+alignment = 1
+
+[node name="PagPosterior" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = ">>"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -185,6 +211,7 @@ icon = ExtResource("5_v2ivm")
 icon_alignment = 2
 
 [node name="LabelFunction2" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
@@ -210,6 +237,9 @@ title = "Confirmação"
 initial_position = 1
 dialog_text = "Deseja confirmar?"
 
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/PagAnterior" to="." method="_on_pag_anterior_pressed"]
+[connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/PagPosterior" to="." method="_on_pag_posterior_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Editar" to="." method="_on_editar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Remover" to="." method="_on_remover_pressed"]

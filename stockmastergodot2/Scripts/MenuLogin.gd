@@ -7,6 +7,8 @@ extends CanvasLayer
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var accept_dialog: AcceptDialog = $AcceptDialog
 
+const DEFAULT_PAGE = preload("res://Scenes/DefaultPage.tscn")
+
 func _on_button_pressed() -> void:
 	var body = JSON.stringify({"usuario": usuario.text, "senha": senha.text})
 	var headers = ["Content-Type: application/json"]
@@ -21,7 +23,11 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		return
 	var data = JSON.parse_string(json_string)
 	if data['message']:
-		print("Efetuou o login")
+		match data['tipo_usuario']:
+			"gerente":
+				get_tree().change_scene_to_packed(DEFAULT_PAGE)
+			"funcionario":
+				pass
 	else:
 		accept_dialog.visible = true
 		senha.text = ""

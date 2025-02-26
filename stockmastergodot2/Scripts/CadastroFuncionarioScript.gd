@@ -4,9 +4,19 @@ class_name CadastroFuncionario
 @onready var http_request_2: HTTPRequest = $HTTPRequest2
 @onready var lista_de_funcionários: VBoxContainer = $HBoxContainer/MarginContainer/ScrollContainer/ListaFuncionario
 const PAINEL_FUNCIONARIO = preload("res://PackedScenes/PainelFuncionario.tscn")
+@onready var pageText: LineEdit = $HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit
+
+var pagAtual : int = 1:
+	set(value):
+		if value > 0:
+			pagAtual = value
+			pageText.text = str(value)
+			var url = "http://127.0.0.1:5000/funcionarios?page=" + str(pagAtual) 
+			http_request_2.request(url, [], HTTPClient.METHOD_GET)
 
 func _ready() -> void:
-	http_request_2.request("http://127.0.0.1:5000/get_funcionarios", [], HTTPClient.METHOD_GET)
+	var url = "http://127.0.0.1:5000/funcionarios?page=" + str(pagAtual) 
+	http_request_2.request(url, [], HTTPClient.METHOD_GET)
 
 func _on_http_request_2_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code != 200:
@@ -66,7 +76,7 @@ func cadastrar():
 		"senha": campo_senha.text,
 	}
 	var body = JSON.stringify(json)
-	var error = http_request.request("http://127.0.0.1:5000/cadastro_funcionario", [], HTTPClient.METHOD_POST, body)
+	var error = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
 	if error != OK:
 		erro.visible = true
 
@@ -83,7 +93,6 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		erro.visible = true
 
 var listaFuncao := ["Administrador", "Gerente", "Caixa/Repositor"]
-
 
 func carregarFuncionario(textura : ImageTexture, funcionario : Dictionary):
 	campo_nome.text = funcionario['nome']
@@ -109,7 +118,7 @@ func editarFuncionario():
 		"id": idFuncionario
 	}
 	var body = JSON.stringify(json)
-	var error = http_request.request("http://127.0.0.1:5000/editar_funcionario", ["Content-Type: application/json"], HTTPClient.METHOD_PUT, body)
+	var error = http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_PUT, body)
 	if error != OK:
 		erro.visible = true
 
@@ -134,3 +143,15 @@ func remover():
 
 func _on_confirmation_dialog_confirmed() -> void:
 	funcaoAtual.call()
+
+func _on_pag_anterior_pressed() -> void:
+	pagAtual -= 1
+
+func _on_pag_posterior_pressed() -> void:
+	pagAtual += 1
+
+func _on_line_edit_text_submitted(new_text: String) -> void:
+	var n : int = int(pageText.text)
+	if n == 0:
+		n = 1
+	pagAtual = n

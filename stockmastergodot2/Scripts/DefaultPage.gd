@@ -13,12 +13,10 @@ func instanciar(cena : PackedScene):
 		telaAtual.queue_free()
 	telaAtual = cena.instantiate() as Control
 	main_frame.add_child(telaAtual)
-	print(telaAtual.name)
 
 func _on_estoque_button_pressed() -> void:
 	print("Apertou botão de estoque")
 	instanciar(LISTA_ITENS)
-	pass # Replace with function body.
 
 func _on_logout_button_pressed() -> void:
 	get_tree().change_scene_to_packed(TELA_INICIAL)
