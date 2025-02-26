@@ -12,26 +12,39 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -384.0
-offset_top = 19.0
-offset_right = 384.0
-offset_bottom = -18.0
+offset_left = -369.0
+offset_top = 39.0
+offset_right = 373.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Nome do produto"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 script = ExtResource("1_u7xwu")
 
-[node name="HTTPRequest" type="HTTPRequest" parent="ScrollContainer/VBoxContainer"]
+[node name="HTTPRequest" type="HTTPRequest" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 
-[connection signal="request_completed" from="ScrollContainer/VBoxContainer/HTTPRequest" to="ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
+[node name="Timer" type="Timer" parent="VBoxContainer"]
+one_shot = true
+
+[connection signal="text_changed" from="VBoxContainer/LineEdit" to="VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_changed"]
+[connection signal="request_completed" from="VBoxContainer/ScrollContainer/VBoxContainer/HTTPRequest" to="VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
+[connection signal="timeout" from="VBoxContainer/Timer" to="VBoxContainer/ScrollContainer/VBoxContainer" method="_on_timer_timeout"]
