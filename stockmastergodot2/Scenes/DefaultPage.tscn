@@ -110,7 +110,7 @@ text = "Cadastro
 [node name="PedidosButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Pedidos
+text = "Notificações
 "
 
 [node name="LogoutButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
