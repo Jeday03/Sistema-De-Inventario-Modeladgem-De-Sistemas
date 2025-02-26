@@ -31,6 +31,8 @@ class Funcionario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
+    cpf = db.Column(db.String(14), unique=True, nullable=False)  # Adicionado CPF
+    celular = db.Column(db.String(20), nullable=False)  # Adicionado Celular
     funcao = db.Column(db.String(50), nullable=False)
     imagem = db.Column(db.String(200), nullable=False)
     _senha = db.Column("senha", db.String(255), nullable=False)
@@ -158,6 +160,8 @@ def gerente_handler():
                 'id': g.id,
                 'nome': g.nome,
                 'email': g.email,
+                'cpf': g.cpf,  # Adicionando CPF
+                'celular': g.celular,  # Adicionando Celular
                 'nivel_acesso': g.nivel_acesso,
                 'imagem': imagem_base64  # Adicionando a imagem convertida
             })
@@ -169,8 +173,9 @@ def gerente_handler():
     if request.method == 'POST':
         if Gerente.query.filter_by(email=data['email']).first():
             return jsonify({'erro': 'E-mail já cadastrado!'}), 400
+        if Gerente.query.filter_by(cpf=data['cpf']).first():
+            return jsonify({'erro': 'CPF já cadastrado!'}), 400
 
-        # Converte a imagem de Base64 para um arquivo e armazena o caminho
         image_data = base64.b64decode(data['imagem'])
         image_path = f"fotos_gerentes/{data['nome']}" + data['extensao']
         with open(image_path, 'wb') as f:
@@ -180,10 +185,12 @@ def gerente_handler():
         new_gerente = Gerente(
             nome=data['nome'],
             email=data['email'],
+            cpf=data['cpf'],  # Adicionando CPF
+            celular=data['celular'],  # Adicionando Celular
             senha=data.get('senha', 'default_senha'),
             funcao='Gerente',
             nivel_acesso=data.get('nivel_acesso', 'Alto'),
-            imagem=data['imagem']  # Adicionando o caminho da imagem ao banco
+            imagem=data['imagem']
         )
 
         try:
@@ -201,13 +208,13 @@ def gerente_handler():
 
         gerente.nome = data.get('nome', gerente.nome)
         gerente.email = data.get('email', gerente.email)
+        gerente.cpf = data.get('cpf', gerente.cpf)  # Atualizando CPF
+        gerente.celular = data.get('celular', gerente.celular)  # Atualizando Celular
         gerente.nivel_acesso = data.get('nivel_acesso', gerente.nivel_acesso)
 
-        # Atualiza a senha, se fornecida
         if 'senha' in data:
             gerente.senha = data['senha']
 
-        # Atualiza a imagem se fornecida
         if 'imagem' in data and data['imagem']:
             image_data = base64.b64decode(data['imagem'])
             image_path = f"fotos_gerentes/{data['nome']}" + data['extensao']
@@ -242,29 +249,17 @@ def gerente_handler():
 @app.route('/funcionarios', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def funcionarios_handler():
     if request.method == 'GET':
-        page = request.args.get('page', 1, type=int)
-        per_page = 10
-        funcionarios_paginated = Funcionario.query.paginate(page=page, per_page=per_page, error_out=False)
-        funcionarios = funcionarios_paginated.items
-
+        funcionarios = Funcionario.query.all()
         funcionarios_encoded = []
         for f in funcionarios:
-            absolute_path = os.path.abspath(f.imagem)
-            if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
-                with open(absolute_path, 'rb') as img_file:
-                    imagem_base64 = base64.b64encode(img_file.read()).decode('utf-8')
-            else:
-                print("Imagem não encontrada para o funcionário", f.nome)
-                imagem_base64 = f.imagem  # Mantém a referência caso a imagem não esteja salva
-
             funcionarios_encoded.append({
                 'id': f.id,
                 'nome': f.nome,
                 'email': f.email,
+                'cpf': f.cpf,  # Adicionando CPF
+                'celular': f.celular,  # Adicionando Celular
                 'funcao': f.funcao,
-                'tipo': f.tipo,
-                'imagem': imagem_base64,  # Adicionando a imagem convertida
-                'vendas': [{'id': v.id, 'item_id': v.item_id, 'quantidade': v.quantidade} for v in f.vendas]
+                'tipo': f.tipo
             })
 
         return jsonify(funcionarios_encoded)
@@ -273,21 +268,19 @@ def funcionarios_handler():
 
     if request.method == 'POST':
         if Funcionario.query.filter_by(email=data['email']).first():
-            return jsonify({'erro': 'E-mail já cadastrado!'}), 400  # Retorna erro HTTP 400
-
-        image_data = base64.b64decode(data['imagem'])
-        image_path = f"fotos_funcionarios/{data['nome']}" + data['extensao']
-        with open(image_path, 'wb') as f:
-            f.write(image_data)
-        data['imagem'] = image_path
+            return jsonify({'erro': 'E-mail já cadastrado!'}), 400
+        if Funcionario.query.filter_by(cpf=data['cpf']).first():
+            return jsonify({'erro': 'CPF já cadastrado!'}), 400
 
         new_funcionario = Funcionario(
             nome=data['nome'],
             email=data['email'],
+            cpf=data['cpf'],  # Adicionando CPF
+            celular=data['celular'],  # Adicionando Celular
             funcao=data.get('funcao', 'Funcionário'),
             senha=data.get('senha', 'default_senha'),
             tipo=data.get('tipo', 'funcionario'),
-            imagem=data['imagem']  # Adicionando o caminho da imagem ao banco
+            imagem=""
         )
 
         try:
@@ -305,21 +298,9 @@ def funcionarios_handler():
 
         funcionario.nome = data.get('nome', funcionario.nome)
         funcionario.email = data.get('email', funcionario.email)
+        funcionario.cpf = data.get('cpf', funcionario.cpf)  # Atualizando CPF
+        funcionario.celular = data.get('celular', funcionario.celular)  # Atualizando Celular
         funcionario.funcao = data.get('funcao', funcionario.funcao)
-
-        # Atualiza a senha, se fornecida
-        if 'senha' in data:
-            funcionario.senha = data['senha']
-
-        funcionario.tipo = data.get('tipo', funcionario.tipo)
-
-        # Atualiza a imagem se fornecida
-        if 'imagem' in data and data['imagem']:
-            image_data = base64.b64decode(data['imagem'])
-            image_path = f"fotos_funcionarios/{data['nome']}" + data['extensao']
-            with open(image_path, 'wb') as f:
-                f.write(image_data)
-            funcionario.imagem = image_path
 
         try:
             db.session.commit()
@@ -342,6 +323,9 @@ def funcionarios_handler():
             return jsonify({'erro': 'Erro ao remover funcionário.'}), 400
 
     return jsonify({'erro': 'Método não permitido!'}), 405
+
+
+
 
 # Endpoint para retornar as vendas de um funcionário específico
 @app.route('/vendas/<int:funcionario_id>', methods=['GET'])
