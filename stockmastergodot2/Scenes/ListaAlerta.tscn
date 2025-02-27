@@ -39,4 +39,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 
-[node name="VBoxContainer_ScrollContainer_NotificacoesContainer#HTTPRequest" type="HTTPRequest" parent="."]
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

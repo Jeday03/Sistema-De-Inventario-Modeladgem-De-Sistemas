@@ -6,9 +6,9 @@ const NOTIFICACAO = preload("res://PackedScenes/Notificacao.tscn")
 
 func _ready() -> void:
 	# Fazer a requisição HTTP para obter as informações de estoque
-	#var erro = http_request.request("http://127.0.0.1:5000/estoque_faltando", ["Content-Type: application/json"], HTTPClient.METHOD_GET)
-	#if erro != OK:
-	#    printerr("Não foi possível fazer a requisição HTTP")
+	var erro = http_request.request("http://127.0.0.1:5000/estoque_faltando", ["Content-Type: application/json"], HTTPClient.METHOD_GET)
+	if erro != OK:
+		printerr("Não foi possível fazer a requisição HTTP")
 	
 	# Adicionar notificações de teste
 	adicionar_notificacoes_teste()
@@ -55,7 +55,7 @@ func adicionar_notificacoes_teste():
 		var image = Image.new()
 		@warning_ignore("static_called_on_instance")
 		image.create(64, 64, false, Image.FORMAT_RGBA8)
-		image.fill(Color(1, 0, 0))  # Preencher a imagem com a cor vermelha
+		image.fill(Color(1, 0, 0))
 		var texture = ImageTexture.new()
 		@warning_ignore("static_called_on_instance")
 		texture.create_from_image(image)
