@@ -22,8 +22,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	print(json_string)
 	if not json_string:
 		return
-	var data = JSON.parse_string(json_string)
-	if data['message']:
+	var data : Dictionary = JSON.parse_string(json_string)
+	if data.get("message", false):
 		get_tree().change_scene_to_packed(DEFAULT_PAGE)
 		'''
 		match data['tipo_usuario']:
