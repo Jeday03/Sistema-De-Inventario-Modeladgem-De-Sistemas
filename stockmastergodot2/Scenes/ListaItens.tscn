@@ -34,6 +34,7 @@ grow_vertical = 2
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("1_g0fg2")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 20
@@ -67,6 +68,7 @@ one_shot = true
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("1_g0fg2")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 55
 theme_override_constants/margin_right = 20
