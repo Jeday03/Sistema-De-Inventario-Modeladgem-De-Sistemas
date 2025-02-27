@@ -3,6 +3,7 @@ extends MarginContainer
 @onready var http_request: HTTPRequest = $HTTPRequest
 @onready var line_edit: LineEdit = $VBoxContainer/LineEdit
 const PAINEL_DE_ITEM_VENDA = preload("res://PackedScenes/PainelDeItemVenda.tscn")
+@onready var listaCompras: ListaCompras = $"../MarginContainer2"
 
 var pagAtual : int = 1:
 	set(value):
@@ -38,9 +39,9 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 
 func instanciar(textura : ImageTexture, f : Dictionary):
 	var qtdCerta = round(f['quantidade'])
-	var instancia : = PAINEL_DE_ITEM_VENDA.instantiate()
+	var instancia : ItemNaListaDeVender = PAINEL_DE_ITEM_VENDA.instantiate()
 	add_child(instancia)
-	#instancia.setup(textura, formulario, f)
+	instancia.setup(textura, f['nome'], f['quantidade'], listaCompras)
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	if not http_request:

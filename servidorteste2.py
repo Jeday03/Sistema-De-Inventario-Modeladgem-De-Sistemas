@@ -342,7 +342,7 @@ def login():
     if not funcionario or not funcionario.verificar_senha(data['senha']):
         return jsonify({'erro': 'Credenciais inválidas!'}), 401
 
-    return jsonify({'mensagem': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!'}), 200
+    return jsonify({'mensagem': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!', 'funcao': funcionario.funcao}), 200
 
 # Relatórios de vendas
 @app.route('/relatorio_vendas', methods=['GET'])
