@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2kah7pq4g4ee"]
+
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_ojssv"]
+[ext_resource type="Script" uid="uid://cdpejbn68wtvg" path="res://Scripts/ListaAlerta.gd" id="2_itey3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -369.0
+offset_top = 39.0
+offset_right = 373.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ojssv")
+script = ExtResource("2_itey3")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_ojssv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="HTTPRequest" type="HTTPRequest" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+
+[node name="Timer" type="Timer" parent="VBoxContainer"]
+one_shot = true
+
+[connection signal="request_completed" from="VBoxContainer/ScrollContainer/VBoxContainer/HTTPRequest" to="VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
+[connection signal="timeout" from="VBoxContainer/Timer" to="VBoxContainer/ScrollContainer/VBoxContainer" method="_on_timer_timeout"]

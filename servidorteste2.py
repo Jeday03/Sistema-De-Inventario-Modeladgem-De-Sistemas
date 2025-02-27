@@ -151,7 +151,11 @@ def item_handler():
 @app.route('/funcionarios', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def funcionarios_handler():
     if request.method == 'GET':
-        funcionarios = Funcionario.query.all()
+        page = request.args.get('page', 1, type=int)
+        per_page = 10
+        funcionarios_paginated = Funcionario.query.paginate(page=page, per_page=per_page, error_out=False)
+        funcionarios = funcionarios_paginated.items
+
         funcionarios_encoded = []
         for f in funcionarios:
             imagem_base64 = get_image(f.imagem, 'fotos_funcionarios', f)
