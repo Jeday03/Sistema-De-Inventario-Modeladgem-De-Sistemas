@@ -88,17 +88,6 @@ class Notificacao(db.Model):
     mensagem = db.Column(db.String(200))
 
 
-# Função para salvar imagem Base64
-def salvar_imagem(base64_str, nome_arquivo, pasta):
-    try:
-        caminho_completo = os.path.join(pasta, f"{nome_arquivo}.png")
-        with open(caminho_completo, 'wb') as f:
-            f.write(base64.b64decode(base64_str))
-        return caminho_completo
-    except Exception as e:
-        print(f"Erro ao salvar imagem: {e}")
-        return None
-
 # Gerenciamento de Itens com filtro por prefixo, GET, POST, PUT e DELETE
 @app.route('/item', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def item_handler():
