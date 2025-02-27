@@ -101,8 +101,12 @@ text = "Finalizar a compra"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer2"]
 
+[node name="AcceptDialog" type="AcceptDialog" parent="HBoxContainer/MarginContainer2"]
+initial_position = 1
+
 [connection signal="request_completed" from="HBoxContainer/MarginContainer/HTTPRequest" to="HBoxContainer/MarginContainer" method="_on_http_request_request_completed"]
 [connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer" method="_on_line_edit_text_submitted"]
 [connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer" method="_on_http_request_request_completed"]
 [connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/Button" to="HBoxContainer/MarginContainer2" method="_on_button_pressed"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer2/HTTPRequest" to="HBoxContainer/MarginContainer2" method="_on_http_request_request_completed"]

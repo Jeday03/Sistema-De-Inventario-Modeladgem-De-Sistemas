@@ -59,8 +59,6 @@ class Funcionario(db.Model):
         return check_password_hash(self._senha, senha_plain)
 
 
-
-
 class Venda(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     funcionario_id = db.Column(db.Integer, db.ForeignKey('funcionario.id'), nullable=False)
@@ -313,6 +311,20 @@ def realizar_venda():
             # Tanto o funcionário quanto o item devem existir no banco de dados!!!!
     """
     data = request.get_json()
+    print(data)
+    for item in data['items']:
+        item_id = item['id']
+        quantidade_venda = item['quantidade']
+        item = Item.query.get(item_id)
+        if item and item.quantidade >= quantidade_venda:
+            item.quantidade -= quantidade_venda
+            db.session.commit()
+        else:
+            return jsonify({'message': 'Erro ao processar venda'}), 400
+    return jsonify({'message': 'Venda realizada com sucesso!'})
+
+    '''
+    data = request.get_json()
     print("Dados recebidos:", data)
     
     item = Item.query.get(data.get('item_id'))
@@ -335,6 +347,7 @@ def realizar_venda():
         return jsonify({'message': 'Venda realizada com sucesso!'})
 
     return jsonify({'message': 'Erro ao processar venda'}), 400
+    '''
 
 
 # Login simples

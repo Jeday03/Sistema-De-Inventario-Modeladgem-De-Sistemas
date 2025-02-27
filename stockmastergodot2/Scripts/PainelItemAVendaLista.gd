@@ -18,7 +18,7 @@ func setup(image : ImageTexture, f : Dictionary, l : ListaCompras):
 	if f['quantidade'] <= 0:
 		disabled = true
 	label_nome.text = f['nome']
-	label_qtd.text = "Restante: " + str(f['quantidade'])
+	label_qtd.text = "Restante: " + str(int(f['quantidade']))
 	foto_produto.texture = image
 	lista = l
 	dicionario = f

@@ -23,7 +23,7 @@ var qtd : int = 1:
 
 func setup(imagem: Texture, dicionario : Dictionary, c : ListaCompras):
 	label_nome.text = dicionario['nome']
-	label_qtd.text = "Restante: " + str(dicionario['quantidade'])
+	label_qtd.text = "Restante: " + str(int(dicionario['quantidade']))
 	label_preco.text = "R$" + str(dicionario['preco'] * qtd)
 	foto_produto.texture = imagem
 	dic = dicionario
