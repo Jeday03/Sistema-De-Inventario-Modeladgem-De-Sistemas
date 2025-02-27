@@ -12,6 +12,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 CORS(app)
 db = SQLAlchemy(app)
 
+"""
+    Metodos GET não necessitam de JSON no corpo da requisição.
+    Metodos POST, PUT e DELETE necessitam de JSON no corpo da requisição.
+"""
+
+
+
 # Criando diretórios para armazenar imagens
 IMAGE_DIRS = ["fotos_gerentes", "fotos_funcionarios", "placeholder"]
 for dir_path in IMAGE_DIRS:
@@ -31,6 +38,8 @@ class Funcionario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
+    cpf = db.Column(db.String(14), unique=True, nullable=False)  # Adicionado CPF
+    celular = db.Column(db.String(20), nullable=False)  # Adicionado Celular
     funcao = db.Column(db.String(50), nullable=False)
     imagem = db.Column(db.String(200), nullable=False)
     _senha = db.Column("senha", db.String(255), nullable=False)
@@ -119,6 +128,15 @@ def item_handler():
 
     data = request.get_json()
     if request.method == 'POST':
+        """
+        Exemplo de JSON para testar no Postman:
+        {
+            "nome": "Notebook Dell",
+            "quantidade": 5,
+            "imagem": "base64_aqui",
+            "extensao": ".png"
+        }
+        """
         image_data = base64.b64decode(data['imagem'])
         image_path = f"placeholder/{data['nome']}" + data['extensao']
         with open(image_path, 'wb') as f:
@@ -127,12 +145,26 @@ def item_handler():
         new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
         db.session.add(new_item)
     elif request.method == 'PUT':
+        """
+        Exemplo de JSON para testar no Postman:
+        {
+            "id": 1,
+            "nome": "Notebook Dell XPS",
+            "quantidade": 8
+        }
+        """
         item = Item.query.get(data['id'])
         if item:
             item.nome = data.get('nome', item.nome)
             item.quantidade = data.get('quantidade', item.quantidade)
             item.imagem = data.get('imagem', item.imagem)
     elif request.method == 'DELETE':
+        """
+        Exemplo de JSON para testar no Postman:
+        {
+            "id": 1
+        }
+        """
         item = Item.query.get(data['id'])
         if item:
             db.session.delete(item)
@@ -159,6 +191,8 @@ def gerente_handler():
                 'id': g.id,
                 'nome': g.nome,
                 'email': g.email,
+                'cpf': g.cpf,  # Adicionando CPF
+                'celular': g.celular,  # Adicionando Celular
                 'nivel_acesso': g.nivel_acesso,
                 'imagem': imagem_base64,  # Adicionando a imagem convertida
                 'extensao': absolute_path[-4:]
@@ -169,10 +203,26 @@ def gerente_handler():
     data = request.get_json()
 
     if request.method == 'POST':
+        """
+        Exemplo de JSON para cadastrar um gerente no Postman:
+        {
+            "nome": "Ana Souza",
+            "email": "ana@email.com",
+            "cpf": "987.654.321-00",
+            "celular": "(32) 99876-5432",
+            "funcao": "Gerente",
+            "senha": "senha123",
+            "nivel_acesso": "Gerente",
+            "imagem": "",
+            "extensao": ".png"
+        }
+        """
+        
         if Gerente.query.filter_by(email=data['email']).first():
             return jsonify({'erro': 'E-mail já cadastrado!'}), 400
+        if Gerente.query.filter_by(cpf=data['cpf']).first():
+            return jsonify({'erro': 'CPF já cadastrado!'}), 400
 
-        # Converte a imagem de Base64 para um arquivo e armazena o caminho
         image_data = base64.b64decode(data['imagem'])
         image_path = f"fotos_gerentes/{data['nome']}" + data['extensao']
         with open(image_path, 'wb') as f:
@@ -182,10 +232,12 @@ def gerente_handler():
         new_gerente = Gerente(
             nome=data['nome'],
             email=data['email'],
+            cpf=data['cpf'],  # Adicionando CPF
+            celular=data['celular'],  # Adicionando Celular
             senha=data.get('senha', 'default_senha'),
             funcao='Gerente',
             nivel_acesso=data.get('nivel_acesso', 'Alto'),
-            imagem=data['imagem']  # Adicionando o caminho da imagem ao banco
+            imagem=data['imagem']
         )
 
         try:
@@ -197,19 +249,29 @@ def gerente_handler():
             return jsonify({'erro': 'Erro ao inserir gerente. Verifique os dados.'}), 400
 
     elif request.method == 'PUT':
+        """
+            Exemplo de JSON para cadastrar um gerente no Postman:
+        {
+            "id": 1,
+            "nome": "Ana S. Oliveira",
+            "cpf": "987.654.321-00",
+            "celular": "(32) 99777-8888",
+            "nivel_acesso": "Gerente"
+        }
+        """
         gerente = Gerente.query.get(data.get('id'))
         if not gerente:
             return jsonify({'erro': 'Gerente não encontrado!'}), 404
 
         gerente.nome = data.get('nome', gerente.nome)
         gerente.email = data.get('email', gerente.email)
+        gerente.cpf = data.get('cpf', gerente.cpf)  # Atualizando CPF
+        gerente.celular = data.get('celular', gerente.celular)  # Atualizando Celular
         gerente.nivel_acesso = data.get('nivel_acesso', gerente.nivel_acesso)
 
-        # Atualiza a senha, se fornecida
         if 'senha' in data:
             gerente.senha = data['senha']
 
-        # Atualiza a imagem se fornecida
         if 'imagem' in data and data['imagem']:
             image_data = base64.b64decode(data['imagem'])
             image_path = f"fotos_gerentes/{data['nome']}" + data['extensao']
@@ -225,6 +287,12 @@ def gerente_handler():
             return jsonify({'erro': 'Erro ao atualizar gerente.'}), 400
 
     elif request.method == 'DELETE':
+        """
+            Exemplo de JSON para cadastrar um gerente no Postman:
+        {
+            "id": 1
+        }
+        """
         gerente = Gerente.query.get(data.get('id'))
         if not gerente:
             return jsonify({'erro': 'Gerente não encontrado!'}), 404
@@ -244,25 +312,15 @@ def gerente_handler():
 @app.route('/funcionarios', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def funcionarios_handler():
     if request.method == 'GET':
-        page = request.args.get('page', 1, type=int)
-        per_page = 10
-        funcionarios_paginated = Funcionario.query.paginate(page=page, per_page=per_page, error_out=False)
-        funcionarios = funcionarios_paginated.items
-
+        funcionarios = Funcionario.query.all()
         funcionarios_encoded = []
         for f in funcionarios:
-            absolute_path = os.path.abspath(f.imagem)
-            if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
-                with open(absolute_path, 'rb') as img_file:
-                    imagem_base64 = base64.b64encode(img_file.read()).decode('utf-8')
-            else:
-                print("Imagem não encontrada para o funcionário", f.nome)
-                imagem_base64 = f.imagem  # Mantém a referência caso a imagem não esteja salva
-
             funcionarios_encoded.append({
                 'id': f.id,
                 'nome': f.nome,
                 'email': f.email,
+                'cpf': f.cpf,  # Adicionando CPF
+                'celular': f.celular,  # Adicionando Celular
                 'funcao': f.funcao,
                 'tipo': f.tipo,
                 'imagem': imagem_base64,  # Adicionando a imagem convertida
@@ -275,22 +333,34 @@ def funcionarios_handler():
     data = request.get_json()
 
     if request.method == 'POST':
+        """
+        Exemplo de JSON para testar no Postman:
+        {
+            "nome": "Carlos Silva",
+            "email": "carlos@email.com",
+            "cpf": "123.456.789-00",
+            "celular": "(32) 91234-5678",
+            "funcao": "Vendedor",
+            "senha": "senha123",
+            "tipo": "funcionario",
+            "imagem": "",
+            "extensao": ".png"
+        }
+        """
         if Funcionario.query.filter_by(email=data['email']).first():
-            return jsonify({'erro': 'E-mail já cadastrado!'}), 400  # Retorna erro HTTP 400
-
-        image_data = base64.b64decode(data['imagem'])
-        image_path = f"fotos_funcionarios/{data['nome']}" + data['extensao']
-        with open(image_path, 'wb') as f:
-            f.write(image_data)
-        data['imagem'] = image_path
+            return jsonify({'erro': 'E-mail já cadastrado!'}), 400
+        if Funcionario.query.filter_by(cpf=data['cpf']).first():
+            return jsonify({'erro': 'CPF já cadastrado!'}), 400
 
         new_funcionario = Funcionario(
             nome=data['nome'],
             email=data['email'],
+            cpf=data['cpf'],  # Adicionando CPF
+            celular=data['celular'],  # Adicionando Celular
             funcao=data.get('funcao', 'Funcionário'),
             senha=data.get('senha', 'default_senha'),
             tipo=data.get('tipo', 'funcionario'),
-            imagem=data['imagem']  # Adicionando o caminho da imagem ao banco
+            imagem=""
         )
 
         try:
@@ -302,27 +372,25 @@ def funcionarios_handler():
             return jsonify({'erro': 'Erro ao inserir funcionário. Verifique os dados.'}), 400
 
     elif request.method == 'PUT':
+        """
+        Exemplo de JSON para atualizar um funcionário no Postman:
+        {
+            "id": 1,
+            "nome": "Carlos S. Oliveira",
+            "cpf": "123.456.789-00",
+            "celular": "(32) 91111-2222",
+            "funcao": "Caixa"
+        }
+        """
         funcionario = Funcionario.query.get(data.get('id'))
         if not funcionario:
             return jsonify({'erro': 'Funcionário não encontrado!'}), 404
 
         funcionario.nome = data.get('nome', funcionario.nome)
         funcionario.email = data.get('email', funcionario.email)
+        funcionario.cpf = data.get('cpf', funcionario.cpf)  # Atualizando CPF
+        funcionario.celular = data.get('celular', funcionario.celular)  # Atualizando Celular
         funcionario.funcao = data.get('funcao', funcionario.funcao)
-
-        # Atualiza a senha, se fornecida
-        if 'senha' in data:
-            funcionario.senha = data['senha']
-
-        funcionario.tipo = data.get('tipo', funcionario.tipo)
-
-        # Atualiza a imagem se fornecida
-        if 'imagem' in data and data['imagem']:
-            image_data = base64.b64decode(data['imagem'])
-            image_path = f"fotos_funcionarios/{data['nome']}" + data['extensao']
-            with open(image_path, 'wb') as f:
-                f.write(image_data)
-            funcionario.imagem = image_path
 
         try:
             db.session.commit()
@@ -332,6 +400,12 @@ def funcionarios_handler():
             return jsonify({'erro': 'Erro ao atualizar funcionário.'}), 400
 
     elif request.method == 'DELETE':
+        """
+        Exemplo de JSON para deletar um funcionário no Postman:
+        {
+            "id": 1
+        }
+        """
         funcionario = Funcionario.query.get(data.get('id'))
         if not funcionario:
             return jsonify({'erro': 'Funcionário não encontrado!'}), 404
@@ -345,6 +419,7 @@ def funcionarios_handler():
             return jsonify({'erro': 'Erro ao remover funcionário.'}), 400
 
     return jsonify({'erro': 'Método não permitido!'}), 405
+
 
 # Endpoint para retornar as vendas de um funcionário específico
 @app.route('/vendas/<int:funcionario_id>', methods=['GET'])
@@ -363,6 +438,15 @@ def vendas_funcionario(funcionario_id):
 # Criar e Registrar Vendas
 @app.route('/venda', methods=['POST'])
 def realizar_venda():
+    """
+        Exemplo de JSON para testar no Postman:
+        {
+            "funcionario_id": 1,
+            "item_id": 2,
+            "quantidade": 3
+        }
+            #Tanto o funcionário quanto o item devem existir no banco de dados!!!!
+    """
     data = request.get_json()
     print("Dados recebidos:", data)
     item = Item.query.get(data.get('item_id'))
@@ -381,6 +465,14 @@ def realizar_venda():
 # Login simples
 @app.route('/login', methods=['POST'])
 def login():
+    """
+        Exemplo de JSON para testar no Postman:
+        {
+            "email": "carlos@email.com",
+            "senha": "senha123"
+        }
+
+    """
     data = request.get_json()
     funcionario = Funcionario.query.filter_by(email=data['email']).first()
 
@@ -420,6 +512,13 @@ def notificacao_handler():
 
     data = request.get_json()
     if request.method == 'POST':
+        """
+            Exemplo de JSON para testar no Postman:
+            {
+                "item_id": 1,
+                "mensagem": "Estoque do item Notebook Dell está baixo!"
+            }
+        """
         new_notificacao = Notificacao(item_id=data['item_id'], mensagem=data['mensagem'])
         db.session.add(new_notificacao)
         db.session.commit()
@@ -430,6 +529,12 @@ def notificacao_handler():
 
         return jsonify({'message': 'Notificação criada e emails enviados!'})
     elif request.method == 'DELETE':
+        """
+            Exemplo de JSON para testar no Postman:
+            {
+                "id": 1
+            }
+        """
         notificacao = Notificacao.query.get(data['id'])
         if notificacao:
             db.session.delete(notificacao)
