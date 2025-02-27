@@ -11,7 +11,7 @@ var pagAtual : int = 1:
 		if value <= 0:
 			value = 1
 		pagAtual = value
-		var erro = http_request.request("http://127.0.0.1:5000/itens", [], HTTPClient.METHOD_GET)
+		var erro = http_request.request("http://127.0.0.1:5000/itens?page=" + str(value), [], HTTPClient.METHOD_GET)
 		if erro != OK:
 			printerr("Não foi possível fazer httprequest")
 
@@ -55,10 +55,6 @@ func _on_timer_timeout() -> void:
 	if not http_request:
 		return
 	http_request.cancel_request()
-	var json = {
-		"prefixo": line_edit.text
-	}
-	var body = JSON.stringify(json)
-	var erro = http_request.request("http://127.0.0.1:5000/item", ["Content-Type: application/json"], HTTPClient.METHOD_GET, body)
+	var erro = http_request.request("http://127.0.0.1:5000/item?prefix" + line_edit.text, [], HTTPClient.METHOD_GET)
 	if erro != OK:
 		printerr("Não foi possível fazer httprequest")
