@@ -1,4 +1,5 @@
 extends MarginContainer
+class_name FormularioItem
 
 @onready var nome: LineEdit = $ScrollContainer/VBoxContainer/LineEdit
 @onready var qtd: SpinBox = $ScrollContainer/VBoxContainer/SpinBox

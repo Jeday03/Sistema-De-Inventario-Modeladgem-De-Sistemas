@@ -1,16 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://db0bixhh74jjv"]
+[gd_scene load_steps=7 format=3 uid="uid://db0bixhh74jjv"]
 
 [ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_axohy"]
 [ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_ph4kd"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_3xlab"]
 [ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="4_v7qm8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7qm8"]
-bg_color = Color(0.45, 0.45, 0.45, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
 
 [sub_resource type="Theme" id="Theme_idymw"]
 Label/fonts/font = ExtResource("2_ph4kd")
@@ -18,11 +11,10 @@ Label/fonts/font = ExtResource("2_ph4kd")
 [sub_resource type="Theme" id="Theme_lpe4d"]
 Label/fonts/font = ExtResource("2_ph4kd")
 
-[node name="ColorRect" type="Panel"]
+[node name="ColorRect" type="Button"]
 custom_minimum_size = Vector2(0, 100)
 offset_right = 446.0
 offset_bottom = 100.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_v7qm8")
 script = ExtResource("1_axohy")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
