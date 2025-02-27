@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, send_file
+from matplotlib.pylab import f
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
@@ -79,28 +80,37 @@ class Notificacao(db.Model):
 @app.route('/item', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def item_handler():
     if request.method == 'GET':
+        page = request.args.get('page', 1, type=int)  # Obtém o número da página
+        per_page = 10  # Define o número de itens por página
         prefix = request.args.get('prefix')
+
+        # Aplica filtro por prefixo, se fornecido
+        query = Item.query
         if prefix:
-            itens = Item.query.filter(Item.nome.startswith(prefix)).all()
-        else:
-            itens = Item.query.all()
+            query = query.filter(Item.nome.startswith(prefix))
+
+        # Aplica paginação
+        itens_paginated = query.paginate(page=page, per_page=per_page, error_out=False)
+        itens = itens_paginated.items
+
         itens_encoded = []
         for i in itens:
-            absolute_path = os.path.abspath(i.imagem)
-            if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
-                with open(absolute_path, 'rb') as f:
-                    imagem_base64 = base64.b64encode(f.read()).decode('utf-8')
-            else:
-                print("Imagem não encontrada para o item", i.nome)
-                imagem_base64 = i.imagem
+            imagem_base64 = get_image(i.imagem, 'fotos_itens', i)  # Corrigindo variável errada
+
             itens_encoded.append({
                 'id': i.id,
                 'imagem': imagem_base64,
                 'nome': i.nome,
                 'quantidade': i.quantidade,
-                'extensao': absolute_path[-4:]
+                'extensao': i.imagem[-4:]
             })
-        return jsonify(itens_encoded)
+
+        return jsonify({
+            'itens': itens_encoded,
+            'total_paginas': itens_paginated.pages,
+            'pagina_atual': itens_paginated.page,
+            'total_itens': itens_paginated.total
+        })
 
     data = request.get_json()
     if request.method == 'POST':
@@ -113,13 +123,10 @@ def item_handler():
             "extensao": ".png"
         }
         """
-        image_data = base64.b64decode(data['imagem'])
-        image_path = f"placeholder/{data['nome']}" + data['extensao']
-        with open(image_path, 'wb') as f:
-            f.write(image_data)
-        data['imagem'] = image_path
+        data['imagem'] = set_image(data['imagem'], 'fotos_itens', data['nome'])
         new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
         db.session.add(new_item)
+        
     elif request.method == 'PUT':
         """
         Exemplo de JSON para testar no Postman:
@@ -376,7 +383,8 @@ def notificacao_handler():
         db.session.add(new_notificacao)
         db.session.commit()
 
-        gerentes = Gerente.query.all()
+        gerentes = Funcionario.query.filter_by(tipo="gerente").all()
+
         for g in gerentes:
             print(f"Email enviado para {g.email}: {data['mensagem']}")
 
