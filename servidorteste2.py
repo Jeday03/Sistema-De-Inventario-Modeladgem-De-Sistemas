@@ -112,20 +112,22 @@ def item_handler():
 
     data = request.get_json()
     if request.method == 'POST':
-        """
-        Exemplo de JSON para testar no Postman:
-        {
-            "nome": "Notebook Dell",
-            "quantidade": 5,
-            "imagem": "base64_aqui",
-            "extensao": ".png"
-        }
-        """
         data['imagem'] = set_image(data['imagem'], 'fotos_itens', data['nome'])
         print(data['imagem'])
-        new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'], preco=data['preco'])
+
+        # Validação do campo 'preco'
+        if 'preco' not in data or data['preco'] is None:
+            return jsonify({'erro': 'O campo "preco" é obrigatório'}), 400
+
+        new_item = Item(
+            imagem=data['imagem'],
+            nome=data['nome'],
+            quantidade=data['quantidade'],
+            preco=data['preco']
+        )
+
         db.session.add(new_item)
-        
+
     elif request.method == 'PUT':
         """
         Exemplo de JSON para testar no Postman:
@@ -308,22 +310,32 @@ def realizar_venda():
             "item_id": 2,
             "quantidade": 3
         }
-            #Tanto o funcionário quanto o item devem existir no banco de dados!!!!
+            # Tanto o funcionário quanto o item devem existir no banco de dados!!!!
     """
     data = request.get_json()
     print("Dados recebidos:", data)
+    
     item = Item.query.get(data.get('item_id'))
     funcionario = Funcionario.query.get(data.get('funcionario_id'))
     quantidade_venda = int(data.get('quantidade', 0))
-    
+
     if item and funcionario and item.quantidade >= quantidade_venda:
         item.quantidade -= quantidade_venda
-        numero_vendas = Venda.query.filter_by(funcionario_id=funcionario.id).count()
         venda = Venda(funcionario_id=funcionario.id, item_id=item.id, quantidade=quantidade_venda)
         db.session.add(venda)
+        
+        # Se o estoque do item chegou a zero, cria uma notificação automaticamente
+        if item.quantidade == 0:
+            mensagem_notificacao = f"Estoque do item {item.nome} esgotado!"
+            nova_notificacao = Notificacao(item_id=item.id, mensagem=mensagem_notificacao)
+            db.session.add(nova_notificacao)
+            print(f"🔔 Notificação criada: {mensagem_notificacao}")
+
         db.session.commit()
         return jsonify({'message': 'Venda realizada com sucesso!'})
+
     return jsonify({'message': 'Erro ao processar venda'}), 400
+
 
 # Login simples
 @app.route('/login', methods=['POST'])
