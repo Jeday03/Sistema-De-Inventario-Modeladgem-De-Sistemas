@@ -5,12 +5,15 @@ const PAINEL_DE_ITEM = preload("res://PackedScenes/PainelDeItem.tscn")
 @onready var http_request: HTTPRequest = $"../HTTPRequest"
 @onready var line_edit: LineEdit = $"../../LineEdit"
 @onready var formulario: FormularioItem = %MarginContainer2
+@onready var line_edit_scroll = $HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit
 
 var pagAtual : int = 1:
 	set(value):
-		if value <= 0:
-			value = 1
-		pagAtual = value
+		if value > 0:
+			pagAtual = value
+			var aux = str(value)
+			print(aux)
+			$HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.text = aux
 		var erro = http_request.request("http://127.0.0.1:5000/item?page=" + str(value) + "&prefix=" + line_edit.text, [], HTTPClient.METHOD_GET)
 		if erro != OK:
 			printerr("Não foi possível fazer httprequest")
@@ -44,7 +47,15 @@ func instanciar(textura : ImageTexture, f : Dictionary):
 	add_child(instancia)
 	instancia.setup(textura, formulario, f)
 
+func _on_pag_anterior_pressed() -> void:
+	pagAtual -= 1
+
+func _on_pag_posterior_pressed() -> void:
+	pagAtual += 1
+
+
 func _on_line_edit_text_submitted(new_text: String) -> void:
-	if not http_request:
-		return
-	pagAtual = pagAtual
+	var n : int = int(line_edit_scroll.text)
+	if n <= 0:
+		n = 1
+	pagAtual = n

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://byi2gdo4om5c4"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7rgoj"]
-[ext_resource type="Script" uid="uid://b7yhgcm5x0lyo" path="res://Scripts/ListaAlerta.gd" id="2_q4o0n"]
+[ext_resource type="Script" path="res://Scripts/ListaAlerta.gd" id="2_q4o0n"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

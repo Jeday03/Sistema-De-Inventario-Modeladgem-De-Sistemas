@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqjc2q5secxgy"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_g0fg2"]
-[ext_resource type="Script" path="res://Scripts/ListaDeItens2.gd" id="2_ntqyp"]
+[ext_resource type="Script" uid="uid://qx24o28gt4f8" path="res://Scripts/ListaDeItens2.gd" id="2_ntqyp"]
 [ext_resource type="Script" path="res://Scripts/FormularioItem.gd" id="3_au85j"]
 [ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="3_ntqyp"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="5_et46i"]
@@ -65,6 +65,26 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 script = ExtResource("2_ntqyp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="pagAnterior" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "<<"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "1"
+alignment = 1
+
+[node name="pagPosterior" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = ">>"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
@@ -192,6 +212,9 @@ dialog_text = "Imagem inválida"
 [connection signal="text_changed" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_changed"]
 [connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]
 [connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/pagAnterior" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_pag_anterior_pressed"]
+[connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/pagPosterior" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_pag_posterior_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/selectImageButton" to="HBoxContainer/MarginContainer2" method="_on_select_image_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Cadastrar" to="HBoxContainer/MarginContainer2" method="_on_cadastrar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Editar" to="HBoxContainer/MarginContainer2" method="_on_editar_pressed"]
