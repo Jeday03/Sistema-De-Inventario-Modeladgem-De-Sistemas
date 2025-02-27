@@ -2,6 +2,8 @@ extends VBoxContainer
 
 const PAINEL_DE_ITEM = preload("res://PackedScenes/PainelDeItem.tscn")
 @onready var http_request: HTTPRequest = $HTTPRequest
+@onready var timer: Timer = $Timer
+@onready var line_edit: LineEdit = $"../../LineEdit"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +13,8 @@ func _ready() -> void:
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code == 200:
+		for c in get_children():
+			c.queue_free()
 		var response_text = body.get_string_from_utf8()
 		var response_json = JSON.parse_string(response_text)
 		for item in response_json:
@@ -37,6 +41,7 @@ func instanciar(textura : ImageTexture, nome : StringName, qtd : float):
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	timer.start()
+	pass
 
 func _on_timer_timeout() -> void:
 	if not http_request:
