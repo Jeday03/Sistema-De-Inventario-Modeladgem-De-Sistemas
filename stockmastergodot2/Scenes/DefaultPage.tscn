@@ -178,5 +178,7 @@ layout_mode = 2
 text = "Deformadores de sistemas™"
 
 [connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/EstoqueButton" to="." method="_on_estoque_button_pressed"]
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/VendasButton" to="." method="_on_vendas_button_pressed"]
 [connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/CadastroButton" to="." method="_on_cadastro_button_pressed"]
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/PedidosButton" to="." method="_on_pedidos_button_pressed"]
 [connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/LogoutButton" to="." method="_on_logout_button_pressed"]

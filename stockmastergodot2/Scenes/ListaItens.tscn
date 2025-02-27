@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqjc2q5secxgy"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_g0fg2"]
-[ext_resource type="Script" uid="uid://qx24o28gt4f8" path="res://Scripts/ListaDeItens2.gd" id="2_ntqyp"]
-[ext_resource type="Script" uid="uid://chswfsp5wxmrj" path="res://Scripts/FormularioItem.gd" id="3_au85j"]
+[ext_resource type="Script" path="res://Scripts/ListaDeItens2.gd" id="2_ntqyp"]
+[ext_resource type="Script" path="res://Scripts/FormularioItem.gd" id="3_au85j"]
 [ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="3_ntqyp"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="5_et46i"]
 

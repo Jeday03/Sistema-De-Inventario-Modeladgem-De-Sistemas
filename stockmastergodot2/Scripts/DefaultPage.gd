@@ -2,7 +2,9 @@ extends Control
 
 const TELA_INICIAL : PackedScene = preload("res://Scenes/TelaInicial.tscn")
 const LISTA_ITENS : PackedScene = preload("res://Scenes/ListaItens.tscn")
-const CADASTRO_FUNCIONARIO = preload("res://Scenes/CadastroFuncionario.tscn")
+const TELA_VENDAS : PackedScene = preload("res://Scenes/TelaVendas.tscn")
+const CADASTRO_FUNCIONARIO : PackedScene = preload("res://Scenes/CadastroFuncionario.tscn")
+const LISTA_ALERTA : PackedScene = preload("res://Scenes/ListaAlerta.tscn")
 
 @onready var main_frame: MarginContainer = $MainFrame/MarginContainer
 var telaAtual : Control
@@ -22,3 +24,9 @@ func _on_logout_button_pressed() -> void:
 
 func _on_cadastro_button_pressed() -> void:
 	instanciar(CADASTRO_FUNCIONARIO)
+
+func _on_vendas_button_pressed() -> void:
+	instanciar(TELA_VENDAS)
+
+func _on_pedidos_button_pressed() -> void:
+	instanciar(LISTA_ALERTA	)
