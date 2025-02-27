@@ -32,7 +32,6 @@ class Item(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     quantidade = db.Column(db.Integer)
 
-
 class Funcionario(db.Model):
     __tablename__ = 'funcionario'
     id = db.Column(db.Integer, primary_key=True)
@@ -44,12 +43,7 @@ class Funcionario(db.Model):
     imagem = db.Column(db.String(200), nullable=False)
     _senha = db.Column("senha", db.String(255), nullable=False)
     vendas = db.relationship('Venda', back_populates='funcionario')
-    tipo = db.Column(db.String(20))
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'funcionario',
-        'polymorphic_on': tipo
-    }
+    tipo = db.Column(db.String(20), nullable=False)  # Agora obrigatório
 
     @property
     def senha(self):
@@ -63,13 +57,6 @@ class Funcionario(db.Model):
         return check_password_hash(self._senha, senha_plain)
 
 
-class Gerente(Funcionario):
-    id = db.Column(db.Integer, db.ForeignKey('funcionario.id'), primary_key=True)
-    nivel_acesso = db.Column(db.String(20), nullable=False, default="Alto")
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'gerente'
-    }
 
 
 class Venda(db.Model):
@@ -160,162 +147,24 @@ def item_handler():
     db.session.commit()
     return jsonify({'message': 'Operação realizada com sucesso!'})
 
-# Gerenciamento de Gerentes com GET, POST, PUT e DELETE
-@app.route('/gerente', methods=['GET', 'POST', 'PUT', 'DELETE'])
-def gerente_handler():
-    if request.method == 'GET':
-        gerentes = Gerente.query.all()
-        gerentes_encoded = []
-        
-        for g in gerentes:
-            absolute_path = os.path.abspath(g.imagem)
-            if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
-                with open(absolute_path, 'rb') as img_file:
-                    imagem_base64 = base64.b64encode(img_file.read()).decode('utf-8')
-            else:
-                print("Imagem não encontrada para o gerente", g.nome)
-                imagem_base64 = g.imagem  # Mantém a referência caso a imagem não esteja salva
-
-            gerentes_encoded.append({
-                'id': g.id,
-                'nome': g.nome,
-                'email': g.email,
-                'cpf': g.cpf,  # Adicionando CPF
-                'celular': g.celular,  # Adicionando Celular
-                'nivel_acesso': g.nivel_acesso,
-                'imagem': imagem_base64,  # Adicionando a imagem convertida
-                'extensao': absolute_path[-4:]
-            })
-
-        return jsonify(gerentes_encoded)
-
-    data = request.get_json()
-
-    if request.method == 'POST':
-        """
-        Exemplo de JSON para cadastrar um gerente no Postman:
-        {
-            "nome": "Ana Souza",
-            "email": "ana@email.com",
-            "cpf": "987.654.321-00",
-            "celular": "(32) 99876-5432",
-            "funcao": "Gerente",
-            "senha": "senha123",
-            "nivel_acesso": "Gerente",
-            "imagem": "",
-            "extensao": ".png"
-        }
-        """
-        
-        if Gerente.query.filter_by(email=data['email']).first():
-            return jsonify({'erro': 'E-mail já cadastrado!'}), 400
-        if Gerente.query.filter_by(cpf=data['cpf']).first():
-            return jsonify({'erro': 'CPF já cadastrado!'}), 400
-
-        image_data = base64.b64decode(data['imagem'])
-        image_path = f"fotos_gerentes/{data['nome']}" + data['extensao']
-        with open(image_path, 'wb') as f:
-            f.write(image_data)
-        data['imagem'] = image_path
-
-        new_gerente = Gerente(
-            nome=data['nome'],
-            email=data['email'],
-            cpf=data['cpf'],  # Adicionando CPF
-            celular=data['celular'],  # Adicionando Celular
-            senha=data.get('senha', 'default_senha'),
-            funcao='Gerente',
-            nivel_acesso=data.get('nivel_acesso', 'Alto'),
-            imagem=data['imagem']
-        )
-
-        try:
-            db.session.add(new_gerente)
-            db.session.commit()
-            return jsonify({'mensagem': 'Gerente cadastrado com sucesso!'}), 201
-        except IntegrityError:
-            db.session.rollback()
-            return jsonify({'erro': 'Erro ao inserir gerente. Verifique os dados.'}), 400
-
-    elif request.method == 'PUT':
-        """
-            Exemplo de JSON para cadastrar um gerente no Postman:
-        {
-            "id": 1,
-            "nome": "Ana S. Oliveira",
-            "cpf": "987.654.321-00",
-            "celular": "(32) 99777-8888",
-            "nivel_acesso": "Gerente"
-        }
-        """
-        gerente = Gerente.query.get(data.get('id'))
-        if not gerente:
-            return jsonify({'erro': 'Gerente não encontrado!'}), 404
-
-        gerente.nome = data.get('nome', gerente.nome)
-        gerente.email = data.get('email', gerente.email)
-        gerente.cpf = data.get('cpf', gerente.cpf)  # Atualizando CPF
-        gerente.celular = data.get('celular', gerente.celular)  # Atualizando Celular
-        gerente.nivel_acesso = data.get('nivel_acesso', gerente.nivel_acesso)
-
-        if 'senha' in data:
-            gerente.senha = data['senha']
-
-        if 'imagem' in data and data['imagem']:
-            image_data = base64.b64decode(data['imagem'])
-            image_path = f"fotos_gerentes/{data['nome']}" + data['extensao']
-            with open(image_path, 'wb') as f:
-                f.write(image_data)
-            gerente.imagem = image_path
-
-        try:
-            db.session.commit()
-            return jsonify({'mensagem': 'Gerente atualizado com sucesso!'}), 200
-        except IntegrityError:
-            db.session.rollback()
-            return jsonify({'erro': 'Erro ao atualizar gerente.'}), 400
-
-    elif request.method == 'DELETE':
-        """
-            Exemplo de JSON para cadastrar um gerente no Postman:
-        {
-            "id": 1
-        }
-        """
-        gerente = Gerente.query.get(data.get('id'))
-        if not gerente:
-            return jsonify({'erro': 'Gerente não encontrado!'}), 404
-
-        try:
-            db.session.delete(gerente)
-            db.session.commit()
-            return jsonify({'mensagem': 'Gerente removido com sucesso!'}), 200
-        except IntegrityError:
-            db.session.rollback()
-            return jsonify({'erro': 'Erro ao remover gerente.'}), 400
-
-    return jsonify({'erro': 'Método não permitido!'}), 405
-
-
-# Gerenciamento de Funcionários
+# Gerenciamento de Funcionários (Gerentes e Caixas diferenciados pelo tipo)
 @app.route('/funcionarios', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def funcionarios_handler():
     if request.method == 'GET':
         funcionarios = Funcionario.query.all()
         funcionarios_encoded = []
         for f in funcionarios:
-
             imagem_base64 = get_image(f.imagem, 'fotos_funcionarios', f)
 
             funcionarios_encoded.append({
                 'id': f.id,
                 'nome': f.nome,
                 'email': f.email,
-                'cpf': f.cpf,  # Adicionando CPF
-                'celular': f.celular,  # Adicionando Celular
-                'funcao': f.funcao,
-                'tipo': f.tipo,
-                'imagem': imagem_base64,  # Adicionando a imagem convertida
+                'cpf': f.cpf,  
+                'celular': f.celular,  
+                'funcao': f.funcao,  
+                'tipo': f.tipo,  
+                'imagem': imagem_base64,  
                 'vendas': [{'id': v.id, 'item_id': v.item_id, 'quantidade': v.quantidade} for v in f.vendas],
                 'extensao': f.imagem[-4:]
             })
@@ -326,15 +175,14 @@ def funcionarios_handler():
 
     if request.method == 'POST':
         """
-        Exemplo de JSON para testar no Postman:
+        Exemplo de JSON para cadastrar um funcionário no Postman:
         {
             "nome": "Carlos Silva",
             "email": "carlos@email.com",
             "cpf": "123.456.789-00",
             "celular": "(32) 91234-5678",
-            "funcao": "Vendedor",
+            "funcao": "Caixa",  // ou "Gerente"
             "senha": "senha123",
-            "tipo": "funcionario",
             "imagem": "",
             "extensao": ".png"
         }
@@ -343,23 +191,25 @@ def funcionarios_handler():
             return jsonify({'erro': 'E-mail já cadastrado!'}), 400
         if Funcionario.query.filter_by(cpf=data['cpf']).first():
             return jsonify({'erro': 'CPF já cadastrado!'}), 400
-        
 
         data['imagem'] = set_image(data['imagem'], 'fotos_funcionarios', data['cpf'])
 
-        new_funcionario = Funcionario(
+        # Define o tipo com base na função
+        tipo_funcionario = "gerente" if data['funcao'].lower() == "gerente" else "caixa"
+
+        novo_funcionario = Funcionario(
             nome=data['nome'],
             email=data['email'],
-            cpf=data['cpf'],  # Adicionando CPF
-            celular=data['celular'],  # Adicionando Celular
-            funcao=data.get('funcao', 'Funcionário'),
-            senha=data.get('senha', 'default_senha'),
-            tipo=data.get('tipo', 'funcionario'),
+            cpf=data['cpf'],
+            celular=data['celular'],
+            funcao=data['funcao'],
+            senha=data['senha'],
+            tipo=tipo_funcionario,
             imagem=data['imagem']
         )
 
         try:
-            db.session.add(new_funcionario)
+            db.session.add(novo_funcionario)
             db.session.commit()
             return jsonify({'mensagem': 'Funcionário cadastrado com sucesso!'}), 201
         except IntegrityError:
@@ -374,7 +224,7 @@ def funcionarios_handler():
             "nome": "Carlos S. Oliveira",
             "cpf": "123.456.789-00",
             "celular": "(32) 91111-2222",
-            "funcao": "Caixa"
+            "funcao": "Caixa" // ou "Gerente"
         }
         """
         funcionario = Funcionario.query.get(data.get('id'))
@@ -383,11 +233,15 @@ def funcionarios_handler():
 
         funcionario.nome = data.get('nome', funcionario.nome)
         funcionario.email = data.get('email', funcionario.email)
-        funcionario.cpf = data.get('cpf', funcionario.cpf)  # Atualizando CPF
-        funcionario.celular = data.get('celular', funcionario.celular)  # Atualizando Celular
+        funcionario.cpf = data.get('cpf', funcionario.cpf)
+        funcionario.celular = data.get('celular', funcionario.celular)
         funcionario.funcao = data.get('funcao', funcionario.funcao)
-        if data.get('senha') != '':
-            funcionario.senha = data.get('senha', funcionario.senha)
+
+        # Atualiza o tipo com base na função
+        funcionario.tipo = "gerente" if data.get('funcao', funcionario.funcao).lower() == "gerente" else "caixa"
+
+        if 'senha' in data and data['senha']:
+            funcionario.senha = data['senha']
 
         try:
             db.session.commit()
