@@ -1,8 +1,8 @@
 extends Panel
 
-@onready var label_nome: Label = $MarginContainer/HBoxContainer/VBoxContainer/Label
-@onready var foto_produto: TextureRect = $MarginContainer/HBoxContainer/TextureRect
+@onready var label_nome: Label = $MarginContainer/HBoxContainer/VBoxContainer/LabelNome
+@onready var foto_produto: TextureRect = $MarginContainer/HBoxContainer/FotoProduto
 
 func set_alert(nome: String, imagem: Texture):
-    label_nome.text = "ALERTA: O " + nome + " possui menos de 10 unidades."
-    foto_produto.texture = imagem
+	label_nome.text = "ALERTA: O " + nome + " possui menos de 10 unidades."
+	foto_produto.texture = imagem

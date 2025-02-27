@@ -44,18 +44,18 @@ func criar_notificacao(nome: String, textura: Texture):
 	var notificacao = NOTIFICACAO.instantiate()
 	notificacoes_container.add_child(notificacao)
 	notificacao.set_alert(nome, textura)
-	notificacao.get_node("MarginContainer/HBoxContainer/VBoxContainer2/Button").connect("pressed", Callable(self, "_on_notificacao_removida").bind([notificacao]))
+	notificacao.get_node("MarginContainer/HBoxContainer/VBoxContainer2/Button").connect("pressed", Callable(self, "_on_notificacao_removida").bind(notificacao))
 
 func _on_notificacao_removida(notificacao):
 	notificacao.queue_free()
 
 func adicionar_notificacoes_teste():
-	var nomes = ["Item 1", "Item 2", "Item 3", "Item 4"]
+	var nomes = ["Brahma", "Kaizer", "Itaipava", "Skoll"]
 	for nome in nomes:
 		var image = Image.new()
 		@warning_ignore("static_called_on_instance")
 		image.create(64, 64, false, Image.FORMAT_RGBA8)
-		image.fill(Color(1, 0, 0))
+		image.fill(Color(1, 0, 0))  # Preencher a imagem com a cor vermelha
 		var texture = ImageTexture.new()
 		@warning_ignore("static_called_on_instance")
 		texture.create_from_image(image)
