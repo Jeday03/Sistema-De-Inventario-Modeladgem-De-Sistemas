@@ -37,6 +37,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_7rgoj")
 
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Notificações Recentes"
+horizontal_alignment = 1
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
