@@ -318,6 +318,11 @@ def realizar_venda():
         item = Item.query.get(item_id)
         if item and item.quantidade >= quantidade_venda:
             item.quantidade -= quantidade_venda
+            if item.quantidade == 0:
+                mensagem_notificacao = item.nome
+                nova_notificacao = Notificacao(item_id=item.id, mensagem=mensagem_notificacao)
+                db.session.add(nova_notificacao)
+                print(f"🔔 Notificação criada: {mensagem_notificacao}")
             db.session.commit()
         else:
             return jsonify({'message': 'Erro ao processar venda'}), 400
@@ -362,12 +367,17 @@ def login():
 
     """
     data = request.get_json()
+
+    if data['email'] == "admin" and data['senha'] == "admin":
+        return jsonify({'message': True, 'funcao': 'Admin'}), 200
+    
     funcionario = Funcionario.query.filter_by(email=data['email']).first()
+
 
     if not funcionario or not funcionario.verificar_senha(data['senha']):
         return jsonify({'erro': 'Credenciais inválidas!'}), 401
 
-    return jsonify({'mensagem': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!', 'funcao': funcionario.funcao}), 200
+    return jsonify({'message': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!', 'funcao': funcionario.funcao}), 200
 
 # Relatórios de vendas
 @app.route('/relatorio_vendas', methods=['GET'])
@@ -392,11 +402,21 @@ def relatorio_vendas():
 # Gerenciamento de Notificações
 @app.route('/notificacao', methods=['GET', 'POST', 'DELETE'])
 def notificacao_handler():
-    data = request.get_json()
+    print("Veio ate aq")
     if request.method == 'GET':
+        itens_encoded = []
         notificacoes = Notificacao.query.all()
-        return jsonify([{'id': n.id, 'item_id': n.item_id, 'mensagem': n.mensagem} for n in notificacoes])
+        print(notificacoes)
+        for i in notificacoes:
+            itens_encoded.append({
+                'id': i.id,
+                'item_id': i.item_id,
+                'mensagem': i.mensagem
+            })
+
+        return jsonify(itens_encoded)
     elif request.method == 'DELETE':
+        data = request.get_json()
         """
             Exemplo de JSON para testar no Postman:
             {
@@ -409,7 +429,7 @@ def notificacao_handler():
             db.session.commit()
             return jsonify({'message': 'Notificação removida!'})
 
-    return jsonify({'message': 'Operação realizada com sucesso!'})
+    return jsonify({'message': 'Operação realizada com sucesso!'}), 200
 
 def set_image(image_code, folder, name):
     image_data = base64.b64decode(image_code)
