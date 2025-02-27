@@ -315,6 +315,9 @@ def funcionarios_handler():
         funcionarios = Funcionario.query.all()
         funcionarios_encoded = []
         for f in funcionarios:
+
+            imagem_base64 = get_image(f.imagem, 'fotos_funcionarios', f)
+
             funcionarios_encoded.append({
                 'id': f.id,
                 'nome': f.nome,
@@ -325,7 +328,7 @@ def funcionarios_handler():
                 'tipo': f.tipo,
                 'imagem': imagem_base64,  # Adicionando a imagem convertida
                 'vendas': [{'id': v.id, 'item_id': v.item_id, 'quantidade': v.quantidade} for v in f.vendas],
-                'extensao': absolute_path[-4:]
+                'extensao': f.imagem[-4:]
             })
 
         return jsonify(funcionarios_encoded)
@@ -351,6 +354,9 @@ def funcionarios_handler():
             return jsonify({'erro': 'E-mail já cadastrado!'}), 400
         if Funcionario.query.filter_by(cpf=data['cpf']).first():
             return jsonify({'erro': 'CPF já cadastrado!'}), 400
+        
+
+        data['imagem'] = set_image(data['imagem'], 'fotos_funcionarios', data['cpf'])
 
         new_funcionario = Funcionario(
             nome=data['nome'],
@@ -360,7 +366,7 @@ def funcionarios_handler():
             funcao=data.get('funcao', 'Funcionário'),
             senha=data.get('senha', 'default_senha'),
             tipo=data.get('tipo', 'funcionario'),
-            imagem=""
+            imagem=data['imagem']
         )
 
         try:
@@ -481,7 +487,6 @@ def login():
 
     return jsonify({'mensagem': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!'}), 200
 
-
 # Relatórios de vendas
 @app.route('/relatorio_vendas', methods=['GET'])
 def relatorio_vendas():
@@ -501,7 +506,6 @@ def relatorio_vendas():
             'total_vendas': total_vendas
         } for f, total_vendas in funcionarios
     ])
-
 
 # Gerenciamento de Notificações
 @app.route('/notificacao', methods=['GET', 'POST', 'DELETE'])
@@ -543,6 +547,22 @@ def notificacao_handler():
 
     return jsonify({'message': 'Operação realizada com sucesso!'})
 
+def set_image(image_code, folder, name):
+    image_data = base64.b64decode(image_code)
+    image_path = f"{folder}/{name}.png"
+    with open(image_path, 'wb') as f:
+        f.write(image_data)
+    return image_path
+
+def get_image(image_path, folder, f):
+    imagem_base64 = ""
+    absolute_path = os.path.abspath(f.imagem)
+    if os.path.exists(absolute_path) and (absolute_path.endswith('.png') or absolute_path.endswith('.jpg')):
+        with open(f.imagem, 'rb') as file:
+            imagem_base64 = base64.b64encode(file.read()).decode('utf-8')
+    else:
+        print("Imagem não encontrada do", f.nome)
+    return imagem_base64
 
 if __name__ == '__main__':
     with app.app_context():

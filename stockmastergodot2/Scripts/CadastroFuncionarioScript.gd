@@ -75,6 +75,7 @@ func _on_cadastrar_pressed() -> void:
 	funcaoAtual = Callable(self, "cadastrar")
 	confirmation_dialog.dialog_text = "Deseja CADASTRAR o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
+	accept_dialog.dialog_text = "Usuário criado"
 
 func cadastrar():
 	var imagemComprimida : PackedByteArray
@@ -131,6 +132,7 @@ func _on_editar_pressed() -> void:
 	funcaoAtual = Callable(self, "editarFuncionario")
 	confirmation_dialog.dialog_text = "Deseja EDITAR o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
+	accept_dialog.dialog_text = "Usuário editado"
 
 func editarFuncionario():
 	var imagemComprimida : PackedByteArray
@@ -162,13 +164,14 @@ func _on_remover_pressed() -> void:
 	funcaoAtual = Callable(self, "remover")
 	confirmation_dialog.dialog_text = "Deseja REMOVER o usuário " + campo_nome.text + "?"
 	confirmation_dialog.visible = true
+	accept_dialog.dialog_text = "Usuário removido"
 
 func remover():
 	var json = {
 		"id": idFuncionario
 	}
 	var body = JSON.stringify(json)
-	http_request.request("http://127.0.0.1:5000/remover_funcionario", ["Content-Type: application/json"], HTTPClient.METHOD_DELETE, body)
+	http_request.request("http://127.0.0.1:5000/funcionarios", ["Content-Type: application/json"], HTTPClient.METHOD_DELETE, body)
 
 func _on_confirmation_dialog_confirmed() -> void:
 	funcaoAtual.call()
