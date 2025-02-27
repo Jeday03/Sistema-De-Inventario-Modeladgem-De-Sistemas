@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://cpp10fh3liriv"]
 
-[ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_2xcu7"]
+[ext_resource type="Script" path="res://Scripts/DefaultPage.gd" id="1_2xcu7"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7tra1"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="2_hxsfm"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="2_mcygh"]
-[ext_resource type="Texture2D" uid="uid://dgsxes1hhbnf7" path="res://PlaceHolders/big-gear.png" id="4_4suug"]
-[ext_resource type="Texture2D" uid="uid://cuachaauwkr3p" path="res://PlaceHolders/sair.png" id="4_776vx"]
-[ext_resource type="Texture2D" uid="uid://v156384kbse4" path="res://PlaceHolders/icons8-caixa.svg" id="4_xlgvs"]
-[ext_resource type="Texture2D" uid="uid://bcdh5pj6m8e4r" path="res://PlaceHolders/icons8-carrinho-de-compras-30.png" id="5_slrki"]
-[ext_resource type="Texture2D" uid="uid://denbt2ffxslgq" path="res://PlaceHolders/icons8-carta-50.png" id="7_r6l41"]
+[ext_resource type="Texture2D" uid="uid://cxqtl8rvevurr" path="res://PlaceHolders/big-gear.png" id="4_4suug"]
+[ext_resource type="Texture2D" uid="uid://c33t8dgjbgv02" path="res://PlaceHolders/sair.png" id="4_776vx"]
+[ext_resource type="Texture2D" uid="uid://cewobepid05dh" path="res://PlaceHolders/icons8-caixa.svg" id="4_xlgvs"]
+[ext_resource type="Texture2D" uid="uid://dr26rkwfbl76r" path="res://PlaceHolders/icons8-carrinho-de-compras-30.png" id="5_slrki"]
+[ext_resource type="Texture2D" uid="uid://b44mnoelx4x6" path="res://PlaceHolders/icons8-carta-50.png" id="7_r6l41"]
 
 [node name="DefaultPage" type="Control"]
 layout_mode = 3

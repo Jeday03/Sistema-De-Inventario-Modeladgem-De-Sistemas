@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqjc2q5secxgy"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_g0fg2"]
-[ext_resource type="Script" uid="uid://c5b27k2fmvkqh" path="res://Scripts/ListaDeItens.gd" id="1_u7xwu"]
+[ext_resource type="Script" path="res://Scripts/ListaDeItens.gd" id="1_u7xwu"]
 [ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="3_ntqyp"]
 
 [node name="Control" type="Control"]
