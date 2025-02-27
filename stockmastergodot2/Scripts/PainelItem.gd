@@ -6,18 +6,17 @@ class_name PainelItem
 @onready var label_qtd: Label = $MarginContainer/HBoxContainer/VBoxContainer/LabelQtd
 
 var formulario : FormularioItem
-var id : int
+var dic : Dictionary
 
 func _ready() -> void:
 	pressed.connect(pressionado)
 
 func pressionado():
-	formulario
-	pass
+	formulario.selecionaItem(dic, foto_produto.texture)
 
-func setup(nome: String, imagem: Texture, qtd : int, f : FormularioItem, _id : int):
-	label_nome.text = nome
-	label_qtd.text = "Restante: " + str(qtd)
+func setup(imagem: Texture, f : FormularioItem, dicionario : Dictionary):
+	label_nome.text = dicionario['nome']
+	label_qtd.text = "Restante: " + str(dicionario['quantidade'])
 	foto_produto.texture = imagem
 	formulario = f
-	id = _id
+	dic = dicionario

@@ -32,6 +32,7 @@ class Item(db.Model):
     imagem = db.Column(db.String(200), nullable=False)
     nome = db.Column(db.String(100), nullable=False)
     quantidade = db.Column(db.Integer)
+    preco = db.Column(db.Float, nullable=False)
 
 class Funcionario(db.Model):
     __tablename__ = 'funcionario'
@@ -95,22 +96,19 @@ def item_handler():
 
         itens_encoded = []
         for i in itens:
+            print(i.nome)
+            print(i.imagem[-4:])
             imagem_base64 = get_image(i.imagem, 'fotos_itens', i)  # Corrigindo variável errada
-
             itens_encoded.append({
                 'id': i.id,
                 'imagem': imagem_base64,
                 'nome': i.nome,
                 'quantidade': i.quantidade,
-                'extensao': i.imagem[-4:]
+                'extensao': i.imagem[-4:],
+                'preco': i.preco
             })
 
-        return jsonify({
-            'itens': itens_encoded,
-            'total_paginas': itens_paginated.pages,
-            'pagina_atual': itens_paginated.page,
-            'total_itens': itens_paginated.total
-        })
+        return jsonify(itens_encoded)
 
     data = request.get_json()
     if request.method == 'POST':
@@ -124,6 +122,7 @@ def item_handler():
         }
         """
         data['imagem'] = set_image(data['imagem'], 'fotos_itens', data['nome'])
+        print(data['imagem'])
         new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
         db.session.add(new_item)
         
@@ -140,7 +139,9 @@ def item_handler():
         if item:
             item.nome = data.get('nome', item.nome)
             item.quantidade = data.get('quantidade', item.quantidade)
-            item.imagem = data.get('imagem', item.imagem)
+            image_path = set_image(data['imagem'], 'fotos_itens', data['nome'])
+            item.imagem = image_path
+            item.preco = data.get('preco', item.preco)
     elif request.method == 'DELETE':
         """
         Exemplo de JSON para testar no Postman:
@@ -366,29 +367,10 @@ def relatorio_vendas():
 # Gerenciamento de Notificações
 @app.route('/notificacao', methods=['GET', 'POST', 'DELETE'])
 def notificacao_handler():
+    data = request.get_json()
     if request.method == 'GET':
         notificacoes = Notificacao.query.all()
         return jsonify([{'id': n.id, 'item_id': n.item_id, 'mensagem': n.mensagem} for n in notificacoes])
-
-    data = request.get_json()
-    if request.method == 'POST':
-        """
-            Exemplo de JSON para testar no Postman:
-            {
-                "item_id": 1,
-                "mensagem": "Estoque do item Notebook Dell está baixo!"
-            }
-        """
-        new_notificacao = Notificacao(item_id=data['item_id'], mensagem=data['mensagem'])
-        db.session.add(new_notificacao)
-        db.session.commit()
-
-        gerentes = Funcionario.query.filter_by(tipo="gerente").all()
-
-        for g in gerentes:
-            print(f"Email enviado para {g.email}: {data['mensagem']}")
-
-        return jsonify({'message': 'Notificação criada e emails enviados!'})
     elif request.method == 'DELETE':
         """
             Exemplo de JSON para testar no Postman:

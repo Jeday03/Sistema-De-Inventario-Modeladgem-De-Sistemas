@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://dkxnoyn3bdk1j"]
 
-[ext_resource type="Script" uid="uid://bx4cuqaekalw8" path="res://Scripts/Notificacao.gd" id="1_qxt1h"]
+[ext_resource type="Script" uid="uid://dlbj7qpj0qukp" path="res://Scripts/Notificacao.gd" id="1_qxt1h"]
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_qxt1h"]
 [ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_v0gpt"]
 [ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_s1dt2"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="5_ygejk"]
-[ext_resource type="Texture2D" uid="uid://b5hmdk5r3pl2f" path="res://PlaceHolders/x.png" id="6_qxt1h"]
+[ext_resource type="Texture2D" uid="uid://gv2lixsmbjnu" path="res://PlaceHolders/x.png" id="6_qxt1h"]
 
 [sub_resource type="Theme" id="Theme_ygejk"]
 

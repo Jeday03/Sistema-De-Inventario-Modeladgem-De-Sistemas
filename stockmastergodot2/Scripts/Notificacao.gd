@@ -1,4 +1,5 @@
 extends Panel
+class_name Notificacao
 
 @onready var label_nome: Label = $MarginContainer/HBoxContainer/VBoxContainer/LabelNome
 @onready var foto_produto: TextureRect = $MarginContainer/HBoxContainer/FotoProduto

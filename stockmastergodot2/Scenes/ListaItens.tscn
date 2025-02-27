@@ -54,17 +54,14 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_g0fg2")
 
+[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 script = ExtResource("2_ntqyp")
-
-[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-
-[node name="Timer" type="Timer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-one_shot = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
@@ -121,6 +118,17 @@ theme = ExtResource("1_g0fg2")
 max_value = 10000.0
 suffix = "unidades"
 
+[node name="itemQtd2" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_g0fg2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Valor unitário (em R$):"
+
+[node name="LineEdit2" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_g0fg2")
+placeholder_text = "Nome do produto"
+
 [node name="itemImg" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_g0fg2")
@@ -163,6 +171,7 @@ text = "Excluir"
 auto_translate_mode = 1
 title = "Open a File"
 initial_position = 1
+size = Vector2i(640, 640)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -177,10 +186,11 @@ dialog_text = "Imagem inválida"
 [node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer2"]
 
 [connection signal="text_changed" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_changed"]
-[connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
-[connection signal="timeout" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Timer" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_timer_timeout"]
+[connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/selectImageButton" to="HBoxContainer/MarginContainer2" method="_on_select_image_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Cadastrar" to="HBoxContainer/MarginContainer2" method="_on_cadastrar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Editar" to="HBoxContainer/MarginContainer2" method="_on_editar_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Remover" to="HBoxContainer/MarginContainer2" method="_on_remover_pressed"]
 [connection signal="file_selected" from="HBoxContainer/MarginContainer2/FileDialog" to="HBoxContainer/MarginContainer2" method="_on_file_dialog_file_selected"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer2/HTTPRequest" to="HBoxContainer/MarginContainer2" method="_on_http_request_request_completed"]

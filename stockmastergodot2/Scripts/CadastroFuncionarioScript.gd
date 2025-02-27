@@ -31,7 +31,6 @@ func _on_http_request_2_request_completed(result: int, response_code: int, heade
 		image = Image.new()
 		var bytes : PackedByteArray = Marshalls.base64_to_raw(funcionario['imagem'])
 		var error : Error = FAILED
-		print(funcionario['extensao'])
 		match funcionario['extensao']:
 			".png":
 				error = image.load_png_from_buffer(bytes)
