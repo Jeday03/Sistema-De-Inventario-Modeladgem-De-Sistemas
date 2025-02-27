@@ -397,6 +397,8 @@ def funcionarios_handler():
         funcionario.cpf = data.get('cpf', funcionario.cpf)  # Atualizando CPF
         funcionario.celular = data.get('celular', funcionario.celular)  # Atualizando Celular
         funcionario.funcao = data.get('funcao', funcionario.funcao)
+        if data.get('senha') != '':
+            funcionario.senha = data.get('senha', funcionario.senha)
 
         try:
             db.session.commit()
