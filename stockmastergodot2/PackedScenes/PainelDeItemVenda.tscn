@@ -1,21 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://db0bixhh74jjv"]
+[gd_scene load_steps=7 format=3 uid="uid://cxgfhtmnoiumf"]
 
-[ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_axohy"]
-[ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_ph4kd"]
-[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_3xlab"]
-[ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="4_v7qm8"]
+[ext_resource type="Script" uid="uid://dqg74vtejuuvk" path="res://Scripts/PainelItemAVendaLista.gd" id="1_kwf83"]
+[ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_rgdr2"]
+[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_cbyk4"]
+[ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="4_o4tji"]
 
 [sub_resource type="Theme" id="Theme_idymw"]
-Label/fonts/font = ExtResource("2_ph4kd")
+Label/fonts/font = ExtResource("2_rgdr2")
 
 [sub_resource type="Theme" id="Theme_lpe4d"]
-Label/fonts/font = ExtResource("2_ph4kd")
+Label/fonts/font = ExtResource("2_rgdr2")
 
 [node name="ColorRect" type="Button"]
 custom_minimum_size = Vector2(0, 100)
 offset_right = 446.0
 offset_bottom = 100.0
-script = ExtResource("1_axohy")
+script = ExtResource("1_kwf83")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -39,7 +39,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = SubResource("Theme_lpe4d")
-texture = ExtResource("3_3xlab")
+texture = ExtResource("3_cbyk4")
 expand_mode = 3
 stretch_mode = 5
 
@@ -50,12 +50,12 @@ alignment = 1
 
 [node name="LabelNome" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_v7qm8")
+theme_override_fonts/font = ExtResource("4_o4tji")
 theme_override_font_sizes/font_size = 23
 text = "Nome do item"
 
 [node name="LabelQtd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_v7qm8")
+theme_override_fonts/font = ExtResource("4_o4tji")
 theme_override_font_sizes/font_size = 23
 text = "Restante: 200"

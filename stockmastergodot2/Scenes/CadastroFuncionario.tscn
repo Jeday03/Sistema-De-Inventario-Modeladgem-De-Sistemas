@@ -156,14 +156,12 @@ text = "Função:"
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-selected = 2
-item_count = 3
-popup/item_0/text = "Admnistrador"
-popup/item_0/id = 0
-popup/item_1/text = "Gerente"
-popup/item_1/id = 1
-popup/item_2/text = "Caixa/Repositor"
-popup/item_2/id = 2
+selected = 1
+item_count = 2
+popup/item_0/text = "Gerente"
+popup/item_0/id = 1
+popup/item_1/text = "Caixa"
+popup/item_1/id = 2
 
 [node name="LabelSenha" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 layout_mode = 2
@@ -256,6 +254,7 @@ dialog_text = "Deseja confirmar?"
 auto_translate_mode = 1
 title = "Open a File"
 initial_position = 1
+size = Vector2i(640, 640)
 ok_button_text = "Open"
 file_mode = 0
 access = 2

@@ -15,7 +15,6 @@ func instanciar(cena : PackedScene):
 	main_frame.add_child(telaAtual)
 
 func _on_estoque_button_pressed() -> void:
-	print("Apertou botão de estoque")
 	instanciar(LISTA_ITENS)
 
 func _on_logout_button_pressed() -> void:

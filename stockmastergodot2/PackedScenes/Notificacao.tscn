@@ -1,29 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://db0bixhh74jjv"]
+[gd_scene load_steps=11 format=3 uid="uid://dkxnoyn3bdk1j"]
 
-[ext_resource type="Script" uid="uid://h2je6woegvuu" path="res://Scripts/PainelItem.gd" id="1_axohy"]
-[ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_ph4kd"]
-[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_po218"]
-[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="4_7lq7c"]
+[ext_resource type="Script" uid="uid://dlbj7qpj0qukp" path="res://Scripts/Notificacao.gd" id="1_qxt1h"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_qxt1h"]
+[ext_resource type="FontFile" uid="uid://lrvdfki8suj3" path="res://GodotFont/fonts/montreal/Montreal-Regular.ttf" id="2_v0gpt"]
+[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_s1dt2"]
+[ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="5_ygejk"]
+[ext_resource type="Texture2D" uid="uid://gv2lixsmbjnu" path="res://PlaceHolders/x.png" id="6_qxt1h"]
+
+[sub_resource type="Theme" id="Theme_ygejk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axohy"]
-bg_color = Color(0.45, 0.45, 0.45, 1)
+bg_color = Color(0.733333, 0.733333, 0.733333, 0.505882)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="Theme" id="Theme_idymw"]
-Label/fonts/font = ExtResource("2_ph4kd")
+Label/fonts/font = ExtResource("2_v0gpt")
 
 [sub_resource type="Theme" id="Theme_lpe4d"]
-Label/fonts/font = ExtResource("2_ph4kd")
+Label/fonts/font = ExtResource("2_v0gpt")
 
 [node name="ColorRect" type="Panel"]
 custom_minimum_size = Vector2(0, 100)
 offset_right = 446.0
 offset_bottom = 100.0
+theme = SubResource("Theme_ygejk")
 theme_override_styles/panel = SubResource("StyleBoxFlat_axohy")
-script = ExtResource("1_axohy")
+script = ExtResource("1_qxt1h")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -32,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_qxt1h")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -47,40 +53,35 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = SubResource("Theme_lpe4d")
-texture = ExtResource("3_po218")
+texture = ExtResource("3_s1dt2")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("4_7lq7c")
 theme_override_constants/separation = 13
 alignment = 1
 
 [node name="LabelNome" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Nome do item"
-
-[node name="LabelQtd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Qtd: 200"
+text = "ALERTA: O *insira nome do
+ item* possui menos de 
+10 unidades."
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-theme = ExtResource("4_7lq7c")
-alignment = 1
 
-[node name="Venda" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
-text = "Vender"
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_ygejk")
+theme_override_constants/icon_max_width = 25
+icon = ExtResource("6_qxt1h")
+icon_alignment = 1
+expand_icon = true
 
-[node name="Compra" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Comprar"
-
-[node name="LabelResto" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Restante: 200"
-horizontal_alignment = 1
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Button" to="." method="_on_button_pressed"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqjc2q5secxgy"]
+[gd_scene load_steps=6 format=3 uid="uid://bqjc2q5secxgy"]
 
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_g0fg2"]
-[ext_resource type="Script" uid="uid://c5b27k2fmvkqh" path="res://Scripts/ListaDeItens.gd" id="1_u7xwu"]
+[ext_resource type="Script" uid="uid://qx24o28gt4f8" path="res://Scripts/ListaDeItens2.gd" id="2_ntqyp"]
+[ext_resource type="Script" uid="uid://chswfsp5wxmrj" path="res://Scripts/FormularioItem.gd" id="3_au85j"]
 [ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="3_ntqyp"]
+[ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="5_et46i"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -53,19 +55,17 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_g0fg2")
 
+[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 40
-script = ExtResource("1_u7xwu")
-
-[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-
-[node name="Timer" type="Timer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
-one_shot = true
+script = ExtResource("2_ntqyp")
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_g0fg2")
@@ -73,6 +73,7 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 55
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 35
+script = ExtResource("3_au85j")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer2"]
 layout_mode = 2
@@ -81,65 +82,117 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 10
 
 [node name="Itens" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Itens"
 
 [node name="description" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Digite os dados do item a ser cadastrado e/ou editados:"
 
 [node name="itemLabel" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Nome:"
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 placeholder_text = "Nome do produto"
 
 [node name="itemQtd" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Quantidade:"
 
 [node name="SpinBox" type="SpinBox" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
+max_value = 10000.0
+suffix = "unidades"
+
+[node name="itemQtd2" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_g0fg2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Valor unitário (em R$):"
+
+[node name="LineEdit2" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_g0fg2")
+placeholder_text = "Nome do produto"
 
 [node name="itemImg" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Imagem:"
 
 [node name="selectImageButton" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 text = "Selecionar imagem"
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_g0fg2")
 texture = ExtResource("3_ntqyp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Cadastrar" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 text = "Cadastrar"
 
 [node name="Editar" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_g0fg2")
 text = "Editar"
 
 [node name="Remover" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("5_et46i")
 text = "Excluir"
 
+[node name="FileDialog" type="FileDialog" parent="HBoxContainer/MarginContainer2"]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 1
+size = Vector2i(640, 640)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="HBoxContainer/MarginContainer2"]
+title = "Erro!"
+initial_position = 1
+size = Vector2i(144, 100)
+dialog_text = "Imagem inválida"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer2"]
+
 [connection signal="text_changed" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_changed"]
-[connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
-[connection signal="timeout" from="HBoxContainer/MarginContainer/VBoxContainer/Timer" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_timer_timeout"]
+[connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/selectImageButton" to="HBoxContainer/MarginContainer2" method="_on_select_image_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Cadastrar" to="HBoxContainer/MarginContainer2" method="_on_cadastrar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Editar" to="HBoxContainer/MarginContainer2" method="_on_editar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/Remover" to="HBoxContainer/MarginContainer2" method="_on_remover_pressed"]
+[connection signal="file_selected" from="HBoxContainer/MarginContainer2/FileDialog" to="HBoxContainer/MarginContainer2" method="_on_file_dialog_file_selected"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer2/HTTPRequest" to="HBoxContainer/MarginContainer2" method="_on_http_request_request_completed"]
