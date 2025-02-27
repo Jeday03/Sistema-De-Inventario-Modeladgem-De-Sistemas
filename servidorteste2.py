@@ -123,7 +123,7 @@ def item_handler():
         """
         data['imagem'] = set_image(data['imagem'], 'fotos_itens', data['nome'])
         print(data['imagem'])
-        new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'])
+        new_item = Item(imagem=data['imagem'], nome=data['nome'], quantidade=data['quantidade'], preco=data['preco'])
         db.session.add(new_item)
         
     elif request.method == 'PUT':
