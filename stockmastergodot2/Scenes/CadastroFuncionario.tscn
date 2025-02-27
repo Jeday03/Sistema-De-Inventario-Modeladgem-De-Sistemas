@@ -156,7 +156,7 @@ text = "Função:"
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-selected = 2
+selected = 1
 item_count = 2
 popup/item_0/text = "Gerente"
 popup/item_0/id = 1
