@@ -1,0 +1,39 @@
+# Godot-specific ignores
+stockmastergodot2/.import/
+stockmastergodot2/export.cfg
+stockmastergodot2/export_presets.cfg
+
+# Mono-specific ignores
+stockmastergodot2/.mono/
+stockmastergodot2/data_*/
+stockmastergodot2/mono_crash.*
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.tmp
+*.bak
+*.old
+*.save
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+*.pyc
+*.pyo
+*.rbc
+*.beam
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Godot-generated files
+*.import
+*.godot
