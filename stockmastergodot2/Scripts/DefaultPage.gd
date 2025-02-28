@@ -1,6 +1,6 @@
 extends Control
 
-const TELA_INICIAL : PackedScene = preload("res://Scenes/TelaInicial.tscn")
+const TELA_INICIAL = preload("res://Scenes/TelaInicial.tscn")
 const LISTA_ITENS : PackedScene = preload("res://Scenes/ListaItens.tscn")
 const TELA_VENDAS : PackedScene = preload("res://Scenes/TelaVendas.tscn")
 const CADASTRO_FUNCIONARIO : PackedScene = preload("res://Scenes/CadastroFuncionario.tscn")
@@ -20,7 +20,7 @@ func _on_estoque_button_pressed() -> void:
 	instanciar(LISTA_ITENS)
 
 func _on_logout_button_pressed() -> void:
-	get_tree().change_scene_to_packed(TELA_INICIAL)
+	get_tree().change_scene_to_file("res://Scenes/TelaInicial.tscn")
 
 func _on_cadastro_button_pressed() -> void:
 	instanciar(CADASTRO_FUNCIONARIO)

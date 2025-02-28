@@ -15,6 +15,9 @@ var pagAtual : int = 1:
 		if erro != OK:
 			printerr("Não foi possível fazer httprequest")
 
+func _ready() -> void:
+	pagAtual = pagAtual
+
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code == 200:
 		for c in get_children():

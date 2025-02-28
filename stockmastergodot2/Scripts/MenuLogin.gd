@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var accept_dialog: AcceptDialog = $AcceptDialog
 
 const DEFAULT_PAGE = preload("res://Scenes/DefaultPage.tscn")
+const DEFAULT_PAGE_CAIXA = preload("res://Scenes/DefaultPageCaixa.tscn")
 
 func _on_button_pressed() -> void:
 	var body = JSON.stringify({"email": usuario.text, "senha": senha.text})
@@ -24,14 +25,11 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		return
 	var data : Dictionary = JSON.parse_string(json_string)
 	if data.get("message", false):
-		get_tree().change_scene_to_packed(DEFAULT_PAGE)
-		'''
-		match data['tipo_usuario']:
-			"gerente":
+		match data['funcao']:
+			"Gerente":
 				get_tree().change_scene_to_packed(DEFAULT_PAGE)
-			"funcionario":
-				pass
-		'''
+			"Caixa":
+				get_tree().change_scene_to_packed(DEFAULT_PAGE_CAIXA)
 	else:
 		accept_dialog.visible = true
 		senha.text = ""

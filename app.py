@@ -369,7 +369,7 @@ def login():
     data = request.get_json()
 
     if data['email'] == "admin" and data['senha'] == "admin":
-        return jsonify({'message': True, 'funcao': 'Admin'}), 200
+        return jsonify({'message': True, 'funcao': 'Gerente'}), 200
     
     funcionario = Funcionario.query.filter_by(email=data['email']).first()
 
@@ -377,7 +377,7 @@ def login():
     if not funcionario or not funcionario.verificar_senha(data['senha']):
         return jsonify({'erro': 'Credenciais inválidas!'}), 401
 
-    return jsonify({'message': f'Login bem-sucedido! Bem-vindo, {funcionario.nome}!', 'funcao': funcionario.funcao}), 200
+    return jsonify({'message': True, 'funcao': funcionario.funcao}), 200
 
 # Relatórios de vendas
 @app.route('/relatorio_vendas', methods=['GET'])

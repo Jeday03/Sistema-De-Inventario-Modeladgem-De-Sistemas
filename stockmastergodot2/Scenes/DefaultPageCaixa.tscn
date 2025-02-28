@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=3 uid="uid://p2c700bbpnau"]
+
+[ext_resource type="Script" uid="uid://cu2d6ncr24eja" path="res://Scripts/DefaultPage.gd" id="1_ldgvm"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_4rqmr"]
+[ext_resource type="Texture2D" uid="uid://brasb8hl1oykc" path="res://PlaceHolders/box.png" id="3_4smss"]
+[ext_resource type="Texture2D" uid="uid://v156384kbse4" path="res://PlaceHolders/icons8-caixa.svg" id="4_xbdt1"]
+[ext_resource type="Texture2D" uid="uid://bcdh5pj6m8e4r" path="res://PlaceHolders/icons8-carrinho-de-compras-30.png" id="5_1pa3y"]
+[ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="8_ml5nu"]
+[ext_resource type="Texture2D" uid="uid://cuachaauwkr3p" path="res://PlaceHolders/sair.png" id="9_klpxq"]
+
+[node name="DefaultPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ldgvm")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -2
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.241373, 0.436284, 0.560191, 1)
+
+[node name="Header" type="ColorRect" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 45.0
+grow_horizontal = 2
+color = Color(0.426345, 0.507299, 0.630688, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Header"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 37.0
+offset_top = -15.5
+offset_right = 252.0
+offset_bottom = 15.5
+grow_vertical = 2
+theme = ExtResource("2_4rqmr")
+
+[node name="TextureRect" type="TextureRect" parent="Header/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_4smss")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Header/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "StockMaster"
+
+[node name="MainFrame" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sidebar" type="ColorRect" parent="MainFrame"]
+z_index = -1
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("2_4rqmr")
+color = Color(0.479976, 0.670227, 0.823632, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MainFrame/Sidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainFrame/Sidebar/MarginContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="EstoqueButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/icon_max_width = 30
+text = "Estoque
+"
+icon = ExtResource("4_xbdt1")
+icon_alignment = 2
+expand_icon = true
+
+[node name="VendasButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Vendas"
+icon = ExtResource("5_1pa3y")
+icon_alignment = 2
+
+[node name="LogoutButton" type="Button" parent="MainFrame/Sidebar/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme = ExtResource("8_ml5nu")
+theme_override_constants/h_separation = -14
+theme_override_constants/icon_max_width = 24
+text = "Sair
+"
+icon = ExtResource("9_klpxq")
+icon_alignment = 2
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MainFrame"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 30
+
+[node name="Footer" type="ColorRect" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_4rqmr")
+color = Color(0.427451, 0.505882, 0.631373, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Footer"]
+layout_direction = 3
+layout_mode = 0
+offset_left = 2.0
+offset_right = 222.0
+offset_bottom = 30.0
+
+[node name="Label" type="Label" parent="Footer/HBoxContainer"]
+layout_mode = 2
+text = "Deformadores de sistemas™"
+
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/EstoqueButton" to="." method="_on_estoque_button_pressed"]
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/VendasButton" to="." method="_on_vendas_button_pressed"]
+[connection signal="pressed" from="MainFrame/Sidebar/MarginContainer/VBoxContainer/LogoutButton" to="." method="_on_logout_button_pressed"]
