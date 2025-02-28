@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_g0fg2"]
 [ext_resource type="Script" uid="uid://qx24o28gt4f8" path="res://Scripts/ListaDeItens2.gd" id="2_ntqyp"]
 [ext_resource type="Script" uid="uid://chswfsp5wxmrj" path="res://Scripts/FormularioItem.gd" id="3_au85j"]
-[ext_resource type="Texture2D" uid="uid://dbhvpl3855emh" path="res://icon.svg" id="4_et46i"]
+[ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="3_ntqyp"]
 [ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="5_et46i"]
 
 [node name="Control" type="Control"]
@@ -150,7 +150,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_g0fg2")
-texture = ExtResource("4_et46i")
+texture = ExtResource("3_ntqyp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
 layout_mode = 2

@@ -1,39 +1,21 @@
 # Godot-specific ignores
 stockmastergodot2/.import/
-stockmastergodot2/export.cfg
-stockmastergodot2/export_presets.cfg
-
-# Mono-specific ignores
+stockmastergodot2/.godot/
 stockmastergodot2/.mono/
-stockmastergodot2/data_*/
-stockmastergodot2/mono_crash.*
-
-# OS-specific ignores
-.DS_Store
-Thumbs.db
-
-# Backup files
-*.tmp
-*.bak
-*.old
-*.save
-
-# Compiled files
-*.exe
-*.dll
-*.so
-*.dylib
-*.class
-*.pyc
-*.pyo
-*.rbc
-*.beam
-
-# Logs and databases
-*.log
-*.sql
-*.sqlite
-
-# Godot-generated files
-*.import
-*.godot
+stockmastergodot2/.mono_temp/
+stockmastergodot2/.godot/mono/
+stockmastergodot2/.godot/mono/solutions/
+stockmastergodot2/.godot/mono/temp/
+stockmastergodot2/.godot/mono/solutions/.vs/
+stockmastergodot2/.godot/mono/solutions/.vsconfig
+stockmastergodot2/.godot/mono/solutions/*.csproj
+stockmastergodot2/.godot/mono/solutions/*.sln
+stockmastergodot2/.godot/mono/solutions/*.userprefs
+stockmastergodot2/.godot/mono/solutions/*.pidb
+stockmastergodot2/.godot/mono/solutions/*.suo
+stockmastergodot2/.godot/mono/solutions/*.user
+stockmastergodot2/.godot/mono/solutions/*.cache
+stockmastergodot2/.godot/mono/solutions/*.ide
+stockmastergodot2/.godot/mono/solutions/*.sdf
+stockmastergodot2/.godot/mono/solutions/*.opendb
+stockmastergodot2/.godot/mono/solutions/*.VC.db
