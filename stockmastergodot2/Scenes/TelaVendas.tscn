@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb68w7vgp0au"]
+
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_qwo00"]
+[ext_resource type="Script" uid="uid://c2byuixjdv2rw" path="res://Scripts/ListaItensVenda.gd" id="1_r562d"]
+[ext_resource type="Script" uid="uid://pbug1rhosb6o" path="res://Scripts/ListaDeCompras.gd" id="4_xduw0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.780392, 0.780392, 0.780392, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qwo00")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_r562d")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_qwo00")
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = " Nome do produto"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_qwo00")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("4_xduw0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_qwo00")
+theme_override_font_sizes/font_size = 27
+text = "Valor total: R$"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+theme = ExtResource("1_qwo00")
+text = "Finalizar a compra"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HBoxContainer/MarginContainer2"]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="HBoxContainer/MarginContainer2"]
+initial_position = 1
+
+[connection signal="request_completed" from="HBoxContainer/MarginContainer/HTTPRequest" to="HBoxContainer/MarginContainer" method="_on_http_request_request_completed"]
+[connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/LineEdit" to="HBoxContainer/MarginContainer" method="_on_line_edit_text_submitted"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer" method="_on_http_request_request_completed"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/HTTPRequest" to="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="_on_http_request_request_completed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/Button" to="HBoxContainer/MarginContainer2" method="_on_button_pressed"]
+[connection signal="request_completed" from="HBoxContainer/MarginContainer2/HTTPRequest" to="HBoxContainer/MarginContainer2" method="_on_http_request_request_completed"]

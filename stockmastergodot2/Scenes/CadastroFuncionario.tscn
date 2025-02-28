@@ -1,0 +1,273 @@
+[gd_scene load_steps=8 format=3 uid="uid://flpa1v0if7uv"]
+
+[ext_resource type="Script" uid="uid://dfes7eftqca3a" path="res://Scripts/CadastroFuncionarioScript.gd" id="1_qssss"]
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="2_al0f7"]
+[ext_resource type="Theme" uid="uid://dormmmutv1axg" path="res://Themes/Logout.tres" id="3_4jtm2"]
+[ext_resource type="Theme" uid="uid://be60t68qx8sof" path="res://Themes/Visibility.tres" id="3_15m6i"]
+[ext_resource type="FontFile" uid="uid://b0s3cfol57scx" path="res://GodotFont/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="3_iy6x7"]
+[ext_resource type="Texture2D" uid="uid://dfqnprdr71tkn" path="res://PlaceHolders/trash.png" id="5_v2ivm"]
+[ext_resource type="Texture2D" uid="uid://yd6lj62ywjel" path="res://icon.svg" id="7_jmddd"]
+
+[node name="CadastroFuncionario" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qssss")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.780392, 0.780392, 0.780392, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("2_al0f7")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListaFuncionario" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PagAnterior" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "<<"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_iy6x7")
+text = "1"
+alignment = 1
+
+[node name="PagPosterior" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = ">>"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 55
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 35
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Formulario" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_al0f7")
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Cadastro e edição de funcionários"
+
+[node name="Description" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 19
+text = "Digite os dados a serem cadastrados e/ou editados:"
+
+[node name="LabelNome" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Nome:"
+
+[node name="CampoNome" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+placeholder_text = "Digite o nome"
+alignment = 1
+
+[node name="LabelCPF" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "CPF:"
+
+[node name="CampoCPF" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+placeholder_text = "Digite o CPF"
+alignment = 1
+
+[node name="LabelCel" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Celular:"
+
+[node name="CampoCel" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+placeholder_text = "(99)9999-9999"
+alignment = 1
+
+[node name="LabelEmail" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "E-mail:"
+
+[node name="CampoEmail" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+placeholder_text = "Digite o email aqui"
+alignment = 1
+
+[node name="LabelFunction" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Função:"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+selected = 1
+item_count = 2
+popup/item_0/text = "Gerente"
+popup/item_0/id = 1
+popup/item_1/text = "Caixa"
+popup/item_1/id = 2
+
+[node name="LabelSenha" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Senha: "
+
+[node name="CampoSenha" type="LineEdit" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+placeholder_text = "Senha"
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/CampoSenha"]
+visible = false
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_vertical = 2
+theme = ExtResource("3_15m6i")
+
+[node name="LabelImagem" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Imagem:"
+
+[node name="buttonImagem" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+text = "Selecionar Imagem"
+
+[node name="FotoFuncionario" type="TextureRect" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+layout_mode = 2
+texture = ExtResource("7_jmddd")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Cadastrar" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Cadastrar"
+
+[node name="Editar" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Editar"
+
+[node name="Remover" type="Button" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme = ExtResource("3_4jtm2")
+text = "Excluir"
+icon = ExtResource("5_v2ivm")
+icon_alignment = 2
+
+[node name="LabelFunction2" type="Label" parent="HBoxContainer/MarginContainer2/ScrollContainer/Formulario"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "Usuário criado"
+initial_position = 1
+size = Vector2i(207, 100)
+dialog_text = "O usuário foi cadastrado"
+
+[node name="Erro" type="AcceptDialog" parent="."]
+title = "ERRO!"
+initial_position = 1
+size = Vector2i(202, 159)
+ok_button_text = "Tentar novamente"
+dialog_text = "O usuário não foi criado"
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Confirmação"
+initial_position = 1
+dialog_text = "Deseja confirmar?"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 1
+size = Vector2i(640, 640)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg")
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/PagAnterior" to="." method="_on_pag_anterior_pressed"]
+[connection signal="text_submitted" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/PagPosterior" to="." method="_on_pag_posterior_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/buttonImagem" to="." method="_on_button_imagem_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Cadastrar" to="." method="_on_cadastrar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Editar" to="." method="_on_editar_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/ScrollContainer/Formulario/HBoxContainer/Remover" to="." method="_on_remover_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="request_completed" from="HTTPRequest2" to="." method="_on_http_request_2_request_completed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

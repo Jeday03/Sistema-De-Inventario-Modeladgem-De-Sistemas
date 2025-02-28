@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://byi2gdo4om5c4"]
+
+[ext_resource type="Theme" uid="uid://bqh2iuipvdjx" path="res://Themes/TemaNovo.tres" id="1_7rgoj"]
+[ext_resource type="Script" uid="uid://b7yhgcm5x0lyo" path="res://Scripts/ListaAlerta.gd" id="2_q4o0n"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_q4o0n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.780392, 0.780392, 0.780392, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -369.0
+offset_top = 39.0
+offset_right = 373.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7rgoj")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Notificações Recentes"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_7rgoj")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="VBoxContainer/ScrollContainer"]
+
+[node name="NotificacoesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="request_completed" from="VBoxContainer/ScrollContainer/HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="segundoRequestCompletado"]
