@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://flpa1v0if7uv"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.780392, 0.780392, 0.780392, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Lista de funcionários" type="VBoxContainer" parent="HBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="HBoxContainer/MarginContainer/ScrollContainer/Lista de funcionários"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/ScrollContainer/Lista de funcionários/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "fdsafdsafjkdlsajfkdlsajfkdlas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Formulario" type="VBoxContainer" parent="HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Cadastro e edição de funcionários"
+
+[node name="Description" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Digite os dados a serem cadastrados e/ou editados:"
+
+[node name="LabelNome" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Nome:"
+
+[node name="CampoNome" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+
+[node name="LabelCPF" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "CPF:"
+
+[node name="CampoCPF" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+
+[node name="LabelCel" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Celular:"
+
+[node name="CampoCel" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+
+[node name="LabelEmail" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "E-mail:"
+
+[node name="CampoEmail" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+
+[node name="LabelFunction" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Função:"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Admnistrador"
+popup/item_0/id = 0
+popup/item_1/text = "Gerente"
+popup/item_1/id = 1
+popup/item_2/text = "Caixa/Repositor"
+popup/item_2/id = 2
+
+[node name="LabelSenha" type="Label" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Senha: "
+
+[node name="CampoSenha" type="LineEdit" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/Formulario"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Cadastrar" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Cadastrar"
+
+[node name="Editar" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Editar"
+
+[node name="Remover" type="Button" parent="HBoxContainer/MarginContainer2/Formulario/HBoxContainer"]
+layout_mode = 2
+text = "Excluir"
